@@ -2,7 +2,7 @@ name: font-end CICD
 
 on:
   pull_request:
-    branches: [ sprint*-sit ]
+    branches: [ master ]
 
 jobs:
   build:
