@@ -68,6 +68,7 @@
                     <input type="submit" class="bg-pink-500  p-2 text-white "   @click="doRegister" />
                   </div>
                     <p class="flex flex-col">  Already have an account? <a href="#" @click="  (registerActive = !registerActive),  (emptyFields = false)"  class="text-red-600 underline">Sign in here </a></p>     
+                    <p></p>
                 </form>
               </div>
             </div>
