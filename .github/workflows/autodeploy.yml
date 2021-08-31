@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/INT222-Integrated-Project/INT222_FRONT-END:${{ env.ENV_NAME }}
+          tags: ghcr.io/INT222-Integrated-Project/INT222_FRONT-END:dev
 
   deploy:
     needs:
