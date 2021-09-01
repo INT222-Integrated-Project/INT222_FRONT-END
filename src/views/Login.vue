@@ -6,7 +6,7 @@
           <div class="container ">    
             <div   class="col-lg-4 col-md-6 col-sm-8 mx-auto ">
                 <div class="bg-black w-full text-white  flex justify-end ">
-                    <button @click="closeCurrentModal"><span   class="material-icons  px-2 pt-2">close</span></button>
+                    <button ><span   class="material-icons  px-2 pt-2">close</a></span></button>
                 </div>
               <div v-if="!registerActive" key="" class="" v-bind:class="{ error: emptyFields }">
                 <div class=" bg-black rounded -my-5  ">
@@ -52,11 +52,11 @@
                   </div>
                   <div class="m-1 mt-2">
                     <p class="flex items-start">Username</p>
-                    <input  v-model="emailReg" type="email" class=" w-full bg-gray-300 h-8" placeholder="" required  />
+                    <input  v-model="userReg" type="email" class=" w-full bg-gray-300 h-8" placeholder="" required  />
                   </div>
                   <div class="m-1 mt-2  ">
                     <p class="flex items-start">Password</p>
-                    <input  v-model="emailReg"
+                    <input  v-model="passwordReg"
                         type="email"  class="w-full  bg-gray-300 h-8"  placeholder=""  required/>
                   </div>
                   <div class="m-1 mt-2  ">
@@ -87,11 +87,13 @@ props: ["loginClicked",],
   data() {
     return {
       registerActive: false,
-      emailLogin: "",
+      userLogin: "",
       passwordLogin: "",
-      emailReg: "",
+      fnameReg:"",
+      lnameReg:"",
+      userReg: "",
       passwordReg: "",
-      confirmReg: "",
+      phoneReg:"",
       emptyFields: false,
       close:false,
       
@@ -99,7 +101,7 @@ props: ["loginClicked",],
   },
   methods: {
     doLogin() {
-      if (this.emailLogin === "" || this.passwordLogin === "") {
+      if (this.userLogin === "" || this.passwordLogin === "") {
         this.emptyFields = true;
       } else {
         alert("You are now logged in");
@@ -108,9 +110,11 @@ props: ["loginClicked",],
 
     doRegister() {
       if (
-        this.emailReg === "" ||
+        this.fnameReg === "" ||
+        this.lnameReg === "" ||
+        this.userReg === "" ||
         this.passwordReg === "" ||
-        this.confirmReg === ""
+        this.phoneReg === "" 
       ) {
         this.emptyFields = true;
       } else {
