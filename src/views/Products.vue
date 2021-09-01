@@ -8,9 +8,8 @@
           <input v-model="inputSearch" placeholder="What are you finding?" class="p-2 bg-white w-full rounded border"/>
           <!-- if notfound Show ... -->
           <p v-if="notFound" class="text-center text-xl mt-4"> We can't find the Case</p>
-           <slides></slides>
         </div>
-       
+        <slides class=""></slides>
         <showcase  @edit-click="openEditModal" @send-data="editCase"></showcase>
       </div>
     </div>
@@ -41,7 +40,6 @@ export default {
       notFound: false,
       editProducts: [],
       slides:false,
-      search: '',
       
     };
   },
@@ -67,12 +65,6 @@ export default {
     editCase(editingCase){
         this.editProducts=editingCase;        
     },
-  },computed: {
-    filteredList() {
-      return this.postList.filter(post => {
-        return post.title.toLowerCase().includes(this.search.toLowerCase())
-      })
-    }
-  },
+  }
 };
 </script>
