@@ -1,12 +1,15 @@
 version: "3"
 services:
   frontend:
-    build: .
-    image: frontend
+    image: ghcr.io/int222-integrated-project/int222-front-end:master
     ports: 
       - "8080:80"
     container_name: frontend
+    networks:
+      - "int222"
+
 networks:
-  default:
-    external:
+    int222:
       name: int222_network
+      driver: bridge
+        
