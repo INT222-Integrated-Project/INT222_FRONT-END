@@ -4,7 +4,7 @@
     <nav-bar v-else bgColor="bg-black" fixedNav="fixed" @add-clicked="addButtonClicked"></nav-bar>
 
     <router-view :addClicked="addItemClicked" @close-add-modal="closeAddModal" />
-    <router-view :addClicked="addItemClicked" @close-add-modal="closeAddModal" />
+    
   </div>
   
 </template>

@@ -44,13 +44,13 @@ data() {
             studentId : "62130500032",
         },
         {
-            image: "36833.jpg",
+            image: "1.png",
             name : "Paweena Thongyan",
             role : "FrontEnd Devops Network",
             studentId : "62130500053",
         }, 
         {
-            image: "2.jpg",
+            image: "1.png",
             name : "Anuttree Tipmom",
             role : "FrontEnd Devops Database ",
             studentId : "62130500101",
