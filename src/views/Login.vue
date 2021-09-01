@@ -6,7 +6,9 @@
           <div class="container ">    
             <div   class="col-lg-4 col-md-6 col-sm-8 mx-auto ">
                 <div class="bg-black w-full text-white  flex justify-end ">
-                    <button ><span   class="material-icons  px-2 pt-2">close</span></button>
+                  <router-link to="/products" >
+                    <button ><span class="material-icons  px-2 pt-2">close</span></button>
+                  </router-link>   
                 </div>
               <div v-if="!registerActive" key="" class="" v-bind:class="{ error: emptyFields }">
                 <div class=" bg-black rounded -my-5  ">
