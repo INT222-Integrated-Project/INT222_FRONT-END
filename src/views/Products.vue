@@ -9,7 +9,7 @@
           <!-- if notfound Show ... -->
           <p v-if="notFound" class="text-center text-xl mt-4"> We can't find the Case</p>
         </div>
-        <slides class=""></slides>
+        
         <showcase  @edit-click="openEditModal" @send-data="editCase"></showcase>
       </div>
     </div>
@@ -23,13 +23,13 @@
 <script>
 import showcase from "../components/ShowCase";
 import inputdata from "../components/AddandEditProduct.vue";
-import slides from "../components/Caseslideshow";
+
 export default {
   emits: ["close-add-modal"],
   props: ["addClicked",],
   components: {
     inputdata,
-    showcase,slides
+    showcase,
   },
  data() {
     return {
@@ -39,7 +39,7 @@ export default {
       inputSearch: "",
       notFound: false,
       editProducts: [],
-      slides:false,
+      
       
     };
   },

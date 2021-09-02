@@ -17,7 +17,7 @@
                     <h1 class="ml-2">Sign In</h1>
                   </div>
                 </div> 
-                <form class="flex flex-col text-gray-400 m-5   rounded-xl">
+                <form @submit.prevent="doLogin" class="flex flex-col text-gray-400 m-5 rounded-xl">
                   <div class="m-1 mt-2">
                     <p class="flex items-start">Username</p>
                     <input v-model="userLogin" type="username" class=" w-full bg-gray-300 h-8" placeholder="" required/>
@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 
 emits: ["close-add-modal"],
@@ -96,12 +97,25 @@ props: ["loginClicked",],
       userReg: "",
       passwordReg: "",
       phoneReg:"",
-      emptyFields: false,
-      close:false,
+      emptyFields: false, 
+      account:[],
       
     };
   },
   methods: {
+    getuser() {
+        axios.get(`${process.env.VUE_APP_ROOT_API}api/users/`).then((response) => {
+          this.account = response.data;
+          console.log("xx : "+this.account)
+        }).then(function(){
+            console.log('Login SUCCESS ')
+          })
+          .catch(function(){
+            console.log('Login FAILURE ')
+          });               
+    },postuser(){
+      
+    },
     doLogin() {
       if (this.userLogin === "" || this.passwordLogin === "") {
         this.emptyFields = true;
@@ -109,7 +123,6 @@ props: ["loginClicked",],
         alert("You are now logged in");
       }
     },
-
     doRegister() {
       if (
         this.fnameReg === "" ||
@@ -122,9 +135,7 @@ props: ["loginClicked",],
       } else {
         alert("You are now registered");
       }
-    },closeCurrentModal() {
-     this.$emit("close", true);
-    }
+    },
   },
 };
 </script>
