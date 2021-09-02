@@ -1,8 +1,10 @@
 <template>
-  <div  class="fixed z-10 inset-0 overflow-y-auto  ">
-    <div class="flex  pt-4 px-4 pb-20 text-center  sm:p-0">
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
-        <div class="inline-block bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-sm sm:max-w-lg sm:w-full items-center justify-center mt-36">
+  <div class="fixed z-10 inset-0 overflow-y-auto  ">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      <div
+        class="inline-block align-bottom bg-white rounded-lg text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-3/12">
           <div class="container ">    
             <div   class="col-lg-4 col-md-6 col-sm-8 mx-auto ">
                 <div class="bg-black w-full text-white  flex justify-end ">
@@ -77,7 +79,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
