@@ -4,11 +4,7 @@
     <div class="h-screen md:w-4/6 bg-white bg-opacity-50 items-center md:mx-auto rounded-xl mt-16 lg:md-20">
       <div class="mt-3 text-center">
         <!-- Search -->
-        <div class="flex justify-center items-center text-center flex-col v-show=">
-          <input v-model="inputSearch" placeholder="What are you finding?" class="p-2 bg-white w-full rounded border"/>
-          <!-- if notfound Show ... -->
-          <p v-if="notFound" class="text-center text-xl mt-4"> We can't find the Case</p>
-        </div>
+        
         <slides></slides>
         
         <showcase  @edit-click="openEditModal" @send-data="editCase"></showcase>
