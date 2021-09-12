@@ -174,7 +174,7 @@ export default {
         formData.append('body',caseBlob)
         console.log(formData.getAll("newProduct"))
                 //post to backend by multipart
-         axios.post(`${process.env.VUE_APP_ROOT_API}api/products/`, formData,
+         axios.post(`${process.env.VUE_APP_ROOT_API}public/products/`, formData,
           {
             headers: {
               'Content-Type': 'multipart/form-data',                   
@@ -201,7 +201,7 @@ export default {
             formData.append('body',caseBlob)
             console.log(formData.getAll("newProduct"))
                 //post to backend by multipart
-            axios.put(`${process.env.VUE_APP_ROOT_API}api/products/${id}`, formData,
+            axios.put(`${process.env.VUE_APP_ROOT_API}public/products/${id}`, formData,
               {
                 headers: {
                   'Content-Type': 'multipart/form-data',                   
@@ -252,7 +252,7 @@ export default {
       reader.readAsDataURL(file);
     },
     ChooseBrand() {
-      axios.get(`${process.env.VUE_APP_ROOT_API}api/brands`).then((response) => {
+      axios.get(`${process.env.VUE_APP_ROOT_API}public/brands`).then((response) => {
         this.ShowBrand = response.data;
       }).then(function(){
       console.log('SUCCESS Brands')
@@ -262,7 +262,7 @@ export default {
       });
     },
     ChooseColor() {
-      return axios.get(`${process.env.VUE_APP_ROOT_API}api/colors`).then((response) => {
+      return axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then((response) => {
         this.ShowColor = response.data;
       }).then(function(){
       console.log('SUCCESS COLORS')

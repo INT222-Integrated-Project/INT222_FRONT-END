@@ -46,7 +46,7 @@ export default {
   },
   methods:{
     showProduct() {
-        axios.get(`${process.env.VUE_APP_ROOT_API}api/products/`).then((response) => {
+        axios.get(`${process.env.VUE_APP_ROOT_API}public/products/`).then((response) => {
           this.ShowCase = response.data;
           console.log("xx : "+this.ShowCase)
         }).then(function(){
@@ -57,7 +57,7 @@ export default {
           });               
     },
     async deleteCase(id){
-      await axios.delete(`${process.env.VUE_APP_ROOT_API}api/products/${id}`)
+      await axios.delete(`${process.env.VUE_APP_ROOT_API}public/products/${id}`)
       for(let i = 0; i< this.ShowCase.length;i++ ){
         if(this.ShowCase[i].caseId == id){
           this.ShowCase.splice(i,1)
