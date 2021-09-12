@@ -160,59 +160,59 @@ export default {
   methods: {
     SentData(id){
       if(this.enterEditMode==false){
-                let formData = new FormData()
-                let caseJson = JSON.stringify(this.products);
+        let formData = new FormData()
+        let caseJson = JSON.stringify(this.products);
                 //change prodJson to Blob
-                const caseBlob = new Blob([caseJson],{
-                    type: 'application/json'
-                })
-                const imageBlob = new Blob([this.caseImage],{
-                    type: 'application/json'
-                })
+        const caseBlob = new Blob([caseJson],{
+            type: 'application/json'
+        })
+        const imageBlob = new Blob([this.caseImage],{
+            type: 'application/json'
+        })
                 //add image to formdata            
-                formData.append("imageFile",imageBlob)
-                formData.append('body',caseBlob)
-                console.log(formData.getAll("newProduct"))
+        formData.append("imageFile",imageBlob)
+        formData.append('body',caseBlob)
+        console.log(formData.getAll("newProduct"))
                 //post to backend by multipart
-                axios.post(`${process.env.VUE_APP_ROOT_API}api/products/`, formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',                   
-                    }
-                }).then(function(){
-                    console.log('SUCCESS')
-                })
-                .catch(function(){
-                    console.log('FAILURE')
-                })
-                console.log(caseJson) 
-                }else{
-                  let formData = new FormData()
-                let caseJson = JSON.stringify(this.products);
-                //change prodJson to Blob
-                const caseBlob = new Blob([caseJson],{
-                    type: 'application/json'
-                })
-                const imageBlob = new Blob([this.caseImage],{
-                    type: 'application/json'
-                })
+         axios.post(`${process.env.VUE_APP_ROOT_API}api/products/`, formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',                   
+            }
+          }).then(function(){
+            console.log('SUCCESS')
+          })
+          .catch(function(){
+            console.log('FAILURE')
+          })
+            console.log(caseJson) 
+          }else{
+            let formData = new FormData()
+            let caseJson = JSON.stringify(this.products);
+            //change prodJson to Blob
+            const caseBlob = new Blob([caseJson],{
+              type: 'application/json'
+            })
+            const imageBlob = new Blob([this.caseImage],{
+              type: 'application/json'
+            })
                 //add image to formdata            
-                formData.append("imageFile",imageBlob)
-                formData.append('body',caseBlob)
-                console.log(formData.getAll("newProduct"))
+            formData.append("imageFile",imageBlob)
+            formData.append('body',caseBlob)
+            console.log(formData.getAll("newProduct"))
                 //post to backend by multipart
-                axios.put(`${process.env.VUE_APP_ROOT_API}api/products/${id}`, formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',                   
-                    }
-                }).then(function(){
-                    console.log('SUCCESS')
+            axios.put(`${process.env.VUE_APP_ROOT_API}api/products/${id}`, formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',                   
+              }
+              }).then(function(){
+                  console.log('SUCCESS')
                 })
-                .catch(function(){
-                    console.log('FAILURE')
-                })
-                console.log(caseJson) 
+              .catch(function(){
+                  console.log('FAILURE')
+              })
+                  console.log(caseJson) 
     }          
                 
      },checkForm() {
