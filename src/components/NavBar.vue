@@ -1,9 +1,14 @@
 <template>
-  <div class="w-screen" :class="[fixedNav, bgColor]">
+  <div class="w-screen bg-black z-50 " :class="[fixedNav]">
     <div class="hidden container mx-auto md:flex items-center py-2 md:justify-between md:relative">
-      <h1 id="icon" class="text-2xl text-white font-medium pl-44">
+      <h1 id="icon" class="text-2xl text-pink-500 font-medium pl-44">
         <router-link to="/">Sweet Sweeties</router-link>
       </h1>
+      <div class="flex justify-center items-center text-center flex-col w-3/12">
+          <input v-model="inputSearch" placeholder="What are you finding?" class="p-1 bg-white w-full rounded border"/>
+          <!-- if notfound Show ... -->
+          <p v-if="notFound" class="text-center text-xl mt-4"> We can't find the Case</p>
+      </div>
       <div class="pr-44 md:block">
         <base-button buttonLabel="+ New Case" textColor="text-white" borderColor="border-transparent" v-if="$route.path === '/products'" @click="changeAddItemClicked"/>
         <router-link to="/products" v-else>
@@ -52,7 +57,7 @@
 </template>
 <script>
 export default {
-  props: ["fixedNav", "bgColor"],
+  props: ["fixedNav",],
   emits: ["add-clicked","login-clicked"],
   data() {
     return {

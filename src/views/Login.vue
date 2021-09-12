@@ -1,8 +1,10 @@
 <template>
-  <div  class="fixed z-10 inset-0 overflow-y-auto  ">
-    <div class="flex  pt-4 px-4 pb-20 text-center  sm:p-0">
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
-        <div class="inline-block bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-sm sm:max-w-lg sm:w-full items-center justify-center mt-36">
+  <div class="fixed z-10 inset-0 overflow-y-auto  ">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      <div
+        class="inline-block align-bottom bg-white rounded-lg text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-3/12">
           <div class="container ">    
             <div   class="col-lg-4 col-md-6 col-sm-8 mx-auto ">
                 <div class="bg-black w-full text-white  flex justify-end ">
@@ -17,7 +19,7 @@
                     <h1 class="ml-2">Sign In</h1>
                   </div>
                 </div> 
-                <form class="flex flex-col text-gray-400 m-5   rounded-xl">
+                <form @submit.prevent="doLogin" class="flex flex-col text-gray-400 m-5 rounded-xl">
                   <div class="m-1 mt-2">
                     <p class="flex items-start">Username</p>
                     <input v-model="userLogin" type="username" class=" w-full bg-gray-300 h-8" placeholder="" required/>
@@ -77,11 +79,11 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 
 emits: ["close-add-modal"],
@@ -96,12 +98,25 @@ props: ["loginClicked",],
       userReg: "",
       passwordReg: "",
       phoneReg:"",
-      emptyFields: false,
-      close:false,
+      emptyFields: false, 
+      account:[],
       
     };
   },
   methods: {
+    getuser() {
+        axios.get(`${process.env.VUE_APP_ROOT_API}api/users/`).then((response) => {
+          this.account = response.data;
+          console.log("xx : "+this.account)
+        }).then(function(){
+            console.log('Login SUCCESS ')
+          })
+          .catch(function(){
+            console.log('Login FAILURE ')
+          });               
+    },postuser(){
+      
+    },
     doLogin() {
       if (this.userLogin === "" || this.passwordLogin === "") {
         this.emptyFields = true;
@@ -109,7 +124,6 @@ props: ["loginClicked",],
         alert("You are now logged in");
       }
     },
-
     doRegister() {
       if (
         this.fnameReg === "" ||
@@ -122,9 +136,7 @@ props: ["loginClicked",],
       } else {
         alert("You are now registered");
       }
-    },closeCurrentModal() {
-     this.$emit("close", true);
-    }
+    },
   },
 };
 </script>
