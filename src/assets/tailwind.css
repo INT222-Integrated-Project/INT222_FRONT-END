@@ -3,27 +3,3 @@
 @tailwind components;
 
 @tailwind utilities;
-
-.bg-caseCol-black{
-    background-color: #000000
-}
-.bg-caseCol-blue{
-    background-color: #3d84b8
-}
-.bg-caseCol-coral{
-    background-color: #ff6666
-}
-.bg-caseCol-green{  
-    background-color: #5aa897
-}
-.bg-caseCol-pink{
-    background-color: #ff9292
-}
-.bg-caseCol-purple{
-    background-color: #c67ace
-}
-.bg-caseCol-red{
-    background-color: #91091e
-}.bg-caseCol-yellow{
-    background-color: #fdfd96
-}

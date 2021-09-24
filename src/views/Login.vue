@@ -8,7 +8,7 @@
           <div class="container ">    
             <div   class="col-lg-4 col-md-6 col-sm-8 mx-auto ">
                 <div class="bg-black w-full text-white  flex justify-end ">
-                  <router-link to="/products" >
+                  <router-link to="/" >
                     <button ><span class="material-icons  px-2 pt-2">close</span></button>
                   </router-link>   
                 </div>
@@ -22,11 +22,11 @@
                 <form @submit.prevent="doLogin" class="flex flex-col text-gray-400 m-5 rounded-xl">
                   <div class="m-1 mt-2">
                     <p class="flex items-start">Username</p>
-                    <input v-model="userLogin" type="username" class=" w-full bg-gray-300 h-8" placeholder="" required/>
+                    <input v-model="userLogin" type="text" name="username"  class=" w-full bg-gray-300 h-8" placeholder="" required/>
                   </div>
                   <div class="m-1 mt-2  ">
                     <p class="flex items-start">Password</p>
-                    <input  v-model="passwordLogin"  type="password"  class="w-full  bg-gray-300 h-8"  placeholder=""  required/>
+                    <input  v-model="passwordLogin"  type="password" name="password" class="w-full  bg-gray-300 h-8"  placeholder=""  required/>
                   </div>
                   <div class="m-1 ">
                     <input type="submit" class="bg-pink-500  p-2 text-white "  @click="doLogin" />
@@ -36,7 +36,6 @@
               </div>
 
               <div  v-else class=""  v-bind:class="{ error: emptyFields }">
-
                 <div class=" bg-black rounded -my-5  ">
                   <div class="flex mx-5 p-5 items-start text-white ">
                     <button ><span class="material-icons">lock</span></button>
@@ -83,46 +82,43 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
 export default {
 
-emits: ["close-add-modal"],
-props: ["loginClicked",],
+emits: [],
+props: [],
   data() {
     return {
       registerActive: false,
-      userLogin: "",
-      passwordLogin: "",
-      fnameReg:"",
-      lnameReg:"",
-      userReg: "",
-      passwordReg: "",
-      phoneReg:"",
+      logform:{
+        userLogin: "",
+        passwordLogin: "",
+      },
+      regisform:{
+        fnameReg:"",
+        lnameReg:"",
+        userReg: "",
+        passwordReg: "",
+        phoneReg:"",
+      },
       emptyFields: false, 
       account:[],
       
     };
   },
   methods: {
-    getuser() {
-        axios.get(`${process.env.VUE_APP_ROOT_API}api/users/`).then((response) => {
-          this.account = response.data;
-          console.log("xx : "+this.account)
-        }).then(function(){
-            console.log('Login SUCCESS ')
-          })
-          .catch(function(){
-            console.log('Login FAILURE ')
-          });               
-    },postuser(){
-      
-    },
+   ...mapActions({SignIn:'auth/SignIn'}),
     doLogin() {
-      if (this.userLogin === "" || this.passwordLogin === "") {
-        this.emptyFields = true;
-      } else {
-        alert("You are now logged in");
-      }
+      this.SignIn(this.logform)
+      // let response = axios.post(`${process.env.VUE_APP_ROOT_API}auth/users/`, this.logform)
+      
+      //   console.log(response.data)
+      //   alert("You are now logged in");
+        // if (this.userLogin === "" || this.passwordLogin === "") {
+      //   this.emptyFields = true;
+      // } else {
+        //alert("You are now logged in");
+      // }
     },
     doRegister() {
       if (

@@ -4,25 +4,22 @@
       <h1 id="icon" class="text-2xl text-pink-500 font-medium pl-44">
         <router-link to="/">Sweet Sweeties</router-link>
       </h1>
-      <div class="flex justify-center items-center text-center flex-col w-3/12">
-          <input v-model="inputSearch" placeholder="What are you finding?" class="p-1 bg-white w-full rounded border"/>
-          <!-- if notfound Show ... -->
-          <p v-if="notFound" class="text-center text-xl mt-4"> We can't find the Case</p>
-      </div>
-      <div class="pr-44 md:block">
-        <base-button buttonLabel="+ New Case" textColor="text-white" borderColor="border-transparent" v-if="$route.path === '/products'" @click="changeAddItemClicked"/>
-        <router-link to="/products" v-else>
-          <base-button  buttonLabel="Case" textColor="text-white" borderColor="border-transparent"/>
+       
+        <!-- <router-link to="/about" class="text-white m-3">
+          <button>Member</button> 
+        </router-link> -->
+          <div class="pr-44 md:block">
+        <router-link to="/AddEdit" class="text-white m-3">
+          <button>Add New Case</button>
         </router-link>
-        <router-link to="/about">
-          <base-button buttonLabel="Member" textColor="text-white" borderColor="border-transparent"/>
+        <router-link to="/login" class="text-white m-3">
+          <button>Login</button>
         </router-link>
-        <router-link to="/login">
-          <base-button buttonLabel="Login" textColor="text-white" borderColor="border-transparent"/>
-        </router-link>
-      </div>
-    </div>
+          </div>
 
+      
+   
+<!-- 
     <div class="flex items-center pl-3 w-screen  h-14 bg-black md:hidden">
       <h1 class="block px-4 py-2 text-md capitalize text-white font-medium">
         <router-link to="/">Sweet Sweeties</router-link>
@@ -35,22 +32,22 @@
 
       <div v-show="dropdownOpen" class="absolute  right-0  mt-40   py-1 w-full bg-black shadow-md">
         <div class="flex justify-center">
-          <base-button buttonLabel="+ New Case" textColor="text-white" borderColor="border-transparent" v-if="$route.path === '/products'" @click="changeAddItemClicked"/>
+          <button buttonLabel="+ New Case" textColor="text-white" borderColor="border-transparent" v-if="$route.path === '/products'" @click="changeAddItemClicked"/>
           <router-link to="/products" v-else>
-            <base-button buttonLabel="Case" textColor="text-white" borderColor="border-transparent"/>
+            <button buttonLabel="Case" textColor="text-white" borderColor="border-transparent"/>
           </router-link>
         </div>
         <div class="flex justify-center ">
           <router-link to="/about">
-            <base-button buttonLabel="Member" textColor="text-white " borderColor="border-transparent"/>
+            <button buttonLabel="Member" textColor="text-white " borderColor="border-transparent"/>
           </router-link>
           </div>
           <div class="flex justify-center ">
            <router-link to="/login">
-          <base-button buttonLabel="Login" textColor="text-white" borderColor="border-transparent"/>
+          <button buttonLabel="Login" textColor="text-white" borderColor="border-transparent"/>
         </router-link>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
@@ -71,6 +68,7 @@ export default {
       this.addItemClicked = true;
       this.$emit("add-clicked", this.addItemClicked);
       this.addItemClicked = false;
+      console.log("kak")
     },
     
   },

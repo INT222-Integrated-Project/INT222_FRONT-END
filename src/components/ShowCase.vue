@@ -1,8 +1,8 @@
 <template>
-    <div  class="flex flex-wrap justify-center m-4 space-x-2 gap-1" >
+    <div  class="flex flex-wrap justify-center m-4 l-5 space-x-2 gap-1" >
         <div  v-for="proCase in ShowCase" :key="proCase.caseId" :value="proCase" class=" w-48 h-full md:m-2 bg-white rounded-md border-2 hover:bg-gray-300  border-gray-300 mt-4 hover:border-gray-600   "  >
             <div class="flex justify-center items-center">
-                <img :src="'http://52.139.201.170:8086/api/products/image/'+proCase.caseImage" class="object-cover w-40 h-64 m-2 " />
+                <img :src="'http://52.230.46.195:8086/public/products/image/'+proCase.caseImage" class="object-cover w-40 h-64 m-2 " />
             </div>
         <div class="col-span-2 ">
             <h4 class="font-bold  ">{{ proCase.caseName }}</h4>
@@ -10,7 +10,7 @@
              <label  v-for=" (c,index) in proCase.color" :key="index" class=" rounded-full bg-black h-8 w-8 shadow-inner" 
                     :class="c.caseColor ? 'bg-caseCol-' + c.caseColor.toLowerCase(): '' "></label>
             </div>
-            <p class="text-bold ">{{ proCase.brand.caseBrand  }} </p>
+            <!-- <p class="text-bold ">{{ proCase.brand.caseBrand  }} </p> -->
             <p >{{ proCase.casePrice + ".-" }}</p>
         </div>
         <div class="ml-auto my-2">
@@ -46,7 +46,7 @@ export default {
   },
   methods:{
     showProduct() {
-        axios.get(`${process.env.VUE_APP_ROOT_API}public/products/`).then((response) => {
+        axios.get(`${process.env.VUE_APP_ROOT_API}/test/products`).then((response) => {
           this.ShowCase = response.data;
           console.log("xx : "+this.ShowCase)
         }).then(function(){
@@ -57,7 +57,7 @@ export default {
           });               
     },
     async deleteCase(id){
-      await axios.delete(`${process.env.VUE_APP_ROOT_API}public/products/${id}`)
+      await axios.delete(`${process.env.VUE_APP_ROOT_API}/test/products/${id}`)
       for(let i = 0; i< this.ShowCase.length;i++ ){
         if(this.ShowCase[i].caseId == id){
           this.ShowCase.splice(i,1)
