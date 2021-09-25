@@ -1,13 +1,22 @@
 import axios from 'axios'
-import { createNamespacedHelpers } from 'vuex'
+
 
 
 export default ({
-    namespaced : true,
+  namespaced : true,
+
   state: {
     token:null,
     user:null,
     
+  },
+  getters:{
+    authenticated (state){
+      return state.token && state.user
+    },
+    user(state){
+      return state.user
+    }
   },
   mutations: {
     SET_TOKEN(state,data){

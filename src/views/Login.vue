@@ -130,7 +130,8 @@ props: [],
       ) {
         this.emptyFields = true;
       } else {
-        alert("You are now registered");
+        this.SentRegis();
+       
       }
     },
   },

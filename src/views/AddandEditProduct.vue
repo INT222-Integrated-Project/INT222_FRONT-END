@@ -254,7 +254,6 @@ export default {
       }
       else {
         this.SentData();
-        this.closeCurrentModal();
       }
      },
     uploadPhoto(e) {
@@ -268,7 +267,7 @@ export default {
       reader.readAsDataURL(file);
     },
     ChooseBrand() {
-      axios.get(`${process.env.VUE_APP_ROOT_API}/test/brands`).then((response) => {
+      axios.get(`${process.env.VUE_APP_ROOT_API}test/brands`).then((response) => {
         this.ShowBrand = response.data;
       }).then(function(){
       console.log('SUCCESS Brands')
@@ -278,7 +277,7 @@ export default {
       });
     },
      ChooseModel() {
-      axios.get(`${process.env.VUE_APP_ROOT_API}/test/models`).then((response) => {
+      axios.get(`${process.env.VUE_APP_ROOT_API}test/models`).then((response) => {
         this.ShowModel = response.data;
       }).then(function(){
       console.log('SUCCESS model')
@@ -288,7 +287,7 @@ export default {
       });
     },
     ChooseColor() {
-      return axios.get(`${process.env.VUE_APP_ROOT_API}/test/colors`).then((response) => {
+      return axios.get(`${process.env.VUE_APP_ROOT_API}test/colors`).then((response) => {
         this.ShowColor = response.data;
       }).then(function(){
       console.log('SUCCESS COLORS')
