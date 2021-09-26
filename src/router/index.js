@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import AddEdit from '../views/AddandEditProduct.vue'
 import Shipping from '../views/Shipping.vue'
+import Dashboard from '../views/Dashboard.vue'
 
 const routes = [
   {
@@ -38,9 +39,9 @@ const routes = [
     component: Shipping
   },
   {
-    path: '/shipping',
-    name: 'Shipping',
-    component: Shipping
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
   },
 ]
 
