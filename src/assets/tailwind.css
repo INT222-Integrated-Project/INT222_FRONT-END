@@ -3,3 +3,37 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.bg-caseCol-black{
+    background-color: #000000
+}
+.bg-caseCol-blue{
+    background-color: #3d84b8
+}
+.bg-caseCol-coral{
+    background-color: #ff6666
+}
+.bg-caseCol-green{  
+    background-color: #5aa897
+}
+.bg-caseCol-pink{
+    background-color: #ff9292
+}
+.bg-caseCol-purple{
+    background-color: #c67ace
+}
+.bg-caseCol-red{
+    background-color: #91091e
+}.bg-caseCol-yellow{
+    background-color: #fdfd96
+}
+
+.input-text{
+    @apply w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white
+}
+.input-sign-in{
+    @apply mt-5 tracking-wide font-semibold bg-pink-400 text-gray-100 w-full py-4 rounded-lg hover:bg-pink-600 transition-all duration-300 ease-in-out flex items-center justify-center  focus:outline-none;
+}
+.input-sign-up{
+    @apply mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none;
+}
