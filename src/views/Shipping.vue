@@ -3,7 +3,7 @@
     <div class="flex shadow-md my-10">
       <div class="w-screen bg-white px-10 py-10">
         <div class="flex justify-between  pb-8">
-          <h1 class="font-semibold sm:text-6xl text-3xl">Shopping Cart</h1>
+          <h1 class="font-semibold sm:text-6xl text-3xl text-pink-400">Shopping Cart</h1>
           <h2 class="font-semibold text-2xl">{{ itemCount }} Items</h2>
         </div>
         <div class="flex mt-10 mb-5 py-2 justify-center border-b-2 border-gray-300">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="" v-if="products.length > 0" >
-          <div class="flex justify-center w-full border-b-2 border-gray-100  " v-for="product in products" :key="product.name">
+          <div class="flex justify-center w-full  border-gray-100  " v-for="product in products" :key="product.name">
             <div class=" font-semibold text-gray-600  uppercase w-2/5  ">
               <div class="flex justify-start items-center flex-row">
                 <img :src="product.image" :alt="product.name" class="h-36  " />
@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class=" flex justify-center font-semibold  text-gray-600  uppercase w-1/5">
-              <input type="number" class="border h-10 w-10 " step="1" :value="product.quantity" @input="updateQuantity(index, $event)" @blur="checkQuantity(index, $event)" />
+              <input type="number" class="border text-center h-10 w-10 " step="1" :value="product.quantity" @input="updateQuantity(index, $event)" @blur="checkQuantity(index, $event)" />
             </div>
             <div class="flex justify-center font-semibold text-gray-600  uppercase w-1/5"> <h2 >{{ product.price }}THB</h2></div>
             <div class="flex justify-center font-semibold text-gray-600 uppercase w-1/5"> <h2 >{{ product.price * product.quantity }}THB</h2></div>
@@ -49,7 +49,7 @@
         <ul class=" text-xl font-bold ">
           <li>Subtotal <span class="ml-32">{{ subTotal  }} THB </span></li>
           <li v-if="discount > 0">Discount <span  class="ml-28">{{ discountPrice }} THB </span></li>
-          <li>Tax <span class="ml-60">{{ tax  }} % </span></li>
+          <li> Tax <span class="ml-60">{{ tax  }} % </span></li>
           <li class="">Total <span class="ml-40">{{ totalPrice.toFixed(2)  }} THB </span></li>
         </ul>
       </div>
@@ -60,9 +60,9 @@
         
         <div v-else class="flex flex-col">
           <h3 class=" p-3 text-3xl text-center">There are no products in your cart.</h3>
-          <div class="flex justify-center">
-            <button class=" bg-purple-600 rounded-3xl p-3 text-3xl text-white mx-6 w-56  ">Shopping now</button>
-            </div>
+          <router-link to="/" class="flex justify-center">
+            <button class=" bg-purple-400 rounded-3xl p-3 text-xl text-white mx-6 w-56  ">Shopping now</button>
+            </router-link>
          </div>
       </div>
     </div>
@@ -77,20 +77,20 @@ export default {
   data() {
     return {
       products: [
-        {
-          image: "https://cdn-image02.casetify.com/usr/14396/4304396/~v72/7057674_iphone11__color_white_16000089.png.350x350-w.m80.jpg",
-          name: "Buttercake case",
-          description: "Sumsung",
-          price: 1750,
-          quantity: 2,
-        },
-        {
-          image: "https://cdn-image02.casetify.com/usr/3640/933640/~v34/2188915_iphone7-plus_298704.png.560x560-w.m80.jpg",
-          name: "Icecramcake case",
-          description: "Iphone",
-          price: 2000,
-          quantity: 1,
-        },
+        // {
+        //   image: "https://cdn-image02.casetify.com/usr/14396/4304396/~v72/7057674_iphone11__color_white_16000089.png.350x350-w.m80.jpg",
+        //   name: "Buttercake case",
+        //   description: "Sumsung",
+        //   price: 1750,
+        //   quantity: 2,
+        // },
+        // {
+        //   image: "https://cdn-image02.casetify.com/usr/3640/933640/~v34/2188915_iphone7-plus_298704.png.560x560-w.m80.jpg",
+        //   name: "Icecramcake case",
+        //   description: "Iphone",
+        //   price: 2000,
+        //   quantity: 1,
+        // },
       ],
       tax: 7,
       promotions: [
