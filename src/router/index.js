@@ -4,6 +4,7 @@ import About from '../views/About.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import AddEdit from '../views/AddandEditProduct.vue'
+import Shipping from '../views/Shipping.vue'
 
 const routes = [
   {
@@ -30,6 +31,16 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/shipping',
+    name: 'Shipping',
+    component: Shipping
+  },
+  {
+    path: '/shipping',
+    name: 'Shipping',
+    component: Shipping
   },
 ]
 
