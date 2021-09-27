@@ -4,11 +4,20 @@
 
 @tailwind utilities;
 
+.bg-caseCol-white{
+    background-color: #fcfcfc
+}
 .bg-caseCol-black{
     background-color: #000000
 }
 .bg-caseCol-blue{
-    background-color: #3d84b8
+    background-color: #0039ff
+}
+.bg-caseCol-lavender{
+    background-color: #713b5e
+}
+.bg-caseCol-navy-blue{
+    background-color: #000080
 }
 .bg-caseCol-coral{
     background-color: #ff6666
@@ -17,15 +26,24 @@
     background-color: #5aa897
 }
 .bg-caseCol-pink{
-    background-color: #ff9292
+    background-color: #ec5578
 }
 .bg-caseCol-purple{
     background-color: #c67ace
 }
 .bg-caseCol-red{
     background-color: #91091e
-}.bg-caseCol-yellow{
+}
+.bg-caseCol-yellow{
     background-color: #fdfd96
+}
+.bg-caseCol-gray{
+    background-color: #8d847f
+}
+.bg-caseCol-charcoal{
+    background-color: #565b5d
+}.bg-caseCol-sky-blue{
+    background-color: #89cff0
 }
 
 .input-text{
@@ -37,3 +55,4 @@
 .input-sign-up{
     @apply mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none;
 }
+

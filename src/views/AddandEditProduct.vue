@@ -122,7 +122,7 @@
           <div  class="bg-gray-200 px-4 pb-3 -top-5 sm:px-6 flex sm:flex-row-reverse justify-center">
             <button Type="submit">submit</button>
             <router-link to="/">
-            <button>close</button>
+            <button @click="closeCurrentModal">close</button>
             </router-link>
           </div>
         </form>
@@ -138,6 +138,7 @@ import CaseImage from "../assets/placeholder.png";
 import axios from "axios";
 
 export default {
+   emits: ["close"],
    props: [ "product" ],
   data() {
     return {
@@ -255,7 +256,9 @@ export default {
       else {
         this.SentData();
       }
-     },
+     },closeCurrentModal() {
+     this.$emit("close", true);
+    },
     uploadPhoto(e) {
       this.enableHolder.holder = false;
       const file = e.target.files[0];

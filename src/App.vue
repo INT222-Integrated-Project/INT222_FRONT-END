@@ -1,8 +1,8 @@
 <template>
   <div > 
     <nav-bar   fixedNav="fixed"></nav-bar>
+       <router-view :addClicked="addItemClicked" @close-add-modal="closeAddModal" />
     
-    <router-view  />
   </div>
 </template>
 
