@@ -1,29 +1,51 @@
 <template>
-    <div  class="flex flex-wrap justify-center m-4 space-x-2 gap-1" >
-        <div  v-for="proCase in ShowCase" :key="proCase.caseId" :value="proCase" class=" w-48 h-full md:m-2 bg-white rounded-md border-2 hover:bg-gray-300  border-gray-300 mt-4 hover:border-gray-600   "  >
-            <div class="flex justify-center items-center">
-                <img :src="'http://52.139.201.170:8086/api/products/image/'+proCase.caseImage" class="object-cover w-40 h-64 m-2 " />
+<div class="bg-pink-100  min-h-screen">
+<p class="flex justify-center items-center text-8xl pt-6 ">SHOP</p>
+<ul class="flex flex-wrap justify-center space-x-6  text-2xl border-gray-900 ">
+  <li v-on:click="filter=false">All</li>
+  <li v-on:click="filter='IPHONE'">IPHONE</li>
+  <li v-on:click="filter='SAMSUNG'">SAMSUNG</li>   
+</ul>
+  <div class="flex items-center " style="font-family: 'Muli', sans-serif;">
+    
+    <div  class="flex  flex-wrap justify-center space-x-2 gap-1  pl-5 pr-5 my-5 lg:pl-2 lg:pr-2 ">
+      <div v-for="(p,index) in ShowCase.products" :key="index" :value="proCase" class="bg-white  w-72 h-96 mb-3 rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
+        <figure class="mb-2">
+          <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="h-64 ml-auto mr-auto" />
+        </figure>
+        <div class="rounded-lg p-3 bg-purple-400 flex flex-col ">
+          <div>
+            <h5 class="text-white text-lg  font-bold leading-none">
+              {{ p.caseName }}
+            </h5>
+            <span class="text-xs text-white leading-none">{{ p.caseName }}</span>
+          </div>
+          <div class="flex items-center">
+            <div class="text-lg text-white font-light">
+              {{ p.casePrice + ".-" }}
             </div>
-        <div class="col-span-2 ">
-            <h4 class="font-bold  ">{{ proCase.caseName }}</h4>
-            <div class="flex flex-row justify-center space-x-0.5 mx-5 my-2">
-             <label  v-for=" (c,index) in proCase.color" :key="index" class=" rounded-full bg-black h-8 w-8 shadow-inner" 
-                    :class="c.caseColor ? 'bg-caseCol-' + c.caseColor.toLowerCase(): '' "></label>
+            <button href="javascript:;" class="rounded-full -mt-4  bg-purple-900 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex ml-auto transition duration-300">
+              <i class="material-icons stroke-current m-auto">add_circle</i>
+            </button>
+          </div>
+          <div class="flex flex-row  space-x-0.5  ">
+             <label  v-for=" (c,index) in p.colors" :key="index" class=" bg-black h-2 w-5 shadow-inner" 
+                    :class="c.caseColor ? 'bg-caseCol-' + c.caseColor.toLowerCase(): '' "> </label>           
             </div>
-            <p class="text-bold ">{{ proCase.brand.caseBrand  }} </p>
-            <p >{{ proCase.casePrice + ".-" }}</p>
         </div>
-        <div class="ml-auto my-2">
+      </div>
+    </div>  
+  </div>
+</div>
+        <!-- <div class="ml-auto my-2">
             <button class="bg-pink-300 py-2 px-3"  @click="editClick(proCase)">
                 <i class="fas fa-pen"></i>
             </button>
             <button class="bg-purple-300 py-2 px-3 mx-2" @click="deleteCase(proCase.caseId)">
                 <i class="fas fa-trash"></i>
             </button>
-        </div>
-      </div> 
-      
-  </div>
+        </div> -->
+     
   <!-- </div> -->
 
 </template>
@@ -42,13 +64,14 @@ export default {
       limit: 8,
       ShowCase:[],
       click: true,
+      filter: false,
     };
   },
   methods:{
     showProduct() {
-        axios.get(`${process.env.VUE_APP_ROOT_API}public/products/`).then((response) => {
+        axios.get(`${process.env.VUE_APP_ROOT_API}public/products`).then((response) => {
           this.ShowCase = response.data;
-          console.log("xx : "+this.ShowCase)
+          console.log("product : "+this.ShowCase)
         }).then(function(){
             console.log('SUCCESS products')
           })
@@ -57,7 +80,7 @@ export default {
           });               
     },
     async deleteCase(id){
-      await axios.delete(`${process.env.VUE_APP_ROOT_API}public/products/${id}`)
+      await axios.delete(`${process.env.VUE_APP_ROOT_API}test/products/${id}`)
       for(let i = 0; i< this.ShowCase.length;i++ ){
         if(this.ShowCase[i].caseId == id){
           this.ShowCase.splice(i,1)

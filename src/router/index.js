@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import About from '../views/About.vue'
+import Login from '../views/Login.vue'
+import Profile from '../views/Profile.vue'
+import AddEdit from '../views/AddandEditProduct.vue'
+import Shipping from '../views/Shipping.vue'
+import Dashboard from '../views/Dashboard.vue'
 
 const routes = [
   {
@@ -11,19 +16,33 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-   }
-   ,
+    component: About
+  },
   {
-    path: '/products',
-    name: 'Products',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Products.vue')
-  }, {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
-  }
+    component: Login
+  },
+  {
+    path: '/addEdit',
+    name: 'AddEdit',
+    component: AddEdit
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
+  },
+  {
+    path: '/shipping',
+    name: 'Shipping',
+    component: Shipping
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  },
 ]
 
 const router = createRouter({
