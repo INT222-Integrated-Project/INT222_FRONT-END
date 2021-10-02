@@ -29,11 +29,6 @@ const routes = [
     component: AddEdit
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile
-  },
-  {
     path: '/shipping',
     name: 'Shipping',
     component: Shipping
