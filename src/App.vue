@@ -1,8 +1,7 @@
 <template>
   <div > 
     <nav-bar   fixedNav="fixed"></nav-bar>
-       <router-view :addClicked="addItemClicked" @close-add-modal="closeAddModal" />
-    
+       <router-view :addClicked="addItemClicked" @close-modal="closeAddModal" />
   </div>
 </template>
 
@@ -15,7 +14,6 @@ export default {
   data() {
     return {
       addItemClicked: false,
-      
     };
   },
   methods: {

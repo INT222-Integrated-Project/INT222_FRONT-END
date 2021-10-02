@@ -31,7 +31,7 @@ import inputdata from "./AddandEditProduct.vue";
 // import slides from "../components/Caseslideshow.vue";
 export default {
   emits: ["close-add-modal"],
-  props: ["addClicked",],
+  // props: ["addClicked",],
   components: {
     inputdata,
     showcase,
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     changeAddItemClicked(value) {
-      this.$emit("close-add-modal", value);
+      this.$emit("close-modal", value);
     }, 
     changeEditItemClicked(value) {
       this.editClicked = value;
