@@ -27,7 +27,15 @@ const routes = [
   {
     path: '/addEdit',
     name: 'AddEdit',
-    component: AddEdit
+    component: AddEdit,
+    beforeEnter:(to,from,next) => {
+      if(!Store.getters['auth/authenticated']){
+        return next({
+          name : 'login'
+        })
+      }
+        next()
+    }
   },
   {
     path: '/shipping',
