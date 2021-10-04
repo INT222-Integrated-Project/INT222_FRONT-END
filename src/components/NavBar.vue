@@ -32,6 +32,9 @@
        </template > 
       <template v-else> 
       <div  class="sm:flex-grow text-white text-xl">
+        <router-link to="/AddEdit" class=" text-white no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-pink-400 mr-4">
+          <button class="flex items-center"><i class="material-icons mr-3 text-3xl">add_circle</i></button>
+        </router-link>
         <router-link to="/shipping" class="text-white no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-pink-400 mr-4">
           <button class="flex items-center"><i class="material-icons mr-3 text-3xl">shopping_cart</i></button> 
         </router-link>
