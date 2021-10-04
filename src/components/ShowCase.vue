@@ -9,7 +9,7 @@
   <div class="flex items-center " style="font-family: 'Muli', sans-serif;">
     
     <div  class="flex  flex-wrap justify-center space-x-2 gap-1  pl-5 pr-5 my-5 lg:pl-2 lg:pr-2 ">
-      <div v-for="(p,index) in ShowCase.products" :key="index" :value="proCase" class="bg-white  w-72 h-96 mb-3 rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
+      <div v-for="(p,index) in ShowCase.content" :key="index" :value="p" class="bg-white  w-72 h-96 mb-3 rounded-lg m-h-64 p-2 transform hover:translate-y-2 hover:shadow-xl transition duration-300">
         <figure class="mb-2">
           <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="h-64 ml-auto mr-auto" />
         </figure>
