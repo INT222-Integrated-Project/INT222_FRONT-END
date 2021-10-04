@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import AddEdit from '../views/AddandEditProduct.vue'
 import Shipping from '../views/Shipping.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Store from '@/store'
+
 
 const routes = [
   {
@@ -30,17 +32,20 @@ const routes = [
   {
     path: '/shipping',
     name: 'Shipping',
-    component: Shipping
+    component: Shipping,
+    beforeEnter:(to,from,next) => {
+      if(!Store.getters['auth/authenticated']){
+        return next({
+          name : 'login'
+        })
+      }
+        next()
+    }
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: About
   },
 ]
 
