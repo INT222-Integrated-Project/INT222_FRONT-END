@@ -1,12 +1,12 @@
 <template>
   <div class="fixed z-10 inset-0 overflow-y-auto  ">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
       <div
         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
         <form @submit.prevent="checkForm">
-          <div class="bg-gray-200 px-4 pt-5 pb-4 ">
+          <div class="bg-pink-100 px-4 pt-5 pb-4 ">
             <div class="mt-3 text-center md:mt-0 md:ml-4 ">
               <h3 class="text-2xl font-medium text-gray-900" id="modal-title">
                 {{ formLabel }}
@@ -76,7 +76,7 @@
                           <input type="checkbox" :id="color.caseColor" :value="color" class="hidden"
                               v-model="products.color" />
                           <label @click="color.checked = !color.checked" :for="color.caseColor"
-                              class="flex rounded-full bg-black h-8 w-8 shadow-inner" :class="
+                              class="flex rounded-full bg-black h-8 w-8 shadow-inner ml-5" :class="
                                 color.caseColor ? 'bg-caseCol-' + color.caseColor.toLowerCase(): '' ">
                           <span v-show="color.checked"
                                 class="flex mx-auto items-center material-icons text-white">done</span>
@@ -119,10 +119,10 @@
             </div>
           </div>
 
-          <div  class="bg-gray-200 px-4 pb-3 -top-5 sm:px-6 flex sm:flex-row-reverse justify-center">
-            <button Type="submit" class="input-sign-in">submit</button>
-            <router-link to="/">
-            <button @click="closeCurrentModal" class="input-sign-up">close</button>
+          <div  class="bg-pink-100 px-4 pb-3 -top-5 sm:px-6 flex sm:flex-row-reverse justify-center">
+            <button Type="submit" class="input-sign-in mx-6">submit</button>
+            <router-link to="/" class="input-sign-up mx-6" >
+            <button @click="closeCurrentModal" >close</button>
             </router-link>
           </div>
         </form>
