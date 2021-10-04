@@ -11,10 +11,12 @@
           </h1>
             <form @submit.prevent="doLogin" class="w-full flex-1 mt-3"> 
                 <div class="mx-auto max-w-xs">
-                    <input v-model="userLogin" type="text" name="username" placeholder="Username" required class="input-text"/>
-                    <input v-model="passwordLogin"  type="password" name="password" placeholder="Password"  required class="input-text"/>
+                    <input v-model="logform.userName" type="text" name="userName" placeholder="userName" required class="input-text"/>
+                      <i class="text-center text-sm text-red-500" v-if="this.invalid.invaliduserName">  please username must be greater than 4 charator </i>
+                    <input v-model="logform.userPassword"  type="password" name="password" placeholder="Password"  required class="input-text"/>
+                      <i class="text-center text-sm text-red-500" v-if="this.invalid.invaliduserPassword">  please Password must be greater than 4 charator </i>
                     <div class="m-1 ">
-                        <input type="submit" class="input-sign-in"  @click="doLogin" />
+                        <input type="submit" class="input-sign-in"  />
                     </div>
                     <div class=" m-2">  
                         <p class="items-center mt-5 text-center">Don't have an account? </p>
@@ -30,22 +32,25 @@
             <h1 class="text-2xl xl:text-3xl font-extrabold">
                 Sign Up
             </h1> 
-            <form class="flex flex-col text-gray-400 m-5   rounded-xl">
-                <input v-model="fnameReg" type="fname" name="Firstname" placeholder="Firstname" required class="input-text"/>
-                <input v-model="lnameReg"  type="lname" name="Lastname" placeholder="Lastname"  required class="input-text"/>
-                <input v-model="userReg" type="userReg" name="Username" placeholder="Username" required class="input-text"/>
-                <input v-model="passwordReg"  type="password" name="Password" placeholder="Password"  required class="input-text"/>
-                <input v-model="phoneReg" type="phoneReg" name="Phone" placeholder="Phone" required class="input-text"/> 
+            <form @submit.prevent="doRegister" class="flex flex-col text-gray-400 m-5   rounded-xl">
+                <input v-model="regisform.firstName" name="Firstname" placeholder="Firstname" required class="input-text"/>
+                <input v-model="regisform.lastName"   name="Lastname" placeholder="Lastname"  required class="input-text"/>
+                <input v-model="regisform.userName"  name="Username" placeholder="Username" required class="input-text"/>
+                 <i class="text-center text-sm text-red-500" v-if="this.invalid.invaliduserName">  Please username must be greater than 4 charator </i>
+                <input v-model="regisform.userPassword"  type="password" name="Password" placeholder="Password"  required class="input-text"/>
+                <i class="text-center text-sm text-red-500" v-if="this.invalid.invaliduserPassword">  Please Password must be greater than 4 charator </i>
+                <input v-model="regisform.phone" type="phone" name="phone" placeholder="phone" required class="input-text"/> 
+                <i class="text-center text-sm text-red-500" v-if="this.invalid.invalidphone"> Please phone must be equal or greater than 8 charator or less 10 charator </i>
                 <div class="m-1 ">
-                    <input type="submit" class="input-sign-in"  @click="doRegister" />
+                    <input type="submit" class="input-sign-in"  />
                 </div>
                 <p class="items-center mt-5 text-center"> Already have an account? </p>  
                 <a href="#" @click="  (registerActive = !registerActive),  (emptyFields = false)"  class="input-sign-up">
                     <i class="material-icons items-center">person</i>  
                         <h3 class="ml-3"> Sign In</h3>
                 </a>    
-                </form>
-              </div>
+            </form>
+        </div>
         <div class="flex justify-center items-center">
             <a href="#" class="border-b border-gray-500 border-dotted">Terms of Service</a>
             <p class="mx-2">and its</p>
@@ -64,57 +69,90 @@
 
 <script>
 import { mapActions } from 'vuex'
+import axios from "axios"
 export default {
 
-emits: [],
-props: [],
   data() {
     return {
       registerActive: false,
       logform:{
-        userLogin: "",
-        passwordLogin: "",
+        userName: "",
+        userPassword: "",
       },
       regisform:{
-        fnameReg:"",
-        lnameReg:"",
-        userReg: "",
-        passwordReg: "",
-        phoneReg:"",
+        userName: "",
+        userPassword: "",
+        firstName:"",
+        lastName:"",
+        phone:"",
       },
       emptyFields: false, 
       account:[],
+      invalid: {
+        invaliduserName: false,
+        invaliduserPassword: false,
+        invalidfirstName: false,
+        invalidlastName: false,
+        invalidphone: false,
+      },
       
     };
   },
   methods: {
-   ...mapActions({SignIn:'auth/SignIn'}),
+    ...mapActions({SignIn:'auth/SignIn'}),
+
     doLogin() {
-      this.SignIn(this.logform)
-      // let response = axios.post(`${process.env.VUE_APP_ROOT_API}auth/users/`, this.logform)
-      
-      //   console.log(response.data)
-      //   alert("You are now logged in");
-        // if (this.userLogin === "" || this.passwordLogin === "") {
-      //   this.emptyFields = true;
-      // } else {
-        //alert("You are now logged in");
-      // }
+      console.log(this.logform)
+      this.SignIn(this.logform).then(()=>{
+        this.$router.replace({
+          name:'Home'
+        })
+        
+
+      })
+    
     },
     doRegister() {
-      if (
-        this.fnameReg === "" ||
-        this.lnameReg === "" ||
-        this.userReg === "" ||
-        this.passwordReg === "" ||
-        this.phoneReg === "" 
-      ) {
-        this.emptyFields = true;
-      } else {
-        this.SentRegis();
-       
+      this.invalid.invaliduserName = this.regisform.userName === "" || this.regisform.userName.length > 20 ? true : false || this.regisform.userName.length < 4 ? true : false;
+        this.invalid.invaliduserPassword = this.regisform.userPassword === "" ? true : false || this.regisform.userPassword.length > 32 ? true : false || this.regisform.userPassword.length < 4 ? true : false;
+        this.invalid.invalidfirstName = this.regisform.firstName === "" ? true : false || this.regisform.firstName.length > 50 ? true : false ;
+        this.invalid.invalidlastName = this.regisform.lastName === "" ? true : false || this.regisform.lastName.length > 50 ? true : false ;
+        this.invalid.invalidphone = this.regisform.phone.length < 8  ? true : false || this.regisform.lastName.length > 10 ? true : false ;
+      if(
+        this.invalid.invaliduserName ||
+        this.invalid.invaliduserPassword ||
+        this.invalid.invalidfirstName ||
+        this.invalid.invalidlastName ||
+        this.invalid.invalidphone === true
+        ){console.log("false")
       }
-    },
-  },
+      else {
+        this.sentRegis();
+      }
+       
+    },sentRegis(){
+      let formData = new FormData()
+        let regisJson = JSON.stringify(this.regisform);
+               
+        const regisBlob = new Blob([regisJson],{
+            type: 'application/json'
+        })
+        formData.append('newUser',regisBlob)
+        // console.log(formData.getAll("newUser"))
+                //post to backend by multipart
+         axios.post(`${process.env.VUE_APP_ROOT_API}public/auth/register`, formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',                   
+            }
+          }).then(function(){
+            console.log('SUCCESS')
+          })
+          .catch(function(){
+            console.log('FAILURE')
+          })
+            console.log(regisJson) 
+  }
+  }
 };
 </script>
