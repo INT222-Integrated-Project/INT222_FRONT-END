@@ -120,9 +120,9 @@
           </div>
 
           <div  class="bg-gray-200 px-4 pb-3 -top-5 sm:px-6 flex sm:flex-row-reverse justify-center">
-            <button Type="submit">submit</button>
+            <button Type="submit" class="input-sign-in">submit</button>
             <router-link to="/">
-            <button @click="closeCurrentModal">close</button>
+            <button @click="closeCurrentModal" class="input-sign-up">close</button>
             </router-link>
           </div>
         </form>
@@ -270,7 +270,7 @@ export default {
       reader.readAsDataURL(file);
     },
     ChooseBrand() {
-      axios.get(`${process.env.VUE_APP_ROOT_API}test/brands`).then((response) => {
+      axios.get(`${process.env.VUE_APP_ROOT_API}public/brands`).then((response) => {
         this.ShowBrand = response.data;
       }).then(function(){
       console.log('SUCCESS Brands')
@@ -280,7 +280,7 @@ export default {
       });
     },
      ChooseModel() {
-      axios.get(`${process.env.VUE_APP_ROOT_API}test/models`).then((response) => {
+      axios.get(`${process.env.VUE_APP_ROOT_API}public/models`).then((response) => {
         this.ShowModel = response.data;
       }).then(function(){
       console.log('SUCCESS model')
@@ -290,7 +290,7 @@ export default {
       });
     },
     ChooseColor() {
-      return axios.get(`${process.env.VUE_APP_ROOT_API}test/colors`).then((response) => {
+      return axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then((response) => {
         this.ShowColor = response.data;
       }).then(function(){
       console.log('SUCCESS COLORS')
