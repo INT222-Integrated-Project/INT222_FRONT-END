@@ -42,7 +42,7 @@
                 <input v-model="regisform.phone" type="phone" name="phone" placeholder="phone" required class="input-text"/> 
                 <i class="text-center text-sm text-red-500" v-if="this.invalid.invalidphone"> Please phone must be equal or greater than 8 charator or less 10 charator </i>
                 <div class="m-1 ">
-                    <input type="submit" class="input-sign-in"  />
+                    <input type="submit" class="input-sign-in" > 
                 </div>
                 <p class="items-center mt-5 text-center"> Already have an account? </p>  
                 <a href="#" @click="  (registerActive = !registerActive),  (emptyFields = false)"  class="input-sign-up">
