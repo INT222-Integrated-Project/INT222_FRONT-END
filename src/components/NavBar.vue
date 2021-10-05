@@ -30,7 +30,7 @@
         </router-link>
       </div>
        </template > 
-      <template v-else> 
+      <template v-else  > 
       <div  class="sm:flex-grow text-white text-xl">
         <router-link to="/AddEdit" class=" text-white no-underline block mt-4 sm:inline-block sm:mt-0 text-teal-lighter hover:text-pink-400 mr-4">
           <button class="flex items-center"><i class="material-icons mr-3 text-3xl">add_circle</i></button>
@@ -72,8 +72,9 @@
 <script>
 // import { mapGetters,mapActions } from 'vuex'
 import { mapGetters,mapActions } from 'vuex'
+
 export default {
-  components: {  },
+  
   props: ["fixedNav",],
   data() {
     return {

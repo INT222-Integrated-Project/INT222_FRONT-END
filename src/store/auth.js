@@ -45,7 +45,7 @@ export default ({
       }                                                                                                                                                                                                                                                                  
     },
     signOut({commit}){
-      return axios.post('auth/signout').then(() => {
+      return axios.post(`${process.env.VUE_APP_ROOT_API}user/auth/logout`).then(() => {
         commit('SET_TOKEN',null)
         commit('SET_USER',null)
 
