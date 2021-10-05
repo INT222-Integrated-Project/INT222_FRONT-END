@@ -3,7 +3,7 @@
     <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
       <div class="lg:w-1/2 xl:w-5/12 p-3 sm:p-12">
         <div>
-          <img src="https://www.pngkey.com/png/full/83-837247_quick-view-sweet-word.png" class="w-32 mx-auto"/>
+          <img src="https://www.pngkey.com/png/full/83-837247_quick-view-sweet-word.png" class="sm:w-32 w-32 mx-auto"/>
         </div>
         <div v-if="!registerActive" key=""  v-bind:class="{ error: emptyFields }" class="mt-12 flex flex-col items-center">
           <h1 class="text-2xl xl:text-3xl font-extrabold">
