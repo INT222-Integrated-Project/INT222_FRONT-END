@@ -17,6 +17,7 @@
 
        <template v-if="authenticated"> 
         <div  class=" sm:flex flex-row text-white text-xl">
+          
           <router-link to="/AddEdit" class=" text-white no-underline block mt-4  sm:mt-0 text-teal-lighter hover:text-pink-400 mr-4">
             <button class="flex items-center"><i class="material-icons mr-3 text-3xl">add_circle</i></button>
           </router-link>
@@ -24,7 +25,8 @@
             <button class="flex items-center"><i class="material-icons mr-3 text-3xl">shopping_cart</i></button> 
           </router-link>
           <router-link to="/Profile" class="text-white no-underline block mt-4  sm:mt-0 text-teal-lighter hover:text-pink-400 mr-4 ">
-            <button class="flex items-center"><i class="material-icons mr-3 text-3xl">contact_mail</i> {{user}}</button>
+            <button class="flex items-center"><i class="material-icons mr-3 text-3xl">contact_mail</i> </button>
+            <div  class=" text-white no-underline  mt-4  sm:mt-0 text-teal-lighter hover:text-pink-400 text-center flex" >{{user}}</div>
           </router-link>
             <a  hraf="#" @click.prevent="signOut" class="text-white no-underline block mt-4  sm:mt-0 text-teal-lighter hover:text-pink-400 mr-4">
               <i  class="material-icons mr-3 text-3xl">logout</i>
