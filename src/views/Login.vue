@@ -51,9 +51,9 @@
                 </a>    
             </form>
         </div>
-        <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center ">
             <a href="#" class="border-b border-gray-500 border-dotted">Terms of Service</a>
-            <p class="mx-2">and its</p>
+            <p class="sm:mx-2">and its</p>
             <a href="#" class="border-b border-gray-500 border-dotted">Privacy Policy</a>
         </div>
       </div>
