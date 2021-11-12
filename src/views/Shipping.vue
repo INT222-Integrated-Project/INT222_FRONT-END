@@ -77,20 +77,20 @@ export default {
   data() {
     return {
       products: [
-        // {
-        //   image: "https://cdn-image02.casetify.com/usr/14396/4304396/~v72/7057674_iphone11__color_white_16000089.png.350x350-w.m80.jpg",
-        //   name: "Buttercake case",
-        //   description: "Sumsung",
-        //   price: 1750,
-        //   quantity: 2,
-        // },
-        // {
-        //   image: "https://cdn-image02.casetify.com/usr/3640/933640/~v34/2188915_iphone7-plus_298704.png.560x560-w.m80.jpg",
-        //   name: "Icecramcake case",
-        //   description: "Iphone",
-        //   price: 2000,
-        //   quantity: 1,
-        // },
+        {
+          image: "https://cdn-image02.casetify.com/usr/14396/4304396/~v72/7057674_iphone11__color_white_16000089.png.350x350-w.m80.jpg",
+          name: "Buttercake case",
+          description: "Sumsung",
+          price: 1750,
+          quantity: 2,
+        },
+        {
+          image: "https://cdn-image02.casetify.com/usr/3640/933640/~v34/2188915_iphone7-plus_298704.png.560x560-w.m80.jpg",
+          name: "Icecramcake case",
+          description: "Iphone",
+          price: 2000,
+          quantity: 1,
+        },
       ],
       tax: 7,
       promotions: [

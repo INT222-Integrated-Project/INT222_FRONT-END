@@ -2,9 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Login from '../views/Login.vue'
+import Profile from '../views/Profile.vue'
 import AddEdit from '../views/AddandEditProduct.vue'
 import Shipping from '../views/Shipping.vue'
 import Dashboard from '../views/Dashboard.vue'
+
 import Store from '@/store'
 
 
@@ -54,6 +56,11 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
 ]
 
