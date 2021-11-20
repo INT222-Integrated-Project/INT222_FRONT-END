@@ -280,7 +280,7 @@ export default {
       });
     },
      ChooseModel() {
-      axios.get(`${process.env.VUE_APP_ROOT_API}public/models`).then((response) => {
+      axios.get(`${process.env.VUE_APP_ROOT_API}test/models`).then((response) => {
         this.ShowModel = response.data;
       }).then(function(){
       console.log('SUCCESS model')
@@ -320,7 +320,7 @@ export default {
     }
     await console.log("Brands : ", this.ShowBrand);
     await console.log("Colors : ", this.ShowColor);
-    await console.log("Model : ", this.ShowColor);
+    await console.log("Models : ", this.ShowColor);
   },
 };
 </script>
