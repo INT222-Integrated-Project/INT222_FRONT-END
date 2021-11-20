@@ -41,7 +41,7 @@
                 <i class="text-center text-sm text-red-500" v-if="this.invalid.invaliduserPassword">  Please Password must be greater than 4 charator </i>
                 <input v-model="regisform.phone" type="phone" name="phone" placeholder="phone" required class="input-text"/> 
                 <i class="text-center text-sm text-red-500" v-if="this.invalid.invalidphone"> Please phone must be equal or greater than 8 charator or less 10 charator </i>
-                <div class="m-1 " >
+                <div class="m-1 ">
                     <input type="submit" class="input-sign-in" > 
                 </div>
                 <p class="items-center mt-5 text-center"> Already have an account? </p>  
@@ -128,12 +128,9 @@ export default {
       }
       else {
         this.sentRegis();
-        
       }
        
     },sentRegis(){
-      
-            
       let formData = new FormData()
         let regisJson = JSON.stringify(this.regisform);
                
@@ -150,16 +147,11 @@ export default {
             }
           }).then(function(){
             console.log('SUCCESS')
-            alert("Register success");
-           
-           
           })
           .catch(function(){
             console.log('FAILURE')
           })
             console.log(regisJson) 
-             
-        
   }
   }
 };
