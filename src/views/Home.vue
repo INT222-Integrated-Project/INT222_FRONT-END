@@ -1,13 +1,20 @@
 <template >
   <div class="flex justify-center  w-screen  h-s">
     <!-- block image to search and can edit , delete  -->
-    <div class="h-screen sm:w-5/6 bg-white bg-opacity-50 items-center md:mx-auto rounded-xl  lg:md-20">
+    <div class="h-screen md:w-5/6 bg-white bg-opacity-50 items-center md:mx-auto rounded-xl  lg:md-20">
       <div class="mt-3 text-center">
         <!-- Search -->
          <div >
           <input class="input-text" type="text" v-model="inputSearch" placeholder="Enter your search terms" />
         </div>
+      <!-- <div v-for="c in filteredData" :key="c.name">
+              <a v-bind:href="proCase.productid"> Price: {{ proCase.casePrice }}</a>
+              <h2>{{proCase.caseName}} <span class="bg-pink-300">Total: {{proCase.total}}</span></h2>
+            </div> -->
+        
+      
 
+        <!-- <slides></slides> -->
         <showcase  @edit-click="openEditModal" @send-data="editCase"></showcase>
       </div>
     </div>
@@ -24,11 +31,11 @@ import inputdata from "./AddandEditProduct.vue";
 // import slides from "../components/Caseslideshow.vue";
 export default {
   emits: ["close-add-modal"],
-
+  // props: ["addClicked",],
   components: {
     inputdata,
     showcase,
-
+    // slides
   },
  data() {
     return {
