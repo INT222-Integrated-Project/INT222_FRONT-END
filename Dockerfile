@@ -3,7 +3,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY ./ .
-RUN node --openssl-legacy-provider ./node_modules/.bin/gatsby build
 RUN npm run build
 
 FROM nginx as production-stage
