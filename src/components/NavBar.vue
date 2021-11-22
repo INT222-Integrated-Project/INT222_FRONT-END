@@ -82,6 +82,11 @@ export default {
   data() {
     return {
       dropdownOpen: false, 
+      showOpionByRole:{
+        authenticatedUser: false,
+        authenticatedStaff: false,
+        authenticatedAdmin: false
+      }
     };
   },
   computed: {
@@ -94,6 +99,7 @@ export default {
     ...mapActions({
         signOutAction:'auth/signOut'
     }),
+    
 
     signOut () {
       this.signOutAction().then(() => {
