@@ -128,6 +128,7 @@ export default {
       }
       else {
         this.sentRegis();
+        
       }
        
     },sentRegis(){
@@ -152,6 +153,11 @@ export default {
             console.log('FAILURE')
           })
             console.log(regisJson) 
+             alert("SUCCESS"),
+            this.$router.replace({
+            name:'Home'
+        })
+        
   }
   }
 };

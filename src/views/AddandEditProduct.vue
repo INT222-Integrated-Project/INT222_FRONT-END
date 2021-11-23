@@ -59,7 +59,7 @@
                           <select class="bg-gray-100 rounded py-2 mb-4 w-40" id="caseBrand" name="caseBrand"
                             v-model="products.model">
                             <option disabled value="">models</option>
-                            <option v-for="model in ShowModel" :key="model" :value="model" selected>
+                            <option v-for="model in ShowModel.content" :key="model" :value="model" selected>
                               {{ model.modelName }}
                             </option>
                           </select>
@@ -194,7 +194,7 @@ export default {
         formData.append('body',caseBlob)
         console.log(formData.getAll("newProduct"))
                 //post to backend by multipart
-         axios.post(`${process.env.VUE_APP_ROOT_API}public/products/`, formData,
+        axios.post(`${process.env.VUE_APP_ROOT_API}public/products`, formData,
           {
             headers: {
               'Content-Type': 'multipart/form-data',                   
@@ -219,7 +219,7 @@ export default {
                 //add image to formdata            
             formData.append("imageFile",imageBlob)
             formData.append('body',caseBlob)
-            console.log(formData.getAll("newProduct"))
+            console.log(formData.getAll("update Product"))
                 //post to backend by multipart
             axios.put(`${process.env.VUE_APP_ROOT_API}public/products/${id}`, formData,
               {
@@ -320,7 +320,7 @@ export default {
     }
     await console.log("Brands : ", this.ShowBrand);
     await console.log("Colors : ", this.ShowColor);
-    await console.log("Model : ", this.ShowColor);
+    await console.log("Models : ", this.ShowColor);
   },
 };
 </script>
