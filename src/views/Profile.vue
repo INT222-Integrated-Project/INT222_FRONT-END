@@ -54,17 +54,17 @@
           <div>
           <div class="flex  justify-center flex-col items-center">
             <form @submit.prevent="editProfile" class=" flex flex-col justify-center items-center ">
-                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.firstName}}</p>
+                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.firstName}}</p>
                 <input v-model="editFrom.firstName" name="Firstname" placeholder="Firstname" required class="input-text w-3/5" />
-                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.lastName}}</p>
+                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.lastName}}</p>
                 <input v-model="editFrom.lastName" name="lastName" placeholder="LastName" required class="input-text" />
-                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.email}}</p>
+                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.email}}</p>
                 <input v-model="editFrom.email" name="email" placeholder="Email" required class="input-text" />
-                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.phoneNumber}}</p>
+                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.phoneNumber}}</p>
                 <input v-model="editFrom.phone" name="phone" placeholder="Phone" required class="input-text" />
-                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.address}}</p>
+                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.address}}</p>
                 <input v-model="editFrom.address" name="address" placeholder="Address" required class="input-text" />
-                <div class="flex flex-row m-2">
+                <div class="flex flex-row m-2  ">
                   <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)" class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
                     <h3 class="">cancel</h3>
                   </a>
