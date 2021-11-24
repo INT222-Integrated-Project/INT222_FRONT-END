@@ -1,4 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+  createRouter,
+  createWebHistory
+} from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Login from '../views/Login.vue'
@@ -7,10 +10,14 @@ import AddEdit from '../views/AddandEditProduct.vue'
 import Shipping from '../views/Shipping.vue'
 import Dashboard from '../views/Dashboard.vue'
 
-import Store from '@/store'
+import AdminPanel from '../views/admin/AdminPanel.vue'
+import ForbiddenSector from '../views/publicVisitors/ForbiddenSector.vue'
+
+import store from '@/store'
 
 
 const routes = [
+  //Public user section
   {
     path: '/',
     name: 'Home',
@@ -24,44 +31,92 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
-  },
-  {
-    path: '/addEdit',
-    name: 'AddEdit',
-    component: AddEdit,
-    beforeEnter:(to,from,next) => {
-      if(!Store.getters['auth/authenticated']){
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (store.getters['authentication/authenticated']) {
         return next({
-          name : 'login'
+          name: 'Home'
         })
       }
-        next()
+      next()
+    }
+  },
+  {
+    path: '/ForbiddenSector',
+    name: 'ForbiddenSector',
+    component: ForbiddenSector
+  },
+  //User only section
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authentication/authenticated']) {
+        return next({
+          name: 'Login'
+        })
+      }
+      next()
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authentication/authenticated']) {
+        return next({
+          name: 'Login'
+        })
+      }
+      next()
     }
   },
   {
     path: '/shipping',
     name: 'Shipping',
     component: Shipping,
-    beforeEnter:(to,from,next) => {
-      if(!Store.getters['auth/authenticated']){
+    beforeEnter: (to, from, next) => {
+      if (!store.getters['authentication/authenticated']) {
         return next({
-          name : 'login'
+          name: 'Login'
         })
       }
-        next()
+      next()
     }
   },
+  //Staff only sector
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard
+    path: '/addEdit',
+    name: 'AddEdit',
+    component: AddEdit,
+    beforeEnter: (to, from, next) => {
+      if (!(store.getters['authentication/authenticated'] && (store.getters['authentication/roleName'] == "admin" || store.getters['authentication/roleName'] == "staff"))) {
+        return next({
+          name: 'Home'
+        })
+      }
+      next()
+    }
   },
+  //Admin only sector
   {
-    path: '/profile',
-    name: 'Profile',
-    component: Profile
+    path: '/adminPanel',
+    name: 'AdminPanel',
+    component: AdminPanel,
+    beforeEnter: (to, from, next) => {
+      if (!(store.getters['authentication/authenticated'] && store.getters['authentication/roleName'] == "admin")) {
+        return next({
+          name: 'ForbiddenSector'
+        })
+      }
+
+      next()
+    }
   },
+
+
 ]
 
 const router = createRouter({

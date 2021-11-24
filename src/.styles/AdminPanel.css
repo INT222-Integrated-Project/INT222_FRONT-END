@@ -1,0 +1,30 @@
+.default-admin-main-href{
+    @apply text-center text-lg py-1 px-3 bg-white border-4 border-red-900 rounded-3xl mx-2 my-2
+}
+.default-admin-profile{
+    @apply mx-2 my-2 border-red-900 border-4 p-3 rounded-3xl bg-white
+}
+.default-user-list{
+    @apply bg-gray-100 border-gray-400 border-2 mx-4 p-2 hover:bg-gray-200 duration-200
+}
+.default-admin-page-background{
+    @apply bg-gradient-to-b from-red-200 to-pink-300 min-h-screen
+}
+.defalut-userlist-block{
+    @apply mx-1 w-2/12
+}
+.defalut-user-profile-image{
+    @apply border-gray-500 p-1 w-20 rounded-3xl ;
+    min-width: 100px;
+    min-height: 100px;
+    max-height: 100px;
+}
+.default-user-list-username{
+    @apply text-xl
+}
+.default-user-list-user-name{
+    @apply text-gray-500
+}
+.default-user-list-header{
+    @apply text-black
+}

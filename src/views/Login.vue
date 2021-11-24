@@ -125,42 +125,27 @@
             showErrorBox: false,
             errorMessage: ""
           }
-        },
-
+        }
       };
     },
     methods: {
       ...mapActions({
-        SignIn: 'auth/SignIn'
+        signIn: 'authentication/signIn'
       }),
 
       async doLogin() {
+        let response = await this.signIn(this.logform);
+        //console.log(response);
 
-        const response = await axios.post(`${process.env.VUE_APP_ROOT_API}public/auth/login`, {
-          userName: this.logform.userName,
-          userPassword: this.logform.userPassword
-        }).then(response => {
+        if (response.data.accessToken) {
           this.invalid.badcredentials = false;
-          console.log(response);
-
-          localStorage.setItem("username", this.logform.userName);
-          localStorage.setItem("acceessToken", response.data.acceessToken);
-          localStorage.setItem("roleID", response.data.role.roleID);
-          localStorage.setItem("roleName", response.data.role.roleName);
-
           this.$router.replace({
             name: 'Home'
           })
-        }).catch(error => {
-          console.log(
-            "[ BAD CREDENTIAL ] An error occures because username and password are not matched. ERROR : " +
-            error.response.data.message)
-          console.log("[ FINE ] The APIs send back with code : " + error.response.data.exceptionCode)
+        } else {
           this.invalid.badcredentials = true;
-        })
+        }
 
-        console.log(response);
-        console.log(this.logform);
       },
       doRegister() {
         this.invalid.invaliduserName = this.regisform.userName === "" || this.regisform.userName.length > 20 ? true :
