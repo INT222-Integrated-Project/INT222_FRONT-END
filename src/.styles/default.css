@@ -1,0 +1,18 @@
+.default-large-header-box{
+    @apply bg-red-200 py-3 text-center text-4xl font-bold
+}
+.default-edit-button{
+    @apply p-2 border-2 rounded-md w-full
+}
+.default-page-button{
+    @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm mx-1 text-center text-lg font-bold justify-center flex items-center my-2;
+    width: 30px;
+    height: 35px;
+}
+.default-page-button-current{
+    @apply p-3 bg-pink-400 border-2 border-pink-800 rounded-sm mx-1 text-center text-lg font-bold justify-center flex items-center my-2;
+    width: 30px;
+    height: 35px;
+}
+
+

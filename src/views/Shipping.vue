@@ -1,6 +1,5 @@
 <template>
-asdasdasd
-  <!-- <div class="sm:w-3/4 w-screen mx-auto mt-10">
+  <div class="sm:w-3/4 w-screen mx-auto mt-10">
     <div class="flex shadow-md my-10">
       <div class="w-screen bg-white px-10 py-10">
         <div class="flex justify-between  pb-8">
@@ -67,127 +66,113 @@ asdasdasd
          </div>
       </div>
     </div>
+    <!-- <section class="flex justify-center flex-col " v-if="products.length > 0">
+      
+    </section> -->
     
-    
-  </div> -->
+  </div>
 </template>
 <script>
-import axios from 'axios'
 export default {
   data() {
     return {
-      order: [
-      //   {
-      //     image: "https://cdn-image02.casetify.com/usr/14396/4304396/~v72/7057674_iphone11__color_white_16000089.png.350x350-w.m80.jpg",
-      //     name: "Buttercake case",
-      //     description: "Sumsung",
-      //     price: 1750,
-      //     quantity: 2,
-      //   },
-      //   {
-      //     image: "https://cdn-image02.casetify.com/usr/3640/933640/~v34/2188915_iphone7-plus_298704.png.560x560-w.m80.jpg",
-      //     name: "Icecramcake case",
-      //     description: "Iphone",
-      //     price: 2000,
-      //     quantity: 1,
-      //   },
-      // ],
-      // tax: 7,
-      // promotions: [
-      //   {
-      //     code: "SUMMER",
-      //     discount: "50%",
-      //   },
-      //   {
-      //     code: "AUTUMN",
-      //     discount: "40%",
-      //   },
-      //   {
-      //     code: "WINTER",
-      //     discount: "30%",
-      //   },
+      products: [
+        {
+          image: "https://cdn-image02.casetify.com/usr/14396/4304396/~v72/7057674_iphone11__color_white_16000089.png.350x350-w.m80.jpg",
+          name: "Buttercake case",
+          description: "Sumsung",
+          price: 1750,
+          quantity: 2,
+        },
+        {
+          image: "https://cdn-image02.casetify.com/usr/3640/933640/~v34/2188915_iphone7-plus_298704.png.560x560-w.m80.jpg",
+          name: "Icecramcake case",
+          description: "Iphone",
+          price: 2000,
+          quantity: 1,
+        },
       ],
-      // promoCode: "",
-      // discount: 0,
+      tax: 7,
+      promotions: [
+        {
+          code: "SUMMER",
+          discount: "50%",
+        },
+        {
+          code: "AUTUMN",
+          discount: "40%",
+        },
+        {
+          code: "WINTER",
+          discount: "30%",
+        },
+      ],
+      promoCode: "",
+      discount: 0,
     };
   },
   computed: {
-    // itemCount: function() {
-    //   var count = 0;
+    itemCount: function() {
+      var count = 0;
 
-    //   for (var i = 0; i < this.products.length; i++) {
-    //     count += parseInt(this.products[i].quantity) || 0;
-    //   }
+      for (var i = 0; i < this.products.length; i++) {
+        count += parseInt(this.products[i].quantity) || 0;
+      }
 
-    //   return count;
-    // },
-    // subTotal: function() {
-    //   var subTotal = 0;
-    //   for (var i = 0; i < this.products.length; i++) {
-    //     subTotal += this.products[i].quantity * this.products[i].price;
-    //   }
-    //   return subTotal;
-    // },
-    // discountPrice: function() {
-    //   return this.subTotal * this.discount / 100;
-    // },
-    // totalPrice: function() {
-    //   return this.subTotal - this.discountPrice + 100/this.tax;
-    // },
+      return count;
+    },
+    subTotal: function() {
+      var subTotal = 0;
+      for (var i = 0; i < this.products.length; i++) {
+        subTotal += this.products[i].quantity * this.products[i].price;
+      }
+      return subTotal;
+    },
+    discountPrice: function() {
+      return this.subTotal * this.discount / 100;
+    },
+    totalPrice: function() {
+      return this.subTotal - this.discountPrice + 100/this.tax;
+    },
      
   },
   methods: {
-    showOrder() {
-        axios.get(`${process.env.VUE_APP_ROOT_API}user/myOrders`).then((response) => {
-          this.order = response.data;
-          console.log("Acc : "+this.order)
-        }).then(function(){
-            console.log('SUCCESS myAcc')
-          })
-          .catch(function(){
-            console.log('FAILURE  myAcc')
-          });               
+    updateQuantity: function(index, event) {
+      var product = this.products[index];
+      var value = event.target.value;
+      var valueInt = parseInt(value);
+
+      // Minimum quantity is 1, maximum quantity is 100, can left blank to input easily
+      if (value === "") {
+        product.quantity = value;
+      } else if (valueInt > 0 && valueInt < 100) {
+        product.quantity = valueInt;
+      }
+
+      this.$set(this.products, index, product);
     },
-    async created() {
-    await this.showOrder();
-    await console.log("Order : ", this.order);
-  }
-    // updateQuantity: function(index, event) {
-    //   var product = this.products[index];
-    //   var value = event.target.value;
-    //   var valueInt = parseInt(value);
-
-    //   // Minimum quantity is 1, maximum quantity is 100, can left blank to input easily
-    //   if (value === "") {
-    //     product.quantity = value;
-    //   } else if (valueInt > 0 && valueInt < 100) {
-    //     product.quantity = valueInt;
-    //   }
-
-    //   this.$set(this.products, index, product);
-    // },
-    // checkQuantity: function(index, event) {
-    //   // Update quantity to 1 if it is empty
-    //   if (event.target.value === "") {
-    //     var product = this.products[index];
-    //     product.quantity = 1;
-    //     this.$set(this.products, index, product);
-    //   }
-    // },
-    // removeItem: function(index) {
-    //   this.products.splice(index, 1);
-    // },
-    // checkPromoCode: function() {
-    //   for (var i = 0; i < this.promotions.length; i++) {
-    //     if (this.promoCode === this.promotions[i].code) {
-    //       this.discount = parseFloat(
-    //         this.promotions[i].discount.replace("%", "")
-    //       );
-    //       return;
-    //     }
-    //   }
-    //   alert("Sorry, the Promotional code you entered is not valid!");
-    // }
+    checkQuantity: function(index, event) {
+      // Update quantity to 1 if it is empty
+      if (event.target.value === "") {
+        var product = this.products[index];
+        product.quantity = 1;
+        this.$set(this.products, index, product);
+      }
+    },
+    removeItem: function(index) {
+      this.products.splice(index, 1);
+    },
+    checkPromoCode: function() {
+      for (var i = 0; i < this.promotions.length; i++) {
+        if (this.promoCode === this.promotions[i].code) {
+          this.discount = parseFloat(
+            this.promotions[i].discount.replace("%", "")
+          );
+          return;
+        }
+      }
+      alert("Sorry, the Promotional code you entered is not valid!");
+    }
   }
 };
 </script>

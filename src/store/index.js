@@ -1,32 +1,20 @@
-import { createStore } from 'vuex'
-import auth from './auth'
-
+import {
+  createStore
+} from 'vuex'
+import authentication from './authentication'
 
 export default createStore({
   state: {
-    cart :[]
+
   },
-  getters:{
-    productQuantity: state => product =>{
-      const item = state.cart.find(i => i.id === product.id)
-      if(item) return item.quantity 
-      else return null
-    }
+  getters: {
+
   },
   mutations: {
-      addToCart(state,product){
-        let item = state.cart.find(i => i.id === product.id)
-      if(item){
-        item.quantity++
-      } 
-      else {
-        state.cart.push({...product,quantity:1})
-      }
-    }
+
   },
-  actions: {
-  },
+  actions: {},
   modules: {
-    auth
+    authentication
   }
 })
