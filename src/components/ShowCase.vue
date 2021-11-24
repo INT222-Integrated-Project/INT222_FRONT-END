@@ -26,15 +26,18 @@
               {{ p.casePrice + ".-" }}
             </div>
           </div>
-            <form @submit.prevent="addToCart(p)">
-            <button Type="submit"  class="rounded-full -mt-4  bg-purple-900 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex ml-auto transition duration-300">
-              <i class="material-icons stroke-current m-auto">add_circle</i>
-            </button>
-        </form>
-          <div class="flex flex-row  space-x-0.5  ">
-             <label  v-for=" (c,index) in p.colors" :key="index" class=" bg-black h-2 w-5 shadow-inner" 
-                    :class="c.caseColor ? 'bg-caseCol-' + c.caseColor.toLowerCase(): '' "> </label>           
+          <div class="flex flex-row">
+            <div  class="flex flex-row  space-x-0.5 to-gray-200  ">
+              <label  v-for=" (c,index) in p.productColor" :key="index" class=" bg-black h-2 w-5 shadow-inner" 
+                    :class="c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> 
+              </label>           
             </div>
+            <form @submit.prevent="addToCart(p.id)" class="flex right-0">
+              <button Type="submit"  class="rounded-full -mt-4  bg-purple-900 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex ml-auto transition duration-300">
+                <i class="material-icons stroke-current m-auto">add_circle</i>
+              </button>
+            </form>
+           </div>
         </div>
       
       </div>
