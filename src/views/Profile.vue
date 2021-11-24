@@ -1,5 +1,177 @@
 <template>
-    <div>
-        <p>HTML</p>
+  <div class="font-sans leading-tight min-h-screen bg-grey-lighter p-8">
+    <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
+      <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU" class="sm:w-full w-full mx-auto" />
+          <div>
+            <p class="font-bold text-lg">
+                {{ this.showProfile.role.roleName}}</p>
+          </div>
+        </div>
+        <div v-if="!editActive" class="flex items-center flex-col  ">
+          <div>
+            <p class="flex justify-center items-center text-5xl pt-6">Profile</p>
+          </div>
+            <div class="flex  justify-center flex-col items-center">
+              <div>
+                <p class="font-bold text-xl my-2">USERNAME :
+                {{ this.showProfile.userName}}</p>
+              </div>
+              <div>
+                <p class="text-grey-darker my-2">FIRSTNAME :
+                {{ this.showProfile.firstName}}</p>
+              </div>
+              <div>
+                <p  class="text-grey-darker my-2">LASTNAME :
+                {{ this.showProfile.lastName}}</p>
+              </div>
+              <div>
+                <p  class="text-grey-darker my-2">EMAIL :
+                {{ this.showProfile.email}}</p>
+              </div>
+              <div>
+                <p class="text-grey-darker my-2">PHONE :
+                {{ this.showProfile.phoneNumber}}</p>
+              </div>
+              <div>
+                <p class="text-grey-darker my-2">ADDRESS :
+                {{ this.showProfile.address}}</p>
+              </div>  
+            </div>
+            <button @click="(editActive = !editActive),  (emptyFields = false)" class="input-sign-in m-3" >edit</button>
+        </div>
+        <div v-else class="flex items-center flex-col" v-bind:class="{ error: emptyFields }">
+          <div>
+            <p class="flex justify-center items-center text-5xl pt-6">Profile</p>
+          </div>
+          <div class="flex  justify-center flex-col items-center">
+            <div>
+              <p class="font-bold text-xl my-2">USERNAME :
+                {{ this.showProfile.userName}}</p>
+            </div>
+          </div>
+          <div>
+          <div class="flex  justify-center flex-col items-center">
+            <form @submit.prevent="editProfile" class=" flex flex-col justify-center items-center ">
+                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.firstName}}</p>
+                <input v-model="editFrom.firstName" name="Firstname" placeholder="Firstname" required class="input-text w-3/5" />
+                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.lastName}}</p>
+                <input v-model="editFrom.lastName" name="lastName" placeholder="LastName" required class="input-text" />
+                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.email}}</p>
+                <input v-model="editFrom.email" name="email" placeholder="Email" required class="input-text" />
+                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.phoneNumber}}</p>
+                <input v-model="editFrom.phone" name="phone" placeholder="Phone" required class="input-text" />
+                <p class="text-gray-500 m-1">  Last Update {{ this.showProfile.address}}</p>
+                <input v-model="editFrom.address" name="address" placeholder="Address" required class="input-text" />
+                <div class="flex flex-row m-2">
+                  <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)" class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+                    <h3 class="">cancel</h3>
+                  </a>
+                  <input type="submit" class="w-16 h-16 mx-6 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none ">
+                </div>
+            </form>
+           </div>
+        </div>
+      </div>
     </div>
+    </div>
+  </div>
+         
+      
+
 </template>
+<script>
+import axios from "axios";
+export default {
+  components: {},
+  data() {
+    return {
+      showProfile: [],
+      editActive: false,
+      emptyFields: false,
+      editFrom:{
+          firstName: "",
+          lastName: "",
+          phone: "",
+          address:"",
+          email:"",
+      },
+      invalid: { 
+          invalidfirstName: false,
+          invalidlastName: false,
+          invalidphone: false,
+          invalidaddress: false,
+          invalidemail: false,
+        }
+    };
+  },
+  methods: {
+    getProfile() {
+      axios
+        .get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
+        .then((response) => {
+          this.showProfile = response.data;
+          console.log("Profile : " + this.showProfile);
+        })
+        .then(function () {
+          console.log("SUCCESS Profile");
+        })
+        .catch(function () {
+          console.log("FAILURE  Profile");
+        });
+    },
+     editProfile() {
+        this.invalid.invalidfirstName = this.editFrom.firstName === "" ? true : false || this.editFrom.firstName
+          .length > 50 ? true : false;
+        this.invalid.invalidlastName = this.editFrom.lastName === "" ? true : false || this.editFrom.lastName.length >
+          50 ? true : false;
+        this.invalid.invalidphone = this.editFrom.phone.length < 8 ? true : false || this.editFrom.phone.length >
+          10 ? true : false;
+        this.invalid.invalidaddress = this.editFrom.address.length === "" ? true : false || this.editFrom.address
+          .length > 80 ? true : false;
+           this.invalid.invalidemail = this.editFrom.email.length === "" ? true : false || this.editFrom.email
+          .length > 50 ? true : false;
+        if (
+          this.invalid.invalidemail ||
+          this.invalid.invalidaddress ||
+          this.invalid.invalidfirstName ||
+          this.invalid.invalidlastName ||
+          this.invalid.invalidphone === true
+        ) {
+          console.log("false")
+          alert("False")
+        } else {
+          this.sentedit();
+
+        }
+
+     },
+     sentedit(){
+      let formData = new FormData()
+      let editJson = JSON.stringify(this.editFrom);
+
+        formData.append('editUser', editJson)
+        axios.put(`${process.env.VUE_APP_ROOT_API}user/editMyprofile`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            }
+          }).then(function () {
+            console.log('SUCCESS')
+          })
+          .catch(function () {
+            console.log('FAILURE')
+          })
+        console.log(editJson)
+        alert("SUCCESS")
+        this.$router.replace({
+            name: 'Profile'
+          })
+     }
+
+  },
+  async created() {
+    await this.getProfile();
+  },
+};
+</script>
