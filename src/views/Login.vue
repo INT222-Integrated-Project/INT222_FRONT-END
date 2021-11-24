@@ -11,9 +11,6 @@
             Sign In
           </h1>
           <form @submit.prevent="doLogin" class="w-full flex-1 mt-3">
-            <div class="default-error-box" v-show="invalid.badcredentials">
-              <p>Incorrect username or password</p>
-            </div>
             <div class="mx-auto max-w-xs">
               <input v-model="logform.userName" type="text" name="userName" placeholder="userName" required
                 class="input-text" />
@@ -28,7 +25,7 @@
               </div>
               <div class=" m-2">
                 <p class="items-center mt-5 text-center">Don't have an account? </p>
-                <a href="#" @click="  (registerActive = !registerActive),  (emptyFields = false)"
+                <a href="#" @click="  (registerActive = !registerActive),  (emptyFields = false) "
                   class="input-sign-up ">
                   <i class="material-icons items-center">person_add_alt_1</i>
                   <h3 class="ml-3"> Sign Up</h3>
@@ -42,9 +39,6 @@
             Sign Up
           </h1>
           <form @submit.prevent="doRegister" class="flex flex-col text-gray-400 m-5   rounded-xl">
-            <div class="default-error-box" v-show="this.invalid.duplicated.showErrorBox">
-              {{this.invalid.duplicated.errorMessage}}
-            </div>
             <input v-model="regisform.firstName" name="Firstname" placeholder="Firstname" required class="input-text" />
             <input v-model="regisform.lastName" name="Lastname" placeholder="Lastname" required class="input-text" />
             <input v-model="regisform.userName" name="Username" placeholder="Username" required class="input-text" />
@@ -58,14 +52,9 @@
               class="input-text" />
             <i class="text-center text-sm text-red-500" v-if="this.invalid.invalidphone"> Please phone must be equal or
               greater than 8 charator or less 10 charator </i>
-
-            <div class="m-1 " v-show="!this.registerSuccess">
+            <div class="m-1 ">
               <input type="submit" class="input-sign-in">
             </div>
-            <div class="m-1" v-show="this.registerSuccess">
-              <div class="box-sign-in-completed">User Created</div>
-            </div>
-
             <p class="items-center mt-5 text-center"> Already have an account? </p>
             <a href="#" @click="  (registerActive = !registerActive),  (emptyFields = false)" class="input-sign-up">
               <i class="material-icons items-center">person</i>
@@ -83,7 +72,6 @@
         <div class="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
           style="background-image: url('https://cdn140.picsart.com/260643629026212.png?type=webp&to=min&r=640');"></div>
       </div>
-
     </div>
   </div>
 </template>
@@ -145,7 +133,6 @@
         } else {
           this.invalid.badcredentials = true;
         }
-
       },
       doRegister() {
         this.invalid.invaliduserName = this.regisform.userName === "" || this.regisform.userName.length > 20 ? true :
@@ -165,13 +152,14 @@
           this.invalid.invalidlastName ||
           this.invalid.invalidphone === true
         ) {
-          console.log("Invalid input found.")
+          console.log("false")
         } else {
           this.sentRegis();
+
         }
 
       },
-      async sentRegis() {
+      sentRegis() {
         let formData = new FormData()
         let regisJson = JSON.stringify(this.regisform);
 
@@ -181,53 +169,23 @@
         formData.append('newUser', regisBlob)
         // console.log(formData.getAll("newUser"))
         //post to backend by multipart
-
-        let errorCode = 0;
-        await axios.post(`${process.env.VUE_APP_ROOT_API}public/auth/register`, formData, {
+        axios.post(`${process.env.VUE_APP_ROOT_API}public/auth/register`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             }
           }).then(function () {
-            errorCode = 0;
+            console.log('SUCCESS')
           })
-          .catch(error => {
-            errorCode = error.response.data.exceptionCode;
+          .catch(function () {
+            console.log('FAILURE')
+          })
+        console.log(regisJson)
+        alert("SUCCESS"),
+          this.$router.replace({
+            name: 'Home'
           })
 
-        if (errorCode == 0) {
-          this.regisform.userName = "";
-          this.regisform.userPassword = "";
-          this.regisform.userConfirmPassword = "";
-          this.regisform.firstName = "";
-          this.regisform.lastName = "";
-          this.regisform.phone = "";
-          this.registerSuccess = true;
-          await setTimeout(() => {
-            this.invalid.duplicated.showErrorBox = false;
-            this.registerSuccess = false;
-            this.registerActive = false;
-          }, 3000);
-
-        } else {
-          this.invalid.duplicated.showErrorBox = true;
-          switch (errorCode) {
-            //Possible exception code. username: 3002 , phone: 3004 , IllegelCharUsedinUsernane: 3006 
-            case 3002:
-              this.invalid.duplicated.errorMessage = "This username is taken by another user.";
-              break;
-            case 3004:
-              this.invalid.duplicated.errorMessage = "This phone number is owned by someone.";
-              break;
-            case 3006:
-              this.invalid.duplicated.errorMessage = "Only A-Z is allowed in the username.";
-              break;
-            default:
-              this.invalid.duplicated.errorMessage = "An unknown error occures at API.";
-              break;
-          }
-        }
       }
-
     }
   };
 </script>
