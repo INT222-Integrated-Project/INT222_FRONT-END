@@ -6,44 +6,40 @@
                 <marquee class="text-lg"> Welcome , {{admininformation.userName}} </marquee>
             </div>
         </div>
-    
-        <div class="default-admin-profile">
-            <div class="">
-            wda
-            </div>
-            <div class="">
-            wda
-            </div>
-        </div>
 
-        <div class="flex flex-wrap items-center">
-            <div class="default-admin-main-href">
+        <div class="default-medium-header-box my-5 flex flex-wrap items-center">
+            <div class="default-page-navigation-buttons">
                 Users Management
             </div>
-            <div class="default-admin-main-href">
+            <div class="default-page-navigation-buttons">
                 Order Management
             </div>
-            <div class="default-admin-main-href">
+            <div class="default-page-navigation-buttons">
                 Product Management
             </div>
         </div>
 
-        <userLister v-show="true"></userLister>
+        <UserListerManager v-show="true"></UserListerManager>
+
+        <div class="py-2">--</div>
     </div>
+
+    
 
 </template>
 
 <script>
     import store from '@/store'
-    import userLister from '@/components/admins/UserLister.vue'
+    import UserListerManager from '@/components/admins/UserListerManager.vue'
     export default {
         data() {
             return {
                 admininformation: {}
+                
             }
         },
         components:{
-            userLister
+            UserListerManager
         },
         methods: {
             async userLister() {

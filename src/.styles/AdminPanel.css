@@ -4,11 +4,11 @@
 .default-admin-profile{
     @apply mx-2 my-2 border-red-900 border-4 p-3 rounded-3xl bg-white
 }
-.default-user-list{
+.white-user-list{
     @apply bg-gray-100 border-gray-400 border-2 mx-4 p-2 hover:bg-gray-200 duration-200
 }
 .default-admin-page-background{
-    @apply bg-gradient-to-b from-red-200 to-pink-300 min-h-screen
+    @apply bg-gradient-to-b from-pink-200 to-red-200 min-h-screen
 }
 .defalut-userlist-block{
     @apply mx-1 w-2/12
@@ -27,4 +27,22 @@
 }
 .default-user-list-header{
     @apply text-black
+}
+
+.default-assignrole-ban{
+    @apply m-2 text-red-900 bg-red-100 border-2 text-lg text-center px-3 py-1 border-red-900 rounded-xl hover:bg-red-200 duration-100
+}
+.default-assignrole-promote{
+    @apply m-2 text-green-900 bg-green-100 border-2 text-lg text-center px-3 py-1 border-green-900 rounded-xl hover:bg-green-200 duration-100
+}
+.default-assignrole-demote{
+    @apply m-2 text-yellow-900 bg-yellow-100 border-2 text-lg text-center px-3 py-1 border-yellow-900 rounded-xl hover:bg-yellow-200 duration-100
+}
+
+:disabled{
+    @apply m-2 text-gray-900 bg-gray-100 border-2 text-lg text-center px-3 py-1 border-gray-900 rounded-xl hover:bg-gray-200 duration-100
+}
+
+.default-assignrole-disabled{
+    @apply m-2 text-gray-900 bg-gray-100 border-2 text-lg text-center px-3 py-1 border-gray-900 rounded-xl hover:bg-gray-200 duration-100
 }

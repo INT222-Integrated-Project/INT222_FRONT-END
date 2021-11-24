@@ -1,11 +1,14 @@
 .default-large-header-box{
-    @apply bg-red-200 py-3 text-center text-4xl font-bold
+    @apply bg-pink-200 py-3 text-center text-4xl font-bold
+}
+.default-medium-header-box{
+    @apply bg-gray-100 border-gray-400 border-2 mx-4 p-2 hover:bg-gray-200 duration-200
 }
 .default-edit-button{
     @apply p-2 border-2 rounded-md w-full
 }
 .default-page-button{
-    @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm mx-1 text-center text-lg font-bold justify-center flex items-center my-2;
+    @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm mx-1 text-center text-lg font-bold justify-center flex items-center my-2 hover:bg-pink-300 duration-100;
     width: 30px;
     height: 35px;
 }
@@ -14,5 +17,23 @@
     width: 30px;
     height: 35px;
 }
+.default-page-search-button{
+    @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm mx-1 text-center font-bold justify-center flex items-center hover:bg-pink-300 duration-100 placeholder-gray-800 ;
+    min-width: 150px;
+}
+.light-page-search-button{
+    @apply p-3 bg-white border-2 border-pink-200 rounded-sm mx-1 text-center font-bold justify-center flex items-center hover:bg-pink-200 duration-100 placeholder-gray-800 ;
+    min-width: 290px;
+}
+.default-search-input{
+    @apply px-3 placeholder-indigo-900;
+    min-width: 400px;
+    -webkit-appearance: none;
+}
+.default-page-navigation-buttons{
+    @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm mx-1 text-center font-bold justify-center flex items-center hover:bg-pink-300 duration-100 placeholder-gray-800 ;
+    min-width: 150px;
+}
+
 
 
