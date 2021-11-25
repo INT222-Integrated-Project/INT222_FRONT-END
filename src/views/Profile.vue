@@ -8,10 +8,13 @@
             class="sm:w-full w-full mx-auto" />
           <div>
             <p class="font-bold text-lg">
-              {{ this.showProfile.role.roleName}}</p>
+              {{ showProfile.role.roleName}}</p>
           </div>
         </div>
         <div v-if="!editActive" class="flex items-center flex-col  ">
+          <div class="default-error-box" v-show="error.showWindow">
+            <p>{{error.message}}</p>
+          </div>
           <div>
             <p class="flex justify-center items-center text-5xl pt-6">Profile</p>
           </div>
@@ -41,7 +44,7 @@
                 {{ this.showProfile.address}}</p>
             </div>
           </div>
-          <button @click="(editActive = !editActive),  (emptyFields = false)" class="input-sign-in m-3">edit</button>
+          <button @click="(editActive = true),  (emptyFields = false)" class="input-sign-in m-3">edit</button>
         </div>
         <div v-else class="flex items-center flex-col" v-bind:class="{ error: emptyFields }">
           <div>
@@ -92,7 +95,9 @@
     components: {},
     data() {
       return {
-        showProfile: [],
+        showProfile: {
+          role: {}
+        },
         editActive: false,
         emptyFields: false,
         editFrom: {
@@ -110,27 +115,22 @@
           invalidemail: false,
         },
         error: {
-          message: ""
+          message: "",
+          showWindow: ""
         }
       };
     },
     methods: {
       async getProfile() {
-        let response = await axios.get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
+        await axios.get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
           .then((response) => {
             this.showProfile = response.data;
-            console.log(this.showProfile);
             this.editFrom.firstName = response.data.firstName;
             this.editFrom.lastName = response.data.lastName;
             this.editFrom.phoneNumber = response.data.phoneNumber;
             this.editFrom.address = response.data.address;
             this.editFrom.email = response.data.email;
-            console.log("SUCCESS Profile");
-          }).catch(function () {
-            console.log("FAILURE  Profile");
-          });
-
-        console.log(response)
+          })
       },
       async editProfile() {
         this.invalid.invalidfirstName = this.editFrom.firstName === "" ? true : false || this.editFrom.firstName
@@ -159,6 +159,7 @@
 
       },
       async sentedit() {
+        this.editActive = false;
         let formData = new FormData()
         let editJson = JSON.stringify(this.editFrom);
 
@@ -169,20 +170,41 @@
         formData.append('newProfileInfo', formDataBlob)
         let errorCode = 0;
         let response = await axios.put(`${process.env.VUE_APP_ROOT_API}user/editMyprofile`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            }
-          })
-          .catch(error => {
-            errorCode = error.response.data.exceptionCode;
-          })
-
-        console.log(errorCode)
-        console.log(response)
-        alert("SUCCESS")
-        this.$router.replace({
-          name: 'Profile'
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).catch(error => {
+          errorCode = error.response.data.exceptionCode;
         })
+
+        console.log(response)
+
+
+        if (errorCode == 0) {
+          this.error.showWindow = false;
+          this.editActive = false;
+          this.showProfile = response.data;
+        } else {
+          this.error.showWindow = true;
+          switch (errorCode) {
+            case 3002:
+              this.error.message = "This email is taken by another user."
+              this.editFrom.email = ""
+              break;
+            case 3004:
+              this.error.message = "This phone is taken by another user."
+              this.editFrom.phoneNumber = ""
+              break;
+            default:
+              this.error.message = "There is an unknown error occures."
+              break;
+          }
+        }
+
+
+
+
+
       }
 
     },

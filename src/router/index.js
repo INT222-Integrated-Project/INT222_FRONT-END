@@ -3,12 +3,11 @@ import {
   createWebHistory
 } from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import AddEdit from '../views/AddandEditProduct.vue'
 import Shipping from '../views/Shipping.vue'
-import Dashboard from '../views/Dashboard.vue'
+import Contact from '../views/Contact.vue'
 
 import AdminPanel from '../views/admin/AdminPanel.vue'
 import ForbiddenSector from '../views/publicVisitors/ForbiddenSector.vue'
@@ -25,9 +24,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   },
   {
     path: '/login',
@@ -48,19 +47,6 @@ const routes = [
     component: ForbiddenSector
   },
   //User only section
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['authentication/authenticated']) {
-        return next({
-          name: 'Login'
-        })
-      }
-      next()
-    }
-  },
   {
     path: '/profile',
     name: 'Profile',
