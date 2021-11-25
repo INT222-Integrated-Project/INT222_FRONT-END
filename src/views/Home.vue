@@ -1,7 +1,10 @@
 <template >
-  <div class="flex justify-center  w-screen  h-s">
+  <div class="w-screen bg-header  ">
+    
+      
+    
     <!-- block image to search and can edit , delete  -->
-    <div class="h-screen md:w-4/6 bg-white bg-opacity-50 items-center md:mx-auto rounded-xl  lg:md-20">
+    <div class="h-screen md:w-4/6 bg-white  items-center md:mx-auto rounded-xl  lg:md-20">
       <div class="mt-3 text-center">
         <slides></slides>
         <showcase  @edit-click="openEditModal" @send-data="editCase"></showcase>

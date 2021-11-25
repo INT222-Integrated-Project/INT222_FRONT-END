@@ -46,7 +46,7 @@
             </div>
           </div>
           <div v-show="dropdownOpen" class=" show-dropdown">
-          <div class="  w-full ">
+          <div class="w-full ">
             <div v-if="roleName=='admin'">
               <router-link to="/adminPanel" class=" ">
                 <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">settings</i>settings</button>
@@ -70,14 +70,18 @@
         </div>
         </template>
 
-        <template v-else class="">
-          <div class="sm:flex-grow text-white text-xl">
-            <router-link to="/login" class="button-nav-show-staff">
-              <button class="flex items-center"><i class="material-icons mr-5 text-3xl">account_circle</i></button>
-            </router-link>
-            <router-link to="/contact" class="button-nav-show-staff">
-              <button class="flex items-center"><i class="material-icons mr-5 text-3xl">forum</i></button>
-            </router-link>
+        <template v-else class="hidden set-template sm:text-lg">
+          <div class=" size-admin">
+            <div class="mx-2 md:w-44  flex items-center">
+              <router-link to="/contact" class="button-nav-show-staff">
+                <button class="flex items-center"><i class="material-icons mr-5 text-3xl">forum</i>Contact Us</button>
+              </router-link>
+            </div>
+            <div class="mx-2 md:w-40  flex items-center">
+              <router-link to="/login" class="button-nav-show-staff">
+                <button class="flex items-center"><i class="material-icons mr-5 text-3xl">account_circle</i>Sign In</button>
+              </router-link>
+            </div>
           </div>
         </template>
       </div>

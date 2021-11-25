@@ -1,10 +1,9 @@
 <template>
   <div class="  min-h-screen">
-    <p class="flex justify-center items-center sm:text-8xl text-4xl font-bold pt-6 ">SHOP</p>
-    <div class="flex  justify-center items-center flex-col md:flex-row " >
-      <input type="text" class="bg-pink-200 border-2 border-pink-500 hover:bg-pink-300 duration-100 my-5 md:w-4/6 px-8 py-4 rounded-lg font-medium " 
-      placeholder="Search Case name" v-model="searchName">
-      <button class="default-page-search-button my-5 " v-on:click.prevent="showProduct()">Search</button>
+    <div class="size-search " >
+      <input type="text" class="insearch-box " 
+      placeholder="Search Case name " v-model="searchName">
+      <button class="search-box  " v-on:click.prevent="showProduct()">Search</button>
     </div>
     <div class="default-error-box" v-show="gui.errorWindow">
         {{exception.message}}
@@ -16,16 +15,16 @@
     </ul> -->
     
     <div class="container sm:my-12  sm:items-center " style="font-family: 'Muli', sans-serif;">
-      <div  class="flex flex-wrap -mx-1 sm:-mx-4   justify-center">
+      <div  class="flex flex-wrap  sm:-mx-4  mx-4 justify-center">
         <div v-for="(p,index) in ShowCase" :key="index" :value="p" class="card-first">
         <div class="card-two ">
           <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" />
-          <div class="flex items-center p-2 sm:p-4 rounded-lg h-28 bg-purple-400  flex-col ">
+          <div class="flex items-center p-2 sm:p-4 rounded-lg h-36 bg-purple-400  flex-col ">
             <div>
-              <h5 class="text-white text-lg  font-bold leading-none">
+              <h5 class="text-white sm:text-lg text-md  font-bold leading-none">
                 {{ p.caseName }}
               </h5>
-              <span class="text-xs text-white leading-none">{{ p.caseName }}</span>
+              <p class="text-lg text-white font-light">{{ p.caseDescription }}</p>
             </div>
             <div class="flex items-center">
               <div class="text-lg text-white font-light">
@@ -46,44 +45,44 @@
     </div>
     <div class="flex align-middle justify-center items-center sm:flex-row flex-col mr-2 ">
       <div class="">
-        <button class="flex default-page-button " style="width: 150px;" v-on:click="changePage(1)" v-if="paging.currentPage != 1">
+        <button class="flex default-page-button-show " style="width: 150px;" v-on:click="changePage(1)" v-if="paging.currentPage != 1">
           First Page
         </button>
-        <button class="flex default-page-button-current" style="width: 150px;" v-on:click="changePage(1)" v-else>
+        <button class="flex default-page-button-current-show" style="width: 150px;" v-on:click="changePage(1)" v-else>
           First Page
         </button>
       </div>
       <div class="flex flex-row">
         <div class="">
-          <button class="flex default-page-button " style="width: 30px;" v-on:click="changePage(paging.currentPage - 1)" v-if="paging.currentPage != 1">
+          <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage - 1)" v-if="paging.currentPage != 1">
           <i class="material-icons"> keyboard_arrow_left </i>
           </button>
-          <button class="flex default-page-button-current " style="width: 30px;" v-else>
+          <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
             <i class="material-icons"> keyboard_arrow_left </i>
           </button>
         </div>
         <div v-for="index in this.paging.arrayofCurrentSetofPage" :key="index" class="">
-          <button class="flex default-page-button" v-on:click="changePage(index)" v-if="index != paging.currentPage">
+          <button class="flex default-page-button-show" v-on:click="changePage(index)" v-if="index != paging.currentPage">
             {{index}}
           </button>
-          <button class="flex default-page-button-current" v-on:click="changePage(index)" v-else>
+          <button class="flex default-page-button-current-show" v-on:click="changePage(index)" v-else>
             {{index}}
           </button>
         </div>
         <div>
-        <button class="flex default-page-button " style="width: 30px;" v-on:click="changePage(paging.currentPage + 1)" v-if="paging.currentPage != paging.numberOfPage">
+        <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage + 1)" v-if="paging.currentPage != paging.numberOfPage">
           <i class="material-icons"> keyboard_arrow_right </i>
         </button>
-        <button class="flex default-page-button-current " style="width: 30px;" v-else>
+        <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
           <i class="material-icons"> keyboard_arrow_right </i>
         </button>
         </div>
     </div>
     <div class="">
-      <button class="flex default-page-button " style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-if="paging.numberOfPage != paging.currentPage">
+      <button class="flex default-page-button-show " style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-if="paging.numberOfPage != paging.currentPage">
         Last Page
       </button>
-      <button class="flex default-page-button-current" style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-else>
+      <button class="flex default-page-button-current-show" style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-else>
         Last Page
       </button>
     </div>

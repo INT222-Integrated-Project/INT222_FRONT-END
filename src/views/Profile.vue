@@ -3,7 +3,7 @@
     <div class="size-card-main-profile-layer-2  leading-tight ">
       <div class="size-card">
         <div class="size-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU" class="sm:w-full w-full mx-auto" />
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU" class="sm:w-auto w-3/4 m-auto" />
           <div>
             <p class="header-topic">
                 {{ this.showProfile.role.roleName}}</p>
