@@ -28,7 +28,7 @@
 
 </template>
 <script>
-    import CardMember from '../components/CardMember.vue';
+    import CardMember from '../components/Contact.vue';
 export default {
 components: {
     CardMember
