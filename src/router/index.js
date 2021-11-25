@@ -12,6 +12,7 @@ import Dashboard from '../views/Dashboard.vue'
 
 import AdminPanel from '../views/admin/AdminPanel.vue'
 import ForbiddenSector from '../views/publicVisitors/ForbiddenSector.vue'
+import AddProduct from '../views/staffs/AddProduct.vue'
 
 import store from '@/store'
 
@@ -91,6 +92,19 @@ const routes = [
     path: '/addEdit',
     name: 'AddEdit',
     component: AddEdit,
+    beforeEnter: (to, from, next) => {
+      if (!(store.getters['authentication/authenticated'] && (store.getters['authentication/roleName'] == "admin" || store.getters['authentication/roleName'] == "staff"))) {
+        return next({
+          name: 'Home'
+        })
+      }
+      next()
+    }
+  },
+  {
+    path: '/addproduct',
+    name: 'AddProduct',
+    component: AddProduct,
     beforeEnter: (to, from, next) => {
       if (!(store.getters['authentication/authenticated'] && (store.getters['authentication/roleName'] == "admin" || store.getters['authentication/roleName'] == "staff"))) {
         return next({
