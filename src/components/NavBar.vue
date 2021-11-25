@@ -1,16 +1,15 @@
 <template>
   <div class="bg-black mx-auto ">
     <div class="page-size-first ">
-      <div class="block sm:hidden mx-5">
-        <button @click="dropdownOpen = !dropdownOpen" class="berger">
-          <svg class="fill-current h-3 w-3 mx-auto" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </button>
-      </div>
       
-        <div class="button-home mx-5 flex justify-center items-center">
+      
+        <div class="hidden set-template sm:text-lg mx-auto">
+          <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
+          <h1 class="text-home">
+            <router-link to="/">Sweet Sweeties</router-link>
+          </h1>
+        </div>
+        <div class=" block md:hidden mx-auto flex justify-center items-center">
           <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
           <h1 class="text-home">
             <router-link to="/">Sweet Sweeties</router-link>
@@ -18,8 +17,16 @@
         </div>
       
         <template class="mx-auto" v-if="authenticated" >
+          <div class="block sm:hidden mx-auto ">
+            <button @click="dropdownOpen = !dropdownOpen" class="berger">
+              <svg class="fill-current h-3 w-3   " viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            </button>
+          </div>
           <div class="hidden set-template sm:text-lg">
-            <div class="size-admin ">
+            <div class="size-admin  ">
               <div v-if="roleName=='admin'"  class=" mx-2 md:w-40  flex items-center">
                 <router-link to="/adminPanel" class=" ">
                   <button class="set-center button-nav-show-staff "><i class="material-icons mr-5 text-3xl">settings</i>Dashboard</button>
@@ -40,13 +47,13 @@
                 <button class="set-center button-nav-show-staff"><i class="material-icons mr-5 text-3xl">contact_mail</i>Profile</button>
               </router-link>
               </div>
-              <div class="sm:w-16  mx-4 flex items-center">
-                <a hraf="#" @click.prevent="signOut" class="button-sing-out "><i class="material-icons mr-5 text-3xl">logout</i></a>
+              <div class="sm:w-16  mx-2 flex items-center">
+                <a hraf="#" @click.prevent="signOut" class="button-sing-out "><i class="material-icons mr-4  text-3xl">logout</i></a>
               </div>
             </div>
           </div>
-          <div v-show="dropdownOpen" class=" show-dropdown">
-          <div class="w-full ">
+          <div v-show="dropdownOpen" class=" show-dropdown ">
+          <div class="w-full m-4 ">
             <div v-if="roleName=='admin'">
               <router-link to="/adminPanel" class=" ">
                 <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">settings</i>settings</button>
@@ -64,14 +71,14 @@
               <button class=" flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">contact_mail</i>Account</button>
             </router-link>
             <div class="button-nav-show-staff ">
-              <a hraf="#" @click.prevent="signOut" class="flex items-center-dropdown"><i class="material-icons mx-5 text-3xl">logout</i>Sign Out</a>
+              <a hraf="#" @click.prevent="signOut" class="flex items-center-dropdown"><i class="material-icons mx-4 text-3xl">logout</i>Sign Out</a>
             </div>
           </div>
         </div>
         </template>
 
         <template v-else class="hidden set-template sm:text-lg">
-          <div class=" size-admin">
+          <div class="hidden  md:flex md:relative">
             <div class="mx-2 md:w-44  flex items-center">
               <router-link to="/contact" class="button-nav-show-staff">
                 <button class="flex items-center"><i class="material-icons mr-5 text-3xl">forum</i>Contact Us</button>
@@ -80,6 +87,18 @@
             <div class="mx-2 md:w-40  flex items-center">
               <router-link to="/login" class="button-nav-show-staff">
                 <button class="flex items-center"><i class="material-icons mr-5 text-3xl">account_circle</i>Sign In</button>
+              </router-link>
+            </div>
+          </div>
+           <div class=" block md:hidden flex ">
+            <div class="mx-2  ">
+              <router-link to="/contact" class="button-nav-show-staff">
+                <button class="flex items-center"><i class="material-icons mr-5 text-3xl">forum</i></button>
+              </router-link>
+            </div>
+            <div class="mx-2 md:w-40  flex items-center">
+              <router-link to="/login" class="button-nav-show-staff">
+                <button class="flex items-center"><i class="material-icons mr-5 text-3xl">account_circle</i></button>
               </router-link>
             </div>
           </div>
