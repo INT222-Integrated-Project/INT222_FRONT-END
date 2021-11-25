@@ -1,19 +1,12 @@
 <template>
-<<<<<<< HEAD
+
+
   <div class="size-card-main-profile">
     <div class="size-card-main-profile-layer-2  leading-tight ">
       <div class="size-card">
         <div class="size-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU" class="sm:w-auto w-3/4 m-auto" />
-=======
-  <div class="font-sans leading-tight min-h-screen bg-grey-lighter p-8">
-    <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-      <div class="flex flex-col justify-center items-center">
-        <div class="flex flex-col justify-center items-center">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU"
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU"
             class="sm:w-full w-full mx-auto" />
->>>>>>> eeff445bd9059b99c1cc5eaceca70d52ce968219
           <div>
             <p class="font-bold text-lg">
               {{ showProfile.role.roleName}}</p>
