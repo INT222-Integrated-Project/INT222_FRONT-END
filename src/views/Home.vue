@@ -4,13 +4,13 @@
       
     
     <!-- block image to search and can edit , delete  -->
-    <div class="h-screen md:w-4/6 bg-white  items-center md:mx-auto rounded-xl  lg:md-20">
-      <div class="mt-3 text-center">
-        <slides></slides>
+      <div class="mt-3 text-center md:w-5/6 items-center md:mx-auto  bg-white lg:md-20">
+        <slides ></slides>
         <showcase  @edit-click="openEditModal" @send-data="editCase"></showcase>
       </div>
-    </div>
-  </div>
+     <!-- // <fooTer class="relative"></fooTer> -->
+    </div> 
+  
   <!-- <inputdata v-if="addClicked"  @close="changeAddItemClicked" formLabel="Add New Case"></inputdata> -->
   <inputdata v-if="editClicked" :product="editProducts" @close="changeEditItemClicked" formLabel="Edit Case"></inputdata>
 
@@ -21,13 +21,16 @@ import axios from 'axios'
 import showcase from "../components/ShowCase";
 import inputdata from "./AddandEditProduct.vue";
 import slides from "../components/Caseslideshow.vue";
+// import fooTer from "../components/Footer";
 export default {
   emits: ["close-add-modal"],
   // props: ["addClicked",],
   components: {
     inputdata,
     showcase,
-    slides
+    slides,
+    // fooTer
+    
   },
  data() {
     return {
@@ -39,6 +42,8 @@ export default {
       slides:false,
       ShowCase:[],
       proCase:[],
+      fooTer:false
+      
     };
   },
   methods: {

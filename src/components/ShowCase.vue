@@ -1,5 +1,5 @@
 <template>
-  <div class="  min-h-screen">
+  <div class="p-6 min-h-screen">
     <div class="size-search " >
       <input type="text" class="insearch-box " 
       placeholder="Search Case name " v-model="searchName">
