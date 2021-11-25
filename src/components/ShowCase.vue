@@ -44,7 +44,7 @@
       </div>  
     </div>
     <div class="flex align-middle justify-center items-center sm:flex-row flex-col mr-2 ">
-      <div class="">
+      <div class="hidden sm:flex flex-row sm:items-center sm:w-auto ">
         <button class="flex default-page-button-show " style="width: 150px;" v-on:click="changePage(1)" v-if="paging.currentPage != 1">
           First Page
         </button>
@@ -69,7 +69,7 @@
             {{index}}
           </button>
         </div>
-        <div>
+        <div >
         <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage + 1)" v-if="paging.currentPage != paging.numberOfPage">
           <i class="material-icons"> keyboard_arrow_right </i>
         </button>
@@ -78,7 +78,7 @@
         </button>
         </div>
     </div>
-    <div class="">
+    <div class="hidden sm:flex flex-row sm:items-center sm:w-auto  ">
       <button class="flex default-page-button-show " style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-if="paging.numberOfPage != paging.currentPage">
         Last Page
       </button>
@@ -86,6 +86,7 @@
         Last Page
       </button>
     </div>
+    
   </div>
 </div>
 
