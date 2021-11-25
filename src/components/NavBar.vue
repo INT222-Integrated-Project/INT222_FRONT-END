@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-black mx-auto ">
+  <div class="bg-black w-screen ">
     <div class="page-size-first ">
       
       
-        <div class="hidden set-template sm:text-lg mx-auto">
+        <div class="hidden  justify-start sm:flex flex-row items-center  sm:text-lg sm:mx-16 mx-auto ">
           <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
           <h1 class="text-home">
             <router-link to="/">Sweet Sweeties</router-link>
