@@ -204,7 +204,6 @@
                     }).catch(error => {
                     errorcode = error.response.data.exceptionCode;
                 })
-                console.log(response)
                 if (errorcode == 0) {
                     this.gui.errorWindow = false;
                     this.usersList = response.data.content;
