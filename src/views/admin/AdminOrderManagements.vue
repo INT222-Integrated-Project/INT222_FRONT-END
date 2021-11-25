@@ -1,5 +1,5 @@
 <template>
-    
+    Addproduct Management
 </template>
 
 <script>

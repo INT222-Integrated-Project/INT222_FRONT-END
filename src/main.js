@@ -9,7 +9,6 @@ import './.styles/AdminPanel.css'
 
 require('@/store/subscriber')
 
-
 store.dispatch('authentication/attempt',localStorage.getItem('accesstoken')).then(() =>{
     createApp(App).use(store).use(router).mount('#app')
 })
