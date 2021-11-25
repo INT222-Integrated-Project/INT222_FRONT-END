@@ -1,0 +1,34 @@
+.button-nav-show-staff-dropdown{
+    @apply text-white   w-full  sm:mt-0  hover:text-black hover:border-white hover:bg-white
+}
+.button-nav-show-staff{
+    @apply text-white  sm:mt-0 p-1 hover:text-pink-700 outline-none hover:border-pink-200 border-transparent border-2 hover:border-current md:text-xl text-base
+}
+.size-admin{
+    @apply sm:flex flex justify-between text-white text-xl 
+}
+.set-center{
+    @apply flex justify-center items-center  
+}
+.button-sing-out{
+    @apply mr-3 text-3xl mt-2 hover:text-pink-700
+}
+.page-size-first{
+    @apply flex items-center justify-between flex-wrap p-3
+}
+.button-home{
+    @apply flex items-center text-white
+}
+.text-home{
+    @apply text-pink-500  text-2xl md:text-4xl
+}
+.show-dropdown{
+    @apply w-screen sm:hidden
+}
+
+.set-template{
+    @apply w-full justify-end sm:flex flex-row sm:items-center sm:w-auto 
+}
+.berger{
+   @apply flex items-center px-3 py-2 border rounded  text-white hover:text-white hover:border-white
+}

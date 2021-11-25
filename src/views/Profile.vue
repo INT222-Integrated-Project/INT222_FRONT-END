@@ -1,74 +1,73 @@
 <template>
-  <div class="font-sans leading-tight min-h-screen bg-grey-lighter p-8">
-    <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-      <div class="flex flex-col justify-center items-center">
-        <div class="flex flex-col justify-center items-center">
+  <div class="size-card-main-profile">
+    <div class="size-card-main-profile-layer-2  leading-tight ">
+      <div class="size-card">
+        <div class="size-card">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU" class="sm:w-full w-full mx-auto" />
           <div>
-            <p class="font-bold text-lg">
+            <p class="header-topic">
                 {{ this.showProfile.role.roleName}}</p>
           </div>
         </div>
-        <div v-if="!editActive" class="flex items-center flex-col  ">
-          <div>
-            <p class="flex justify-center items-center text-5xl pt-6">Profile</p>
-          </div>
-            <div class="flex  justify-center flex-col items-center">
+        <div v-if="!editActive" class="size-card  ">
+            <div class="size-card">
               <div>
-                <p class="font-bold text-xl my-2">USERNAME :
-                {{ this.showProfile.userName}}</p>
+                <p class="header-topic-two">USERNAME :
+                <span class="content-text">{{ this.showProfile.userName}}</span></p>
               </div>
-              <div>
-                <p class="text-grey-darker my-2">FIRSTNAME :
-                {{ this.showProfile.firstName}}</p>
-              </div>
-              <div>
-                <p  class="text-grey-darker my-2">LASTNAME :
-                {{ this.showProfile.lastName}}</p>
-              </div>
-              <div>
-                <p  class="text-grey-darker my-2">EMAIL :
-                {{ this.showProfile.email}}</p>
-              </div>
-              <div>
-                <p class="text-grey-darker my-2">PHONE :
-                {{ this.showProfile.phoneNumber}}</p>
-              </div>
-              <div>
-                <p class="text-grey-darker my-2">ADDRESS :
-                {{ this.showProfile.address}}</p>
+              <div class="size-card">
+                <p class="header-topic-two">FIRSTNAME</p>
+                <span class="content-text-false" v-if="this.showProfile.firstName == null">This user has no firstName</span>
+                <span class="content-text" v-else>{{this.showProfile.firstName}}</span>
+              </div> 
+              <div class="size-card">
+                <p class="header-topic-two">LASTNAME</p>
+                <span class="content-text-false" v-if="this.showProfile.lastName == null">This user has no lastName</span>
+                <span class="content-text" v-else>{{this.showProfile.lastName}}</span>
+              </div> 
+              <div class="size-card">
+                <p class="header-topic-two">EMAIL</p>
+                <span class="content-text-false" v-if="this.showProfile.email == null">This user has no email</span>
+                <span class="content-text" v-else>{{this.showProfile.email}}</span>
+              </div> 
+              <div class="size-card">
+                <p class="header-topic-two">PHONE</p>
+                <span class="ccontent-text-false" v-if="this.showProfile.phoneNumber == null">This user has no phone</span>
+                <span class="content-text" v-else>{{this.showProfile.phoneNumber}}</span>
+              </div> 
+              <div class="size-card">
+                <p class="header-topic-two">ADDRESS</p>
+                <span class="content-text-false" v-if="this.showProfile.address == null">This user has no address</span>
+                <span class="content-text" v-else>{{this.showProfile.address}}</span>
               </div>  
             </div>
             <button @click="(editActive = !editActive),  (emptyFields = false)" class="input-sign-in m-3" >edit</button>
         </div>
-        <div v-else class="flex items-center flex-col" v-bind:class="{ error: emptyFields }">
-          <div>
-            <p class="flex justify-center items-center text-5xl pt-6">Profile</p>
-          </div>
-          <div class="flex  justify-center flex-col items-center">
+        <div v-else class="size-card" v-bind:class="{ error: emptyFields }">
+          <div class="">
             <div>
-              <p class="font-bold text-xl my-2">USERNAME :
+              <p class="header-topic-two">USERNAME :
                 {{ this.showProfile.userName}}</p>
             </div>
           </div>
           <div>
-          <div class="flex  justify-center flex-col items-center">
-            <form @submit.prevent="editProfile" class=" flex flex-col justify-center items-center ">
-                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.firstName}}</p>
-                <input v-model="editFrom.firstName" name="Firstname" placeholder="Firstname" required class="input-text w-3/5" />
-                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.lastName}}</p>
+          <div class="">
+            <form @submit.prevent="editProfile" class=" size-card ">
+                <p class="header-form">  Last Update : {{ this.showProfile.firstName}}</p>
+                <input v-model="editFrom.firstName" name="Firstname" placeholder="Firstname" required class="input-text " />
+                <p class="header-form">  Last Update : {{ this.showProfile.lastName}}</p>
                 <input v-model="editFrom.lastName" name="lastName" placeholder="LastName" required class="input-text" />
-                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.email}}</p>
+                <p class="header-form">  Last Update : {{ this.showProfile.email}}</p>
                 <input v-model="editFrom.email" name="email" placeholder="Email" required class="input-text" />
-                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.phoneNumber}}</p>
+                <p class="header-form">  Last Update : {{ this.showProfile.phoneNumber}}</p>
                 <input v-model="editFrom.phone" name="phone" placeholder="Phone" required class="input-text" />
-                <p class="text-gray-500 m-1 text-sm">  Last Update : {{ this.showProfile.address}}</p>
+                <p class="header-form">  Last Update : {{ this.showProfile.address}}</p>
                 <input v-model="editFrom.address" name="address" placeholder="Address" required class="input-text" />
                 <div class="flex flex-row m-2  ">
-                  <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)" class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+                  <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)" class=" cancle-button ">
                     <h3 class="">cancel</h3>
                   </a>
-                  <input type="submit" class="w-16 h-16 mx-6 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none ">
+                  <input type="submit" class="summit-button">
                 </div>
             </form>
            </div>
@@ -150,20 +149,24 @@ export default {
      sentedit(){
       let formData = new FormData()
       let editJson = JSON.stringify(this.editFrom);
-
-        formData.append('editUser', editJson)
+      const caseBlob = new Blob([editJson],{
+          type: 'application/json'
+      })
+        formData.append('newProfileInfo', caseBlob)
         axios.put(`${process.env.VUE_APP_ROOT_API}user/editMyprofile`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             }
           }).then(function () {
             console.log('SUCCESS')
+            alert("SUCCESS")
           })
           .catch(function () {
             console.log('FAILURE')
+            alert("FAILURE")
           })
         console.log(editJson)
-        alert("SUCCESS")
+        
         this.$router.replace({
             name: 'Profile'
           })
