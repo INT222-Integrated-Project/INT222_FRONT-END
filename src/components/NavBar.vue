@@ -1,9 +1,9 @@
 <template>
   <div class="bg-black ">
-    <div class="page-size-first ">
-        <div class="hidden mx-auto sm:flex justify-center items-center ">
-          <div class="hidden sm:flex  items-center  sm:text-lg  "> 
-            <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
+    <div class="flex items-center  flex-wrap p-3 w-screen ">
+        <div class="hidden mx-auto sm:flex  items-center ">
+          <div class="hidden sm:flex justify-start items-center  sm:text-lg  "> 
+            <img src="../assets/icon.png" alt="icon" class="w-14 h-14 flex justify-start ">
             <h1 class="text-home">
               <router-link to="/">Sweet Sweeties</router-link>
             </h1>
@@ -77,8 +77,8 @@
           </div>
         </template>
 
-        <template v-else class="hidden set-template sm:text-lg">
-          <div class="hidden  md:flex md:relative">
+        <template v-else class="hidden  mx-auto sm:text-lg">
+          <div class="hidden  md:flex justify-center w-3/6">
             <div class="mx-2 md:w-44  flex items-center">
               <router-link to="/contact" class="button-nav-show-staff">
                 <button class="flex items-center"><i class="material-icons mr-5 text-3xl">forum</i>Contact Us</button>
