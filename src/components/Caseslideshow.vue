@@ -1,13 +1,12 @@
 <template>
-
   <div class="">
     <div class="carousel-inner items-center overflow-hidden w-full">
       <div v-for="(img, i) in images" :id="`slide-${i}`" :key="i" :class="`${active === i ? 'active' : 'left-full'}`" class="carousel-item w-full h-44 sm:h-72 transform transition-all duration-500 ease-in-out">
         <img class="block w-full items-center " :src="img"  />
+
       </div>
     </div>
   </div>
-
 </template>
 <script>
    export default {
@@ -39,19 +38,4 @@
   }
   }
 </script>
-<style>
-.left-full {
-  left: -100%;
-}
-.carousel-item {
-  float: left;
-  position: relative;
-  display: block;
-  width: 100%;
-  margin-right: -100%;
-  backface-visibility: hidden;
-}
-.carousel-item.active {
-  left: 0;
-}
-</style>
+
