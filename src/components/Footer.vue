@@ -1,5 +1,5 @@
 <template>
-   <div class="bg-black w-screen ">
+   <div class="bg-black  ">
       <div class="bg-black">
         <div class="flex justify-center items-center flex-col text-pink-500 sm:text-xl text-sm p-5  ">
           <p class="flex justify-center items-center">Sweet Sweeties Co., Ltd</p>

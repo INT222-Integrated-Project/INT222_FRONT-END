@@ -1,5 +1,5 @@
 <template >
-  <div class="w-screen bg-header  ">
+  <div class=" bg-header  ">
     
       
     

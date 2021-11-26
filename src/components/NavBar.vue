@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-black w-screen ">
+  <div class="bg-black ">
     <div class="page-size-first ">
-      
-      
-        <div class="hidden  justify-start sm:flex flex-row items-center  sm:text-lg sm:mx-16 mx-auto ">
-          <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
-          <h1 class="text-home">
-            <router-link to="/">Sweet Sweeties</router-link>
-          </h1>
+        <div class="hidden mx-auto sm:flex justify-center items-center ">
+          <div class="hidden sm:flex  items-center  sm:text-lg  "> 
+            <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
+            <h1 class="text-home">
+              <router-link to="/">Sweet Sweeties</router-link>
+            </h1>
+          </div>
         </div>
-        <div class=" block md:hidden mx-auto flex justify-center items-center">
+        <div class=" block sm:hidden mx-auto flex justify-center items-center ">
           <img src="../assets/icon.png" alt="icon" class="w-14 h-14  ">
-          <h1 class="text-home">
+          <h1 class="text-2xl md:text-4xl text-pink-500">
             <router-link to="/">Sweet Sweeties</router-link>
           </h1>
         </div>
@@ -25,8 +25,8 @@
               </svg>
             </button>
           </div>
-          <div class="hidden set-template sm:text-lg">
-            <div class="size-admin  ">
+          <div class="hidden mx-auto sm:flex justify-center items-center sm:text-lg ">
+            <div class="flex justify-center items-center mx-auto">
               <div v-if="roleName=='admin'"  class=" mx-2 md:w-40  flex items-center">
                 <router-link to="/adminPanel" class=" ">
                   <button class="set-center button-nav-show-staff "><i class="material-icons mr-5 text-3xl">settings</i>Dashboard</button>
@@ -48,33 +48,33 @@
               </router-link>
               </div>
               <div class="sm:w-16  mx-2 flex items-center">
-                <a hraf="#" @click.prevent="signOut" class="button-sing-out "><i class="material-icons mr-4  text-3xl">logout</i></a>
+                <a hraf="#" @click.prevent="signOut" class="button-sing-out text-white mx-5 "><i class="material-icons mr-4  text-3xl">logout</i></a>
               </div>
             </div>
           </div>
           <div v-show="dropdownOpen" class=" show-dropdown ">
-          <div class="w-full m-4 ">
-            <div v-if="roleName=='admin'">
-              <router-link to="/adminPanel" class=" ">
-                <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">settings</i>settings</button>
+            <div class="w-full mt-3 mx-16">
+              <div v-if="roleName=='admin'">
+                <router-link to="/adminPanel" class=" ">
+                  <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">settings</i>Dashboard</button>
+                </router-link>
+              </div>
+              <div v-if="roleName=='admin'||roleName=='staff'">
+                <router-link to="/AddEdit" class=" ">
+                  <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">add_circle</i>Add New Case</button>
+                </router-link>
+              </div>
+              <router-link to="/shipping" class="">
+                <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">shopping_cart</i>Cart</button>
               </router-link>
-            </div>
-            <div v-if="roleName=='admin'||roleName=='staff'">
-              <router-link to="/AddEdit" class=" ">
-                <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">add_circle</i>Add New Case</button>
+              <router-link to="/Profile" class=" ">
+                <button class=" flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">contact_mail</i>Account</button>
               </router-link>
-            </div>
-            <router-link to="/shipping" class="">
-              <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">shopping_cart</i>Cart</button>
-            </router-link>
-            <router-link to="/Profile" class=" ">
-              <button class=" flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">contact_mail</i>Account</button>
-            </router-link>
-            <div class="button-nav-show-staff ">
-              <a hraf="#" @click.prevent="signOut" class="flex items-center-dropdown"><i class="material-icons mx-4 text-3xl">logout</i>Sign Out</a>
+              <div class="button-nav-show-staff ">
+                <a hraf="#" @click.prevent="signOut" class="flex items-center "><i class="material-icons mx-4 text-3xl">logout</i>Sign Out</a>
+              </div>
             </div>
           </div>
-        </div>
         </template>
 
         <template v-else class="hidden set-template sm:text-lg">
