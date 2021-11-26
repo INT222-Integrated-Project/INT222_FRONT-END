@@ -14,7 +14,7 @@
     @apply mr-3 text-3xl mt-2 hover:text-pink-700
 }
 .page-size-first{
-    @apply flex items-center justify-between flex-wrap p-3
+    @apply flex items-center justify-between flex-wrap p-3 w-screen
 }
 .button-home{
     @apply flex items-center text-white
