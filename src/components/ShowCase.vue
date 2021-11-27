@@ -11,26 +11,28 @@
     
     <div class="container sm:my-6  sm:items-center " style="font-family: 'Muli', sans-serif;">
       <div  class="flex flex-wrap  sm:mx-4  mx-4 justify-center">
-        <div v-for="(p,index) in ShowCase" :key="index" :value="p" class="my-1 px-1 w-5/6 flex justify-center items-center sm:w-1/3 sm:my-4 sm:px-4 rounded-lg   hover:shadow-xl  ">
+        <div v-for="(product,index) in ShowCase" :key="index" :value="product" class="my-1 px-1 w-5/6 flex justify-center items-center sm:w-1/3 sm:my-4 sm:px-4 rounded-lg   hover:shadow-xl  ">
         <div class="card-two ">
           <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" />
-          <div class="flex items-center p-2 sm:p-4 rounded-lg h-36 bg-purple-400  flex-col ">
+          <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-52 bg-purple-400 h-44 flex-col ">
             <div>
               <h5 class="text-white sm:text-lg text-md  font-bold leading-none">
-                {{ p.caseName }}
+                {{ product.caseName }}
               </h5>
-              <p class="text-lg text-white font-light">{{ p.caseDescription }}</p>
+              <p class="text-lg text-white font-light">{{ product.caseDescription }}</p>
             </div>
             <div class="flex items-center">
               <div class="text-lg text-white font-light">
-                {{ p.casePrice + ".-" }}
+                {{ product.casePrice + ".-" }}
               </div>
               
             </div>
             <div class="flex flex-row  space-x-0.5  ">
-              <label  v-for=" (c,index) in p.productColor" :key="index" class=" bg-black h-2 w-5 shadow-inner" 
+              <label  v-for=" (c,index) in product.productColor" :key="index" class=" bg-black h-2 w-5 shadow-inner" 
                       :class="c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> </label>           
-              </div>
+            </div>
+            <button @click="detailClick(product)" class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">VIEW</button>
+            
           </div>
         </div>
         </div>
@@ -79,7 +81,6 @@
         Last Page
       </button>
     </div>
-    
   </div>
 </div>
 
@@ -89,7 +90,7 @@
 import axios from 'axios'
 
 export default {
- emits: ['edit-click','send-data'],
+ emits: ['send-data'],
  
   components: {
     
@@ -117,6 +118,10 @@ export default {
     };
   },
   methods:{
+    detailClick(product) {
+      this.$emit("detail-click", true);
+      this.$emit("send-data", product);
+    },
     async showProduct() {
       let errorcode = 0;
       let response = await axios.get(`${process.env.VUE_APP_ROOT_API}public/products`, {

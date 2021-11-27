@@ -96,7 +96,7 @@
     @apply font-semibold text-lg text-red-800 
 }
 .size-card-main-profile{
-    @apply font-sans leading-tight min-h-screen  p-8 bg-purple-200
+    @apply font-sans leading-tight  p-8 
 }
 .size-card-main-profile-layer-2{
     @apply max-w-sm mx-auto  bg-white rounded-lg overflow-hidden shadow-lg
