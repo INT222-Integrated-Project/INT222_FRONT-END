@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="carousel-inner items-center overflow-hidden w-full">
+    <div class="carousel-inner items-center overflow-hidden w-full ">
       <div v-for="(img, i) in images" :id="`slide-${i}`" :key="i" :class="`${active === i ? 'active' : 'left-full'}`" class="carousel-item w-full h-44 sm:h-72 transform transition-all duration-500 ease-in-out">
         <img class="block w-full items-center " :src="img"  />
 
