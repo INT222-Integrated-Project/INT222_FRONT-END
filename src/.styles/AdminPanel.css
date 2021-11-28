@@ -1,0 +1,45 @@
+.default-admin-main-href{
+    @apply text-center text-lg py-1 px-3 bg-white border-4 border-red-900 rounded-3xl mx-2 my-2
+}
+.default-admin-profile{
+    @apply mx-2 my-2 border-red-900 border-4 p-3 rounded-3xl bg-white
+}
+.white-user-list{
+    @apply bg-gray-100 border-gray-400 border-2  hover:bg-gray-200 duration-200   
+}
+.default-admin-page-background{
+    @apply bg-gradient-to-b from-pink-200 to-red-200 
+}
+.defalut-userlist-block{
+    @apply mx-1 
+}
+.defalut-user-profile-image{
+    @apply border-gray-500 p-1 m-1 lg:w-20 sm:w-20 xl:w-36 2xl:w-40 rounded-3xl 
+} 
+.default-user-list-username{
+    @apply text-xl
+}
+.default-user-list-user-name{
+    @apply text-gray-500  sm:text-lg lg:text-base xl:text-lg 2xl:text-2xl
+}
+.default-user-list-header{
+    @apply text-black  sm:text-xl  lg:text-base xl:text-lg 2xl:text-2xl
+}
+
+.default-assignrole-ban{
+    @apply m-1 sm:w-32 text-red-900 bg-red-100 border-2 p-1 sm:text-lg md:text-base text-sm text-center xl:text-xl  border-red-900 rounded-xl hover:bg-red-200 duration-100
+}
+.default-assignrole-promote{
+    @apply m-1 sm:w-32 text-green-900 bg-green-100 border-2 p-1 sm:text-lg md:text-base text-sm text-center xl:text-xl  border-green-900 rounded-xl hover:bg-green-200 duration-100
+}
+.default-assignrole-demote{
+    @apply m-1 sm:w-32 text-yellow-900 bg-yellow-100 border-2 p-1 sm:text-lg md:text-base text-sm text-center xl:text-xl border-yellow-900 rounded-xl hover:bg-yellow-200 duration-100
+}
+
+:disabled{
+    @apply m-1 sm:w-32 text-gray-900 bg-gray-100 border-2 p-1 sm:text-lg text-sm md:text-base xl:text-xl text-center  border-gray-900 rounded-xl hover:bg-gray-200 duration-100
+}
+
+.default-assignrole-disabled{
+    @apply m-1 sm:w-32 text-gray-900 bg-gray-100 border-2 p-1 sm:text-lg text-sm md:text-base text-center xl:text-xl border-gray-900 rounded-xl hover:bg-gray-200 duration-100
+}

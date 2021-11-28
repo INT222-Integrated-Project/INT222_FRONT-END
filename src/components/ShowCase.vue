@@ -1,79 +1,183 @@
 <template>
-    <div  class="flex flex-wrap justify-center m-4 space-x-2 gap-1" >
-        <div  v-for="proCase in ShowCase" :key="proCase.caseId" :value="proCase" class=" w-48 h-full md:m-2 bg-white rounded-md border-2 hover:bg-gray-300  border-gray-300 mt-4 hover:border-gray-600   "  >
-            <div class="flex justify-center items-center">
-                <img :src="'http://52.139.201.170:8086/api/products/image/'+proCase.caseImage" class="object-cover w-40 h-64 m-2 " />
+  <div class="sm:p-5 p-5 ">
+    <div class="size-search " >
+      <input type="text" class="insearch-box  " 
+      placeholder="Search Case name " v-model="searchName">
+      <button class="search-box  p-3" v-on:click.prevent="showProduct()">Search</button>
+    </div>
+    <div class="default-error-box" v-show="gui.errorWindow">
+        {{exception.message}}
+    </div>
+    
+    <div class="container sm:my-6  sm:items-center " style="font-family: 'Muli', sans-serif;">
+      <div  class="flex flex-wrap  sm:mx-4  mx-4 justify-center">
+        <div v-for="(product,index) in ShowCase" :key="index" :value="product" :product="product" class="my-1 px-1 w-5/6 flex justify-center items-center sm:w-1/3 sm:my-4 sm:px-4 rounded-lg   hover:shadow-xl  ">
+        <div class="card-two ">
+          <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" />
+          <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-52 bg-purple-400 h-44 flex-col ">
+            <div>
+              <h5 class="text-white sm:text-lg text-md  font-bold leading-none">
+                {{ product.caseName }}
+              </h5>
+              <p class="text-lg text-white font-light">{{ product.caseDescription }}</p>
             </div>
-        <div class="col-span-2 ">
-            <h4 class="font-bold  ">{{ proCase.caseName }}</h4>
-            <div class="flex flex-row justify-center space-x-0.5 mx-5 my-2">
-             <label  v-for=" (c,index) in proCase.color" :key="index" class=" rounded-full bg-black h-8 w-8 shadow-inner" 
-                    :class="c.caseColor ? 'bg-caseCol-' + c.caseColor.toLowerCase(): '' "></label>
+            <div class="flex items-center">
+              <div class="text-lg text-white font-light">
+                {{ product.casePrice + ".-" }}
+              </div>
+              
             </div>
-            <p class="text-bold ">{{ proCase.brand.caseBrand  }} </p>
-            <p >{{ proCase.casePrice + ".-" }}</p>
+            <div class="flex flex-row  space-x-0.5  ">
+              <label  v-for=" (c,index) in product.productColor" :product="product" :key="index" class=" bg-black h-2 w-5 shadow-inner" 
+                      :class="c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> </label>           
+            </div>
+            <button @click="detailClick(product)" class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">VIEW</button>
+            
+          </div>
         </div>
-        <div class="ml-auto my-2">
-            <button class="bg-pink-300 py-2 px-3"  @click="editClick(proCase)">
-                <i class="fas fa-pen"></i>
-            </button>
-            <button class="bg-purple-300 py-2 px-3 mx-2" @click="deleteCase(proCase.caseId)">
-                <i class="fas fa-trash"></i>
-            </button>
         </div>
-      </div> 
-      
+      </div>  
+    </div>
+    <div class="flex align-middle justify-center items-center sm:flex-row flex-col mr-2 ">
+      <div class="hidden sm:flex flex-row sm:items-center sm:w-auto ">
+        <button class="flex default-page-button-show " style="width: 150px;" v-on:click="changePage(1)" v-if="paging.currentPage != 1">
+          First Page
+        </button>
+        <button class="flex default-page-button-current-show" style="width: 150px;" v-on:click="changePage(1)" v-else>
+          First Page
+        </button>
+      </div>
+      <div class="flex flex-row">
+        <div class="">
+          <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage - 1)" v-if="paging.currentPage != 1">
+          <i class="material-icons"> keyboard_arrow_left </i>
+          </button>
+          <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
+            <i class="material-icons"> keyboard_arrow_left </i>
+          </button>
+        </div>
+        <div v-for="index in this.paging.arrayofCurrentSetofPage" :key="index" class="">
+          <button class="flex default-page-button-show" v-on:click="changePage(index)" v-if="index != paging.currentPage">
+            {{index}}
+          </button>
+          <button class="flex default-page-button-current-show" v-on:click="changePage(index)" v-else>
+            {{index}}
+          </button>
+        </div>
+        <div >
+        <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage + 1)" v-if="paging.currentPage != paging.numberOfPage">
+          <i class="material-icons"> keyboard_arrow_right </i>
+        </button>
+        <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
+          <i class="material-icons"> keyboard_arrow_right </i>
+        </button>
+        </div>
+    </div>
+    <div class="hidden sm:flex flex-row sm:items-center sm:w-auto  ">
+      <button class="flex default-page-button-show " style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-if="paging.numberOfPage != paging.currentPage">
+        Last Page
+      </button>
+      <button class="flex default-page-button-current-show" style="width: 150px;" v-on:click="changePage(paging.numberOfPage)" v-else>
+        Last Page
+      </button>
+    </div>
   </div>
-  <!-- </div> -->
+</div>
+
 
 </template>
 <script>
 import axios from 'axios'
 
 export default {
- emits: ['edit-click','send-data'],
+ emits: ['send-data','detail-click'],
  
   components: {
     
   },
   data() {
     return {
-      offset: 0,
-      limit: 8,
+      paging: {
+        currentPage: 1,
+        numberOfPage: 0,
+        lowestMove: 7,
+        highestMove: 0,
+        arrayofCurrentSetofPage: []
+      },
+      totalElements: 0,
+      searchName: "",
       ShowCase:[],
-      click: true,
+      gui: {
+        edittingWindow: false,
+        errorWindow: false,
+
+      },
+      exception: {
+        message: ""
+      }
     };
   },
   methods:{
-    showProduct() {
-        axios.get(`${process.env.VUE_APP_ROOT_API}public/products/`).then((response) => {
-          this.ShowCase = response.data;
-          console.log("xx : "+this.ShowCase)
-        }).then(function(){
-            console.log('SUCCESS products')
-          })
-          .catch(function(){
-            console.log('FAILURE  products')
-          });               
+    detailClick(product) {
+      this.$emit("detail-click", true);
+      this.$emit("send-data", product);
     },
-    async deleteCase(id){
-      await axios.delete(`${process.env.VUE_APP_ROOT_API}public/products/${id}`)
-      for(let i = 0; i< this.ShowCase.length;i++ ){
-        if(this.ShowCase[i].caseId == id){
-          this.ShowCase.splice(i,1)
+    async showProduct() {
+      let errorcode = 0;
+      let response = await axios.get(`${process.env.VUE_APP_ROOT_API}public/products`, {
+        params: { 
+          page: this.paging.currentPage - 1,
+          size: 6, 
+          searchname: this.searchName
         }
-      }
+      }).catch(error => {
+        errorcode = error.response.data.exceptionCode;
+      })
+      if (errorcode == 0) {
+        this.gui.errorWindow = false;
+        this.ShowCase = response.data.content;
+        this.paging.numberOfPage = response.data.totalPages;
+        this.totalElements = response.data.totalElements;
+        this.createPagingBar(this.paging.currentPage);
+        console.log(this.ShowCase)
+      } else {
+        this.exception.message = "[ Not found ] "
+        this.gui.errorWindow = true;
+      }               
     },
-    editClick(proCase) {
-      
-      this.$emit("edit-click", true);
-      this.$emit("send-data", proCase);
-
-    }
- 
+    async changePage(pageNumber) {
+      this.paging.currentPage = pageNumber;
+      this.createPagingBar(pageNumber);
+      await this.showProduct();
+    },
+    createPagingBar(pageNumber) {
+      if (this.paging.numberOfPage >= 11) {
+        this.paging.highestMove = this.paging.numberOfPage - 5;
+        if (this.paging.highestMove <= pageNumber) {
+          for (let index = 0; index < 11; index++) {
+            this.paging.arrayofCurrentSetofPage[index] = this.paging.highestMove - 5 + index;
+          }
+        } else if (this.paging.lowestMove <= pageNumber) {
+            for (let index = 0; index < 11; index++) {
+              this.paging.arrayofCurrentSetofPage[index] = pageNumber - 5 + index;
+            }
+          } else {
+            for (let index = 0; index < 11; index++) {
+              this.paging.arrayofCurrentSetofPage[index] = index + 1;
+            }
+          }
+      } else {
+          this.paging.arrayofCurrentSetofPage = [];
+            for (let index = 1; index <= this.paging.numberOfPage; index++) {
+              this.paging.arrayofCurrentSetofPage.push(index);
+            }
+        }
+    },
+    
   },
   async created() {
     await this.showProduct();
+    this.createPagingBar(1);
   }
 }
 </script>

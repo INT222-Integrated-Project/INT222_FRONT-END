@@ -1,0 +1,140 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.bg-caseCol-white{
+    background-color: #fcfcfc
+}
+.bg-caseCol-black{
+    background-color: #000000
+}
+.bg-caseCol-blue{
+    background-color: #0039ff
+}
+.bg-caseCol-lavender{
+    background-color: #713b5e
+}
+.bg-caseCol-navy-blue{
+    background-color: #000080
+}
+.bg-caseCol-coral{
+    background-color: #ff6666
+}
+.bg-caseCol-green{  
+    background-color: #5aa897
+}
+.bg-caseCol-pink{
+    background-color: #ec5578
+}
+.bg-caseCol-purple{
+    background-color: #c67ace
+}
+.bg-caseCol-red{
+    background-color: #91091e
+}
+.bg-caseCol-yellow{
+    background-color: #fdfd96
+}
+.bg-caseCol-gray{
+    background-color: #8d847f
+}
+.bg-caseCol-charcoal{
+    background-color: #565b5d
+}.bg-caseCol-sky-blue{
+    background-color: #89cff0
+}
+
+.input-text{
+    @apply md:w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-gray-800 text-sm focus:outline-none focus:border-gray-400 focus:bg-white
+}
+.input-sign-in{
+    @apply mt-5 tracking-wide font-semibold bg-pink-500 text-gray-100 w-full py-4 rounded-lg hover:bg-pink-700 transition-all duration-300 ease-in-out flex items-center justify-center  focus:outline-none;
+}
+.input-sign-up{
+    @apply mt-5 tracking-wide font-semibold bg-indigo-500 text-white w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:outline-none;
+}
+.box-sign-in-completed{
+    @apply mt-5 tracking-wide font-semibold bg-green-500 text-gray-50 w-full py-4 rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out flex items-center text-center justify-center  focus:outline-none;
+}
+
+.default-error-box{
+    @apply text-red-900 bg-red-100 font-bold border-2 border-red-900 items-center py-2 text-center rounded-lg my-4
+}
+.card-first{
+    @apply my-1 px-1 w-3/5 flex justify-center items-center sm:w-1/2 sm:my-4 sm:px-4 lg:w-1/3 rounded-lg   hover:shadow-xl  
+}
+.card-two{
+    @apply overflow-hidden rounded-lg shadow-lg bg-white   hover:shadow-xl  
+}
+.buttun-addpro{
+    @apply rounded-full -mt-4  bg-purple-900 text-white hover:bg-white hover:text-purple-900 hover:shadow-xl focus:outline-none w-10 h-10 flex ml-auto transition duration-300
+}
+.header-form{
+    @apply text-gray-500 m-1 text-sm
+}
+.cancle-button{
+    @apply w-3/4 p-3 m-2 h-10 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none
+}
+.summit-button{
+    @apply w-3/4 p-3 m-2 h-10 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none 
+}
+.size-card{
+    @apply flex justify-center flex-col items-center 
+}
+.header-topic{
+    @apply flex justify-center items-center sm:text-5xl text-2xl m-2 font-bold
+}
+.header-topic-two{
+    @apply font-bold sm:text-xl text-lg m-3
+}
+.content-text{
+    @apply font-semibold sm:text-xl text-lg 
+}
+.content-text-false{
+    @apply font-semibold text-lg text-red-800 
+}
+.size-card-main-profile{
+    @apply font-sans leading-tight  p-8 
+}
+.size-card-main-profile-layer-2{
+    @apply max-w-sm mx-auto  bg-white rounded-lg overflow-hidden shadow-lg
+}
+.bg-header {
+    background: url(https://i.pinimg.com/originals/c7/70/13/c77013c8b2670355bff971b4ba9ae3ae.jpg) center center repeat ;
+    background-attachment: scroll ;
+}
+.insearch-box{
+    @apply bg-white border-2 border-gray-500 hover:bg-purple-100 duration-100 m-1 w-3/4 sm:w-5/6 px-8 py-2 rounded-sm font-medium
+}
+.search-box{
+    @apply bg-purple-300 border-2 border-purple-700 hover:bg-purple-500 duration-100 m-1 w-3/4 sm:w-1/6  py-2 rounded-sm font-medium sm:text-base 
+}
+.size-search{
+    @apply flex  justify-center items-center flex-col sm:flex-row  bg-gray-100 border-gray-300 
+}
+.default-page-button-show{
+    @apply p-3 bg-purple-200 border-2 border-purple-500 rounded-sm mx-1 text-center   justify-center flex items-center my-2 hover:bg-purple-300 duration-100;
+    width: 30px;
+    height: 35px;
+}
+.default-page-button-current-show{
+    @apply p-3 bg-purple-400 border-2 border-purple-800 rounded-sm mx-1 text-center   justify-center flex items-center my-2;
+    width: 30px;
+    height: 35px;
+}
+.left-full {
+    left: -100%;
+  }
+  .carousel-item {
+    float: left;
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-right: -100%;
+    backface-visibility: hidden;
+  }
+  .carousel-item.active {
+    left: 0;
+  }

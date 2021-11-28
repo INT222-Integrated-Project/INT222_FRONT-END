@@ -1,12 +1,12 @@
 <template>
   <div class="fixed z-10 inset-0 overflow-y-auto  ">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+      <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
       <div
         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
         <form @submit.prevent="checkForm">
-          <div class="bg-gray-200 px-4 pt-5 pb-4 ">
+          <div class="bg-pink-100 px-4 pt-5 pb-4 ">
             <div class="mt-3 text-center md:mt-0 md:ml-4 ">
               <h3 class="text-2xl font-medium text-gray-900" id="modal-title">
                 {{ formLabel }}
@@ -19,8 +19,7 @@
 
                     <br />
                     <div class="relative overflow-hidden inline-block ">
-                      <base-button buttonLabel="Upload Image" buttonColor="bg-black" textColor="text-white"
-                        borderColor="border-black"></base-button>
+                      <button >uploadPhoto</button>
                       <input id="file-input" type="file" @change="uploadPhoto"
                         class="absolute top-0 left-0 opacity-0 h-10" />
                     </div>
@@ -53,23 +52,39 @@
                         </div>
                       </div>
 
-                      <div class="mr-5 ml-10">
-                        <p class="text-lg font-medium">Color</p>
-                        <div class="grid grid-cols-4 -ml-3">
-                          <div v-for="color in ShowColor" :key="color.codeColor" class="m-2">
-                            <input type="checkbox" :id="color.caseColor" :value="color" class="hidden"
+                      <div class="ml-5">
+                        <label for="modelName" class="text-lg font-medium">Model</label>
+                        <br />
+                        <div>
+                          <select class="bg-gray-100 rounded py-2 mb-4 w-40" id="caseBrand" name="caseBrand"
+                            v-model="products.model">
+                            <option disabled value="">models</option>
+                            <option v-for="model in ShowModel" :key="model" :value="model" selected>
+                              {{ model.modelName }}
+                            </option>
+                          </select>
+                          <br />
+                          <i class="text-sm text-red-500" v-if="this.invalid.inmodel"> Invalid validate model! </i>
+                        </div>
+                      </div>  
+                    </div>
+                    
+                    <div class="mt-2">
+                      <p class="text-lg font-medium">Color</p>
+                      <div class="grid grid-cols-4 ">
+                        <div v-for="color in ShowColor" :key="color.codeColor" class="p-2">
+                          <input type="checkbox" :id="color.caseColor" :value="color" class="hidden"
                               v-model="products.color" />
-                            <label @click="color.checked = !color.checked" :for="color.caseColor"
-                              class="flex rounded-full bg-black h-8 w-8 shadow-inner" :class="
+                          <label @click="color.checked = !color.checked" :for="color.caseColor"
+                              class="flex rounded-full bg-black h-8 w-8 shadow-inner ml-5" :class="
                                 color.caseColor ? 'bg-caseCol-' + color.caseColor.toLowerCase(): '' ">
-                              <span v-show="color.checked"
+                          <span v-show="color.checked"
                                 class="flex mx-auto items-center material-icons text-white">done</span>
-                            </label>
+                          </label>
                           </div>
                         </div>
-                        <div class="">
+                      <div class="">
                           <i class="text-sm text-red-500" v-if="this.invalid.incaseColor"> Invalid validate color! </i>
-                        </div>
                       </div>
                     </div>
 
@@ -97,20 +112,21 @@
                         <i class="text-sm text-red-500" v-if="this.invalid.incasePrice"> Invalid validate Price! </i>
                       </div>
                     </div>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div  class="bg-gray-200 px-4 py-3 sm:px-6 flex sm:flex-row-reverse justify-center">
-            <base-button buttonLabel="Save" buttonColor="bg-pink-300" textColor="text-white" buttonType="submit"/>
+          <div  class="bg-pink-100 px-4 pb-3 -top-5 sm:px-6 flex sm:flex-row-reverse justify-center">
+            <button Type="submit" class="input-sign-in mx-6">submit</button>
+            <router-link to="/" class="input-sign-up mx-6" >
+            <button @click="closeCurrentModal" >close</button>
+            </router-link>
           </div>
-          
         </form>
-        <div class="bg-gray-200 px-4 py-3 sm:px-6 flex sm:flex-row-reverse justify-center ">
-          <base-button  buttonLabel="Cancel" buttonColor="bg-purple-300" textColor="text-black" borderColor="border-grey-400" @click="closeCurrentModal" />
-        </div>
+        
       </div>
     </div>
   </div>
@@ -136,9 +152,14 @@ export default {
                 caseBrand: ""
        },
         color: [],
+       model:{
+         modelID:0,
+         modelName:""
+       }
       },
       ShowBrand: [],
       ShowColor: [],
+      ShowModel: [],
       enableHolder:{
         holder: false
       },
@@ -150,11 +171,10 @@ export default {
         incasePrice: false,
         incaseimage: false,
         inbrand: false,
+        inmodel: false,
         incaseColor: false
       },
       enterEditMode:false,
-      
-      
     };
   },
   methods: {
@@ -222,23 +242,21 @@ export default {
         this.invalid.incaseDate = this.products.caseDate === "" ? true : false;
         this.invalid.incaseColor = this.products.color.length === 0  ? true : false;
         this.invalid.inbrand = this.products.brand.caseBrand === "" ? true : false;
-
+         this.invalid.inmodel = this.products.model.modelName === "" ? true : false;
       if(
         this.invalid.incaseName ||
         this.invalid.incaseDes ||
         this.invalid.incasePrice ||
         this.invalid.incaseDate ||
         this.invalid.incaseColor ||
+        this.invalid.inmodel ||
         this.invalid.inbrand === true
         ){console.log("false")
       }
       else {
         this.SentData();
-        this.closeCurrentModal();
       }
-     },
-    
-    closeCurrentModal() {
+     },closeCurrentModal() {
      this.$emit("close", true);
     },
     uploadPhoto(e) {
@@ -261,6 +279,16 @@ export default {
       console.log('FAILURE Brands')
       });
     },
+     ChooseModel() {
+      axios.get(`${process.env.VUE_APP_ROOT_API}public/models`).then((response) => {
+        this.ShowModel = response.data;
+      }).then(function(){
+      console.log('SUCCESS model')
+      })
+      .catch(function(){
+      console.log('FAILURE model')
+      });
+    },
     ChooseColor() {
       return axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then((response) => {
         this.ShowColor = response.data;
@@ -275,6 +303,7 @@ export default {
   async created() {
     await this.ChooseBrand();
     await  this.ChooseColor();
+    await  this.ChooseModel();
     if(this.product!=undefined){
     this.enterEditMode==true;
     this.products = this.product;
@@ -291,6 +320,7 @@ export default {
     }
     await console.log("Brands : ", this.ShowBrand);
     await console.log("Colors : ", this.ShowColor);
+    await console.log("Model : ", this.ShowColor);
   },
 };
 </script>

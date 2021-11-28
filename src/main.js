@@ -1,9 +1,16 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import './assets/tailwind.css'
-import BaseButton from './components/BaseButton'
+import store from './store'
+import './.styles/tailwind.css'
+import './.styles/navebar.css'
+import './.styles/default.css'
+import './.styles/AdminPanel.css'
 
-const app = createApp(App)
-app.component('base-button', BaseButton)
-app.use(router).mount('#app')
+require('@/store/subscriber')
+
+store.dispatch('authentication/attempt',localStorage.getItem('accesstoken')).then(() =>{
+    createApp(App).use(store).use(router).mount('#app')
+})
+
+
