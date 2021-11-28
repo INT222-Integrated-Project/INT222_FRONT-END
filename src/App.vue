@@ -2,7 +2,7 @@
   <div > 
     <nav-bar   fixedNav="fixed"></nav-bar>
       <router-view :addClicked="addItemClicked" @close-modal="closeAddModal" />
-      <fooTer class="relative"></fooTer>
+      <fooTer></fooTer>
   </div>
   
 </template>

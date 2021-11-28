@@ -85,9 +85,9 @@
       </div>
 
 <!-- My Product Management -->
-      <div class="container  sm:m-6 p-3  sm:w-4/6    bg-blue-300 sm:items-center  " style="font-family: 'Muli', sans-serif;">
+      <div  class="container  sm:m-6 p-3  sm:w-4/6    bg-blue-300 sm:items-center  " style="font-family: 'Muli', sans-serif;">
           <p class="text-4xl text-center my-5  text-white font-semibold">My Product</p>
-          <div  class="flex flex-wrap  sm:mx-2  mx-4 justify-center ">
+          <div v-if="!editproductActive" class="flex flex-wrap  sm:mx-2  mx-4 justify-center ">
             <div  v-for="(myProduct,index) in ShowProductByuser" :key="index" :value="myProduct" class="m-2 w-5/6 flex justify-center items-center bg-black sm:w-1/3 md:w-2/6 sm:my-4  rounded-lg   hover:shadow-xl  ">
             <div class="card-two ">
               <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" />
@@ -98,7 +98,7 @@
                   </h5>
                 </div>
                 <div class="flex flex-row ">
-                  <button  class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
+                  <button @click="(editproductActive = true),  (emptyFieldsproduct = false)"  class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
                   <button @click="deleteCase(myProduct.caseId)" class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
                         Delete
                   </button>  
@@ -106,6 +106,13 @@
               </div>
             </div>
             </div>
+          </div>
+
+          <div v-else class="flex flex-wrap  sm:mx-2  mx-4 justify-center bg-blue-500 " >
+            <a href="#" @click="  (editproductActive = !editproductActive),  (emptyFieldsproduct = false)"
+                    class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+                    <h3 class="">cancel</h3>
+                  </a>
           </div>
           <!-- Paging -->
             <div class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
@@ -154,6 +161,8 @@ export default {
         },
         editActive: false,
         emptyFields: false,
+        editproductActive: false,
+        emptyFieldsproduct: false,
         editFrom: {
           firstName: "",
           lastName: "",
