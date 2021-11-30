@@ -33,7 +33,7 @@
                 </router-link>
               </div>
               <div v-if="roleName=='admin'||roleName=='staff'"  class="md:w-52 p-1 mx-2 flex items-center">
-                <router-link to="/AddEdit" >
+                <router-link to="/addproduct" >
                   <button class="set-center button-nav-show-staff"><i class="material-icons mr-5 text-3xl">add_circle</i>Add Product</button>
                 </router-link>
               </div>

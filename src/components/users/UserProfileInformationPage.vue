@@ -1,5 +1,5 @@
 <template>
-    <div>fucking secured</div>
+    <div>secured</div>
 </template>
 
 <script>
