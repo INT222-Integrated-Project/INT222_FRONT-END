@@ -1,0 +1,6 @@
+.bodystyle-addproduct-page{
+    @apply bg-gradient-to-b from-pink-200 to-pink-800
+}
+.bodystyle-addproduct-form{
+    @apply bg-gray-100 border-gray-400 border-2 m-5 p-2
+}
