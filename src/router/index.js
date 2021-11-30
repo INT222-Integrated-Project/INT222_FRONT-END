@@ -41,6 +41,7 @@ const routes = [
       next()
     }
   },
+ 
   {
     path: '/ForbiddenSector',
     name: 'ForbiddenSector',
@@ -60,6 +61,7 @@ const routes = [
       next()
     }
   },
+
   {
     path: '/shipping',
     name: 'Shipping',

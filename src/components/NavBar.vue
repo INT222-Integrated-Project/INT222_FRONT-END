@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black ">
+  <div class="bg-black " >
     <div class="flex items-center  flex-wrap p-3 w-screen ">
         <div class="hidden mx-auto sm:flex  items-center ">
           <div class="hidden sm:flex justify-start items-center  sm:text-lg  "> 
@@ -54,7 +54,7 @@
           </div>
           <div v-show="dropdownOpen" class=" show-dropdown ">
             <div class="w-full mt-3 mx-16">
-              <!-- <div v-if="roleName=='admin'">
+              <div v-if="roleName=='admin'">
                 <router-link to="/adminPanel" class=" ">
                   <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">settings</i>Dashboard</button>
                 </router-link>
@@ -66,7 +66,7 @@
               </div>
               <router-link to="/shipping" class="">
                 <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">shopping_cart</i>Cart</button>
-              </router-link> -->
+              </router-link>
               <router-link to="/Profile" class=" ">
                 <button class=" flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">contact_mail</i>Account</button>
               </router-link>
