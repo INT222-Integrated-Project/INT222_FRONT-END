@@ -1,13 +1,13 @@
 <template>
-    <div class="">
-
-    </div>
+    <div>My orders</div>
 </template>
 
 <script>
 export default {
     setup() {
-        
-    },
+        return{
+
+        }
+    }
 }
 </script>
