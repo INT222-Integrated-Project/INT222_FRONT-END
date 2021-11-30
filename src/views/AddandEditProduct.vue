@@ -73,6 +73,7 @@
                       <p class="text-lg font-medium">Color</p>
                       <div class="grid grid-cols-4 ">
                         <div v-for="color in ShowColor" :key="color.codeColor" class="p-2">
+                          
                           <input type="checkbox" :id="color.caseColor" :value="color" class="hidden"
                               v-model="products.color" />
                           <label @click="color.checked = !color.checked" :for="color.caseColor"

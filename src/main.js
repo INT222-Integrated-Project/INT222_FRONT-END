@@ -6,6 +6,10 @@ import './.styles/tailwind.css'
 import './.styles/navebar.css'
 import './.styles/default.css'
 import './.styles/AdminPanel.css'
+import './.styles/DefaultNotification.css'
+import './.styles/DefaultInput.css'
+import './.styles/BodyStyle.css'
+import './.styles/ColorPick.css'
 
 require('@/store/subscriber')
 
