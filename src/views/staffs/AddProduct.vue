@@ -119,9 +119,7 @@
               >
               </label>
               <div class="flex align-middle justify-start items-center">
-                <div
-                  :class="'colorpick-' + color.caseColor.toLowerCase()"
-                ></div>
+                <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
               </div>
             </div>
           </div>
@@ -154,10 +152,7 @@
                 placeholder="Quantity"
                 v-model="newProduct.productColor[index].quantity"
               />
-              <button
-                type="button"
-                class="defaultinput-pick-model-button"
-                @click="color.quantity = this.increaseStock(color.quantity)"
+              <button type="button" class="defaultinput-pick-model-button" @click="color.quantity = this.increaseStock(color.quantity)"
               >
                 +
               </button>
