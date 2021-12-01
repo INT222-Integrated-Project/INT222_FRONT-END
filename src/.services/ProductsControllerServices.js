@@ -34,8 +34,7 @@ export const prodcutControllerServices = {
                 //formData.append('File', newImage)
             }
             let actionResponse;
-            await axios.post(`${process.env.VUE_APP_ROOT_API}staff/products`, formData
-            ).then(response => {
+            await axios.post(`${process.env.VUE_APP_ROOT_API}staff/products`, formData).then(response => {
                 actionResponse = response.data;
             }).catch(error => {
                 actionResponse = error.response.data;
@@ -81,6 +80,32 @@ export const prodcutControllerServices = {
         },
         async permanentlyRemoveProduct() {
 
+        },
+        async getAllAvailableColors() {
+            await axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then(response => {
+                return response.data
+            }).catch(error => {
+                return error.response
+            })
+        },
+        async getAllAvailableBrand() {
+            await axios.get(`${process.env.VUE_APP_ROOT_API}public/brands`).then(response => {
+                return response.data
+            }).catch(error => {
+                return error.response
+            })
+        },
+        async getAllAvailableModels(searchcontent) {
+            await axios
+                .get(`${process.env.VUE_APP_ROOT_API}public/models`,{params:{
+                    searchname:searchcontent
+                }})
+                .then((response) => {
+                    this.modelList = response.data.content;
+                })
+                .catch((error) => {
+                    this.error.pageError = error.response.data.message;
+                });
         }
     }
 }

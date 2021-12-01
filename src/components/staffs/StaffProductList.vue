@@ -1,9 +1,8 @@
 <template>
-    <div>fucking secured</div>
+    <div>My products</div>
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
 
 export default{
     name: 'StaffProductList',
