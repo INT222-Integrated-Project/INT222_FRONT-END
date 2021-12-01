@@ -29,7 +29,7 @@
     background-color: #ec5578
 }
 .bg-caseCol-purple{
-    background-color: #c67ace
+    background-color: #999999
 }
 .bg-caseCol-red{
     background-color: #91091e
@@ -45,6 +45,49 @@
 }.bg-caseCol-sky-blue{
     background-color: #89cff0
 }
+
+.text-caseCol-white{
+    text-color: #fcfcfc
+}
+.text-caseCol-black{
+    text-color: #000000
+}
+.text-caseCol-blue{
+    text-color: #0039ff
+}
+.text-caseCol-lavender{
+    text-color: #713b5e
+}
+.text-caseCol-blue{
+    text-color: #000080
+}
+.text-caseCol-coral{
+    text-color: #ff6666
+}
+.text-caseCol-green{  
+    text-color: #5aa897
+}
+.text-caseCol-pink{
+    text-color: #ec5578
+}
+.text-caseCol-purple{
+    text-color: #c67ace
+}
+.text-caseCol-red{
+    text-color: #91091e
+}
+.text-caseCol-yellow{
+    text-color: #fdfd96
+}
+.text-caseCol-gray{
+    text-color: #8d847f
+}
+.text-caseCol-charcoal{
+    text-color: #565b5d
+}.text-caseCol-sky-blue{
+    text-color: #89cff0
+}
+
 
 .input-text{
     @apply md:w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-gray-800 text-sm focus:outline-none focus:border-gray-400 focus:bg-white

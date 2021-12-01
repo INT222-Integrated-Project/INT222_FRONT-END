@@ -1,7 +1,8 @@
 <template>
-  <div class="bodystyle-addproduct-page">
-    <div>
-      <div>Add product</div>
+  <div class=" mt-3 text-center md:w-5/6 items-center md:mx-auto  bg-white lg:md-20 ">
+    <div class="sm:p-5 p-5">
+    <div class="bg-pink-200 rounded-full">
+      <div class="text-4xl font-semibold m-5 p-3 ">Add Product</div>
     </div>
     <div v-show="!invalid.validationPassed" class="default-error-notification-window">
       <p v-show="invalid.caseName">♦ Please fill in the product name.</p>
@@ -11,173 +12,123 @@
       <p v-show="invalid.modals">♦ At least 1 model is required.</p>
       <p v-show="invalid.productColor">♦ At least 1 color is required.</p>
     </div>
-    <div class="p-5">
+    <div class=" flex justify-center item-center bg-purple-300 p-5 rounded-xl">
       <!----
         Style file in a ton of files.
         The first place of the style name tells where the style is kept.
         -->
 
       <form @submit.prevent="formValidate">
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 1 : General information</h2>
-          <div>Add new products</div>
-
-          <div class="flex flex-col justify-center w-1/12">
-            <div>
-              <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
+        <div class="flex border-2 rounded-xl m-2 p-5 "  >
+          <div class="w-2/6 flex justify-center items-center">
+            <div class="w-3/5 flex flex-col relative overflow-hidden   ">
+              <img v-show="imageholderEnable" :src="productImage" class="" />
               <button type="button">uploadPhoto</button>
-              <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
+              <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="text-center" />
             </div>
           </div>
 
-          <div>
+          <div class="w-4/6">
             <i class="text-sm text-red-500" v-if="this.invalid.caseName">
               Invalid validate Image!
             </i>
             <i class="text-sm text-red-500" v-if="this.invalid.casePrice">
               Invalid validate Image!
             </i>
-            <div>
+            <div class="flex">
+              <div class="flex-1">
               <label for="CaseName" class="text-lg font-medium">Case Name</label>
-              <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName"
-                class="defaultinput-light-input" placeholder="Your new product name." />
-            </div>
-            <div>
-              <label for="caseDescription" class="text-lg font-medium">caseDescription</label>
-              <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"
-                name="caseDescription" class="defaultinput-light-input"
-                placeholder="A description in brief for this product." />
+              <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName" class="defaultinput-light-input" placeholder="Your new product name." />
               </div>
+              <div class="flex-1">
+              <label for="caseDescription" class="text-lg font-medium">caseDescription</label>
+              <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"  name="caseDescription" class="defaultinput-light-input" placeholder="A description in brief for this product." />
+              </div>
+            </div>
             <div>
-              <label for="casePrice" class="text-lg font-medium"
-                >casePrice</label
-              >
-              <input
-                type="text"
-                id="casePrice"
-                v-model="newProduct.casePrice"
-                name="casePrice"
-                class="defaultinput-light-input"
-                placeholder="How mush is this?"
-              />
+              <label for="casePrice" class="text-lg font-medium">casePrice</label>
+              <input type="number" id="casePrice"  min="1" step="100" v-model="newProduct.casePrice" name="casePrice" class="defaultinput-light-input" placeholder="How mush is this?"/>
             </div>
-            <div
-              class="default-error-notification-window"
-              v-if="newProduct.caseName == '' || newProduct.casePrice == ''"
-            >
+            <!-- <div  class="default-error-notification-window" v-if="newProduct.caseName == '' || newProduct.casePrice == ''">
               Give your product a name, and set a price too.
-            </div>
+            </div> -->
           </div>
+          
         </div>
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 2 : Pick models.</h2>
-          <div>Pick at least 1 models that fit to this product.</div>
-
-          <input type="text" placeholder="" v-model="modelSearchName">
+        <div class="flex justify-center items-center" v-if="!modelActive">
+          <button @click="(modelActive = true),  (emptyFields = false)" class="cancle-button" >Choose Model and Colors</button>
+        </div>
+        <div v-else class="flex" >
+          <!-- <input type="text" placeholder="" v-model="modelSearchName">
           <button type="button" @click="getModels" class="defaultinput-page-default-button">
             Search
-          </button>
-
-          <div v-for="(item, index) in modelList" :key="index">
-            <div class="flex align-middle justify-start items-center">
-              <input type="checkbox" class="defaultinput-pick-model-button" :value="item" v-model="newProduct.models"/>
-              <div>{{ item.brand.caseBrand }} : {{ item.modelName }}</div>
-            </div>
-          </div>
-
-          <div>
-              <!--PLEASE COMPLETE THE CSS-->
-            <h2 class="bg-red-400">
-              Your product will be available for the following models.
-            </h2>
-          </div>
-          <div v-for="(item, index) in newProduct.models" :key="index">
-            {{ item.brand.caseBrand }} : {{ item.modelName }}
-          </div>
-          <div
-            class="default-error-notification-window"
-            v-if="newProduct.models.length == 0"
-          >
-            Select at least one compatible model.
-          </div>
-        </div>
-
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 3 : Pick colors.</h2>
-          <div>Pick at least 1 color that fit to this product.</div>
+          </button> -->
           
-          <div class="flex justify-between">
-            <div v-for="color in colorList" :key="color.codeColor">
-              <input
-                type="checkbox"
-                :id="color.caseColor"
-                :value="{ color: color, imageCase: null, quantity: 0 }"
-                v-model="newProduct.productColor"
-              />
-              <label
-                @click="color.selected = !color.selected"
-                :for="color.caseColor"
-                :class="
-                  color.caseColor
-                    ? 'colorpick-' + color.caseColor.toLowerCase()
-                    : ''
-                "
+          <div class="flex w-2/3 justify-center md:mx-auto">
+            <div class="w-2/6  sm:px-10 py-3  border-2 rounded-xl m-2">
+            <label for="Brand and Model" class="text-lg font-medium">Brand and Model</label>
+              <div v-for="(item, index) in modelList" :key="index">
+                <div class="flex align-middle justify-start items-center border-2 rounded mb-2">
+                  <input type="checkbox" class="text-lg  " :value="item" v-model="newProduct.models"/>
+                  <div class="text-sm m-1 ">
+                    <p class="text-center">{{ item.brand.caseBrand }} : {{ item.modelName }}</p> 
+                  </div>
+                </div>
+              </div>
+              <!-- <div>
+                <h2 class="bg-red-400"> Your product will be available for the following models.</h2>
+              </div>
+              <div v-for="(item, index) in newProduct.models" :key="index"> {{ item.brand.caseBrand }} : {{ item.modelName }}</div>
+              <div  class="default-error-notification-window" v-if="newProduct.models.length == 0">
+                Select at least one compatible model.
+              </div> -->
+            </div>  
+            <div class="flex w-4/6 flex-row">
+              <div class="w-2/4 py-3 border-2 rounded-xl m-2">
+              <label for="Colors" class="text-lg font-medium">Colors</label>
+                <div v-for="color in colorList" :key="color.codeColor" class="flex flex-row items-center mx-5 mb-5">
+                  <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"  v-model="newProduct.productColor"/>
+                  <label @click="color.selected = !color.selected" :for="color.caseColor" :class=" color.caseColor ? 'colorpick-' + color.caseColor.toLowerCase(): ''">{{color.caseColor}}</label>
+                  <!-- <div class="">
+                    <div :class="'colorpick-' + color.caseColor.toLowerCase() "></div>
+                  </div> -->
+                </div>
+              </div>
+              <!-- <div
+                class="default-error-notification-window"
+                v-if="newProduct.productColor.length == 0"
               >
-              </label>
-              <div class="flex align-middle justify-start items-center">
-                <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
+                Select at least one color.
+              </div> -->
+              <div class="w-2/4 py-3 border-2 rounded-xl m-2">
+              <label for="Quantity" class="text-lg font-medium">Quantity</label>
+                <div v-for="(color, index) in newProduct.productColor" :key="index">
+                  <div class="flex items-center mx-1 mb-5">
+                  <div :class=" 'colorpick-bg-' + color.color.caseColor.toLowerCase() + ' flex justify-start items-center '">
+                    <button  type="button" class="defaultinput-pick-model-button " @click="color.quantity = this.decreaseStock(color.quantity)">
+                      -
+                    </button>
+                    <input  class="defaultinput-light-input-number" type="number" placeholder="Quantity" v-model="newProduct.productColor[index].quantity"/>
+                    <button type="button" class="defaultinput-pick-model-button " @click="color.quantity = this.increaseStock(color.quantity)">
+                      +
+                    </button>
+                    <div>Quantity : {{ color.quantity }}</div>
+                  </div>  
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div
-            class="default-error-notification-window"
-            v-if="newProduct.productColor.length == 0"
-          >
-            Select at least one color.
-          </div>
-
-          <div v-for="(color, index) in newProduct.productColor" :key="index">
-            <div
-              :class="
-                'colorpick-bg-' +
-                color.color.caseColor.toLowerCase() +
-                ' flex justify-start items-center'
-              "
-            >
-              <button
-                type="button"
-                class="defaultinput-pick-model-button"
-                @click="color.quantity = this.decreaseStock(color.quantity)"
-              >
-                -
-              </button>
-              <input
-                class="defaultinput-light-input-number"
-                type="number"
-                placeholder="Quantity"
-                v-model="newProduct.productColor[index].quantity"
-              />
-              <button type="button" class="defaultinput-pick-model-button" @click="color.quantity = this.increaseStock(color.quantity)"
-              >
-                +
-              </button>
-              <div>Quantity : {{ color.quantity }}</div>
-            </div>
-          </div>
+        <!-- <a href="#" @click="  (modelActive = !modelActive),  (emptyFields = false)" class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none "> <h3 class="">choose</h3></a> -->
         </div>
-
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 4 : Place product..</h2>
-          <div>Please accept our term and aggrement.</div>
-          <button type="submit" class="defaultinput-page-default-button">
-            GO
-          </button>
+        <div class="flex justify-center items-center">
+        <button type="submit" class="summit-button  ">Summit</button>
         </div>
       </form>
     </div>
-    <div></div>
+    
   </div>
+</div>
 </template>
 
 
@@ -207,6 +158,9 @@ export default {
       },
       imageholderEnable: true,
       productImage: ProductImage,
+      modelActive: false,
+      emptyFields: false,
+      choosemodelActive: false,
       error: {
         pageError: false,
       },

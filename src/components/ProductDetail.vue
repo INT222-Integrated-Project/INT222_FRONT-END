@@ -5,8 +5,8 @@
         <i class="material-icons w-16  text-center">keyboard_backspace</i>
       </button>
     </div>
-    <div class=" sm:m-  flex justify-center item-center sm:w-11/12 " style="font-family: 'Muli', sans-serif;">
-      <div  class="flex sm:mx-a16  mx-4 ">
+    <div class="  flex justify-center item-center sm:w-full " style="font-family: 'Muli', sans-serif;">
+      <div  class="w-10/12 ">
         <div class="card-two ">
           
           <form @submit.prevent="addtocard">
@@ -25,47 +25,37 @@
             <div class="flex ">
               <p class="text-xl text-black font-semibold text-center"> ฿{{ product.casePrice + ".-" }} baht.</p>
             </div>
+            <div class="flex flex-row">
+              <div>
+                <p class="text-lg text-gray font-light ">Description </p> 
+              </div>
+              <div>
+                <p class="text-lg text-gray font-light ml-3">{{ product.caseDescription }}</p>
+              </div>
+                
+              </div>
             
             <div class="flex flex-row">
-              <div class="flex-1 flex-col">
-                <p class="text-lg text-gray font-light ">Description </p> 
-                <div class="text-lg text-black border-2 border-gray-800 w-full">
-                  <p class="text-lg text-gray font-light flex-1">{{ product.caseDescription }}</p>
-                </div>  
-              </div>
               <div class="flex-1  ">
-                  <p  class="text-lg text-black font-light  ">Color</p>
-                  <div class="flex flex-row items-center justify-center space-x-3   ">
-                    <select  :value="c" id="productColor" name="productColor" v-model="productCart.productColorId">
-                      <option disabled value="Colors" >Colors</option>
-                      <option v-for="c in product.productColor"  :key="c" selected  > {{c.productcolorID}}</option>
-                            <!-- class="flex rounded-full bg-black h-8 w-8 shadow-inner " :class=" c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> -->
-                          <!-- @click="c.checked = !c.checked" :for="c.color.caseColor"
-                            <span v-show="c.checked" class="flex mx-auto items-center material-icons text-black">done</span> -->
-                        
-                    </select>
-                  </div>
-                  
+                <p  class="text-lg text-black font-light  ">Color</p>
+                <div class="flex flex-row items-center justify-center    ">
+                  <select  :value="c" id="productColor" name="productColor" v-model="productCart.productColorId" class="bg-gray-100 rounded py-2 mb-4 w-full h-10 flex mx-2 items-center text-center ">
+                    <option disabled value="Colors" >Colors</option>
+                    <option v-for="c in product.productColor"  :key="c" selected 
+                        :class=" c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' ? 'text-caseCol-'+ c.color.caseColor.toLowerCase(): ''  "   > {{c.productcolorID}}</option>
+                  </select>
                 </div>
-                <div class="flex-1">
-                    <p  class="text-lg text-black font-light ">Quantity</p>
-                    
-                     
-                      <!-- <div  :class="'colorpick-bg-' + c.color.caseColor.toLowerCase() +' flex justify-start items-center'">
-                        <button type="button" class="defaultinput-pick-model-button" @click="c.quantity = this.decreaseStock(c.quantity)"> - </button>
-                        
-                        <button type="button" class="defaultinput-pick-model-button" @click="c.quantity = this.increaseStock(c.quantity)"> + </button>
-                      </div> -->
-                     
-                    <!-- </div> -->
-                    <input type="number" placeholder="Quantity" min="1" step="1" max="" v-model="productCart.quantityOrder" class="bg-gray-100 rounded py-2 mb-4 w-full h-10 flex  items-center text-center "/>                
-                  </div>
+              </div>
+              <div class="flex-1">
+                <p  class="text-lg text-black font-light ">Quantity</p>
+                  <input type="number" placeholder="Quantity" min="1" step="1" max="" v-model="productCart.quantityOrder" class="bg-gray-100 rounded py-2 mb-4 w-full h-10 flex mx-2 items-center text-center "/>                
+              </div>
             </div>
             
             
             <div class="flex flex-row">
               <div class="flex-1">
-                <p  class="text-lg text-black font-light ">Model {{product.models[0].brand.caseBrand}}</p>
+                <!-- <p  class="text-lg text-black font-light ">Model {{product.models[0].brand.caseBrand}}</p> -->
                 <select  class="bg-gray-100 rounded py-2 mb-4 w-40 h-10" id="caseBrand" placeholder="Model" name="caseBrand" > 
                   <option value="Model" disabled >models</option>
                   <option v-for=" (m,index) in product.models"  :key="index" >{{m.modelName}}</option>
@@ -82,11 +72,11 @@
           </div>
           </form>
         </div>
-          
+          {{productCart}}
 
       </div>
     </div>
-    {{productCart}}
+    
   </div>  
 </template>
 <script>
@@ -115,7 +105,12 @@ export default {
     async addtocard(){
       let formData = new FormData();
        let addproJson = JSON.stringify(this.productCart);
-      formData.append('newOrders', addproJson)
+        
+        const addjsonBlob = new Blob([addproJson], {
+          type: 'application/json'
+        })
+      formData.append('newOrders', addjsonBlob)
+      
       console.log(addproJson)
       let errorCode = 0;
       await axios.post(`${process.env.VUE_APP_ROOT_API}user/addOrder`, formData,{
@@ -129,6 +124,7 @@ export default {
           })
           .catch(error => {
             errorCode = error.response.data.exceptionCode;
+            console.log(error.response)
             alert("No")
           })
           console.log(addproJson)

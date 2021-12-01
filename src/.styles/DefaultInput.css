@@ -2,14 +2,14 @@
     @apply border-gray-500 border-2 w-11/12 mt-2 h-10 px-2 placeholder-gray-800 bg-white hover:bg-gray-50 duration-150
 }
 .defaultinput-light-input-number{
-    @apply border-gray-500 border-2 w-1/6 mt-2 h-10 px-2 placeholder-gray-800 bg-white hover:bg-gray-50 duration-150
+    @apply border-gray-500 border-2 w-2/12 m-2 h-6   placeholder-gray-800 bg-white hover:bg-gray-50 duration-150
 }
 .defaultinput-light-input-error{
     @apply border w-11/12 mt-2 h-10 px-2
 }
 .defaultinput-pick-model-button{
-    @apply p-1 bg-green-200 border-2 border-green-500 rounded-sm m-2 text-center justify-center flex items-center hover:bg-green-300 duration-200;
-    min-width: 20px;
+    @apply p-1 bg-purple-200 border-2 border-purple-500 rounded-lg m-2 h-5  w-5 text-center justify-center  flex items-center hover:bg-purple-300 duration-200;
+   
 }
 .defaultinput-undopick-model-button{
     @apply p-1 bg-red-200 border-2 border-red-500 rounded-sm m-2 text-center justify-center flex items-center hover:bg-red-300 duration-200;
