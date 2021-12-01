@@ -31,12 +31,6 @@
           </div>
 
           <div>
-            <i class="text-sm text-red-500" v-if="this.invalid.caseName">
-              Invalid validate Image!
-            </i>
-            <i class="text-sm text-red-500" v-if="this.invalid.casePrice">
-              Invalid validate Image!
-            </i>
             <div>
               <label for="CaseName" class="text-lg font-medium">Case Name</label>
               <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName"
@@ -228,7 +222,8 @@ export default {
   methods: {
     //----------createNewProductImage---------
     async getModels(){
-      this.models = this.getAllAvailableModels(this.modelSearchName);
+      let response = await this.getAllAvailableModels(this.modelSearchName);
+      this.modelList = response
     },
     async createNewProductImage(event) {
       this.imageholderEnable = false;
