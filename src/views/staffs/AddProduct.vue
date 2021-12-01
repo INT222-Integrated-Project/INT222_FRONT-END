@@ -231,7 +231,7 @@ export default {
       reader.readAsDataURL(file.files[0]);
     },
     //---------------FORM VALID---------------
-    formValidate() {
+    async formValidate() {
       this.invalid.caseName =this.newProduct.caseName === "" || this.newProduct.caseName.length > 25? true: false;
       //this.invalid.caseDescription = this.newProduct.caseDescription === "" ? true : false;
       this.invalid.casePrice = this.newProduct.casePrice < 0 ? true : false;
@@ -245,7 +245,7 @@ export default {
       ) {
         this.invalid.validationPassed = false;
       } else {
-        let response = this.addProduct(this.newProduct, document.getElementById('imageHolderDiv').files[0]);
+        let response = await this.addProduct(this.newProduct, document.getElementById('imageHolderDiv').files[0]);
         this.invalid.validationPassed = true;
         console.log(JSON.stringify(response));
       }

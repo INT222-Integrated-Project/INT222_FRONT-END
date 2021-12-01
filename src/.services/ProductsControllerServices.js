@@ -34,13 +34,13 @@ export const prodcutControllerServices = {
             })
             return actionResponse;
         },
-        async editProduct(newProductEdit, newImage) {
+        async editSelectedProduct(newProductEdit, newImage) {
             const newProductEditBlob = new Blob([JSON.stringify(newProductEdit)], {
                 type: 'application/json'
             })
 
             let formData = new FormData;
-            formData.append(newProducts, newProductEditBlob)
+            formData.append('incomingproduct', newProductEditBlob)
             if (newImage != null) {
                 formData.append('imageFile', newImage)
             }
@@ -55,7 +55,6 @@ export const prodcutControllerServices = {
 
         },
         async toggleThisProductOnorOutofStore(comingId) {
-            console.log(comingId)
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/product/onstore?productId=${comingId}`).then(response => {
                 actionResponse = response.data;
@@ -69,7 +68,7 @@ export const prodcutControllerServices = {
 
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/addStock`, {
-                parem: {
+                params: {
                     productColorId: productColorId,
                     quantity: quantity
                 }
@@ -87,7 +86,7 @@ export const prodcutControllerServices = {
         async getAllAvailableColors() {
             let result;
             await axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then(response => {
-                result = response.data.content;
+                result = response.data;
             }).catch(error => {
                 result = error.response;
             });

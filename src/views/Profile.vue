@@ -72,7 +72,7 @@
                 <p class="text-gray-500 m-1 text-sm"> Last Update : {{ this.showProfile.address}}</p>
                 <input v-model="editFrom.address" name="address" placeholder="Address" required class="input-text" />
                 <div class="flex flex-row m-2  ">
-                  <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)"
+                  <a href="#" @click="  (editActive = !editActive), imageholderEnable=false, (emptyFields = false)"
                     class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
                     <h3 class="">cancel</h3>
                   </a>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="flex flex-row ">
 
-                  <button @click="(editproductActive = true,editProduct = myProduct),  (emptyFieldsproduct = false)"
+                  <button @click="(editproductActive = true,editProduct = myProduct), (emptyFieldsproduct = false)"
                     class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
 
                   <button @click="deleteCase(myProduct.caseId)"
@@ -119,12 +119,14 @@
 
         <div v-else class="flex flex-wrap  sm:mx-2  mx-4 justify-center bg-blue-500 ">
           <div>Edit your product : {{editProduct.caseName}}</div>
-          <a href="#" @click="  (editproductActive = !editproductActive),  (emptyFieldsproduct = false)"
+          <a href="#"
+            @click="  (editproductActive = !editproductActive), imageholderEnable=false, (emptyFieldsproduct = false)"
             class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
             <h3 class="">cancel</h3>
           </a>
-          <img v-show="!imageholderEnable" :src="`${process.env.VUE_APP_ROOT_API}public/productImage/${editProduct.productImage}`" class="input-image-get"/>
-          <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />  
+          <img v-show="!imageholderEnable" :src="`public/productImage/${editProduct.productImage}`"
+            class="input-image-get" />
+          <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
         </div>
         <!-- Paging -->
         <div v-show="!editproductActive" class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
@@ -167,14 +169,13 @@
         <p>{{editProduct}}</p>
       </div>
 
-      <form>
+      <form @submit.prevent="formValidate">
         <div class="bodystyle-addproduct-form">
 
           <h2>Step 1 : Edit General information</h2>
 
           <div class="flex flex-col justify-center w-1/12">
             <div>
-              <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
               <button type="button">uploadPhoto</button>
               <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
             </div>
@@ -203,26 +204,88 @@
 
         <div class="bodystyle-addproduct-form">
           <h2>Step 2 : Pick models.</h2>
+          <input type="text" placeholder="" v-model="modelSearchName">
+          <button type="button" @click="getModelList" class="defaultinput-page-default-button">
+            Search
+          </button>
+
+          <div v-for="(item, index) in modelList" :key="index">
+            <div class="flex align-middle justify-start items-center">
+              <input type="checkbox" class="defaultinput-pick-model-button" :value="item"
+                v-model="editProduct.models" />
+              <div>{{ item.brand.caseBrand }} : {{ item.modelName }}</div>
+            </div>
+          </div>
+
+          <div>
+            <!--PLEASE COMPLETE THE CSS-->
+            <h2 class="bg-red-400">
+              Your product will be available for the following models.
+            </h2>
+          </div>
+          <div v-for="(item, index) in editProduct.models" :key="index">
+            {{ item.brand.caseBrand }} : {{ item.modelName }}
+          </div>
+          <div class="default-error-notification-window" v-if="editProduct.models.length == 0">
+            Select at least one compatible model.
+          </div>
+
 
         </div>
 
         <div class="bodystyle-addproduct-form">
           <h2>Step 3 : Pick colors.</h2>
+          <div class="flex justify-between">
 
+            <div v-for="color in colorList" :key="color.codeColor">
+              <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"
+                v-model="editProduct.productColor" />
+              <label @click="color.selected = !color.selected" :for="color.caseColor" :class="
+                  color.caseColor
+                    ? 'colorpick-' + color.caseColor.toLowerCase()
+                    : ''
+                ">
+              </label>
+              <div class="flex align-middle justify-start items-center">
+                <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
+              </div>
+
+              <div class="default-error-notification-window" v-if="editProduct.productColor.length == 0">
+                Select at least one color.
+              </div>
+            </div>
+          </div>
+          <div v-for="(color, index) in editProduct.productColor" :key="index">
+            <div :class="
+                'colorpick-bg-' +
+                color.color.caseColor.toLowerCase() +
+                ' flex justify-start items-center'
+              ">
+              <button type="button" class="defaultinput-pick-model-button"
+                @click="color.quantity = this.decreaseStock(color.quantity)">
+                -
+              </button>
+              <input class="defaultinput-light-input-number" type="number" placeholder="Quantity"
+                v-model="editProduct.productColor[index].quantity" />
+              <button type="button" class="defaultinput-pick-model-button"
+                @click="color.quantity = this.increaseStock(color.quantity)">
+                +
+              </button>
+              <div>Quantity : {{ color.quantity }}</div>
+            </div>
+          </div>
         </div>
 
 
         <div class="bodystyle-addproduct-form">
           <h2>Step 4 : Revive And Save.</h2>
-          <a href="#" @click="  (editproductActive = !editproductActive), editProduct = {}, (emptyFieldsproduct = false)"
-            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-            <h3 class="">cancel</h3>
-          </a>
-
-          <a href="#" @click="  (editproductActive = !editproductActive)"
-            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-            <h3 class="">Save</h3>
-          </a>
+          <button v-show="!invalid.validationPassed" type="submit" class="defaultinput-page-default-button">
+            GO
+          </button>
+          <div v-show="invalid.validationPassed"
+            :class="error.showWindow=='Saving...'?'default-inprogress-notification-window':'Product is sucessfully updated'?'default-success-notification-window':'default-error-notification-window'">
+            {{error.showWindow}}
+          </div>
         </div>
         <br>
 
@@ -243,7 +306,11 @@
   } from 'vuex';
   import StaffProductList from '@/components/staffs/StaffProductList.vue'
   import StaffOrderList from '@/components/staffs/StaffOrderList.vue'
+  import {
+    prodcutControllerServices
+  } from "@/.services/ProductsControllerServices.js";
   export default {
+    mixins: [prodcutControllerServices],
     components: {
       StaffProductList,
       StaffOrderList
@@ -251,6 +318,7 @@
     data() {
       return {
         // profile information
+        modelSearchName: "",
         productImage: null,
         editProduct: {
           caseName: "",
@@ -259,10 +327,12 @@
           productColor: [],
           models: [],
         },
+        modelList: [],
+        colorList: [],
         showProfile: {
           role: {}
         },
-        imageholderEnable:false,
+        imageholderEnable: false,
         editActive: false,
         emptyFields: false,
         editproductActive: false,
@@ -275,18 +345,24 @@
           email: "",
         },
         invalid: {
+          validationPassed: false,
           invalidfirstName: false,
           invalidlastName: false,
           invalidphone: false,
           invalidaddress: false,
           invalidemail: false,
+          models: false,
+          productColor: false,
+          casePrice: false,
+          caseName: false,
+          enableProductSubmitButton: true
         },
         error: {
           message: "",
           showWindow: ""
         },
         // Flow list Product and page
-        ShowProductByuser: {},
+        ShowProductByuser: [],
         paging: {
           currentPage: 1,
           numberOfPage: 0,
@@ -304,16 +380,73 @@
       };
     },
     methods: {
+      async formValidate() {
+        this.invalid.caseName = this.editProduct.caseName === "" || this.editProduct.caseName.length > 25 ? true :
+          false;
+        //this.invalid.caseDescription = this.newProduct.caseDescription === "" ? true : false;
+        this.invalid.casePrice = this.editProduct.casePrice < 0 ? true : false;
+        this.invalid.productColor = this.editProduct.productColor === "" ? true : false;
+        this.invalid.models = this.editProduct.models === "" ? true : false;
+        if (
+          this.invalid.caseName ||
+          this.invalid.casePrice ||
+          this.invalid.productColor ||
+          this.invalid.models
+        ) {
+          this.invalid.validationPassed = false;
+        } else {
+          this.invalid.validationPassed = true;
+          this.invalid.enableProductSubmitButton = false;
+          this.error.showWindow = "Saving..."
+          let response = await this.editSelectedProduct(this.editProduct, document.getElementById('imageHolderDiv')
+            .files[0]);
+          if (response.exceptionCode) {
+            switch (response.exceptionCode) {
+              case 2006:
+                this.error.showWindow = "This product name is already taken by someone.";
+                break;
+              default:
+                this.error.showWindow = "This is not an error from the API,"
+                break;
+            }
+            setTimeout(() => {
+              this.invalid.enableProductSubmitButton = true;
+              this.invalid.validationPassed = false;
+            }, 5000);
+          } else {
+            this.error.showWindow = "Product is sucessfully updated"
+            console.log(response);
+            setTimeout(() => {
+              this.editproductActive = false;
+              this.invalid.enableProductSubmitButton = true;
+              this.invalid.validationPassed = false;
+            }, 2000);
+            console.log(this.ShowProductByuser);
+            for (let index = 0; index < this.ShowProductByuser.length; index++) {
+              if (response.caseID == this.ShowProductByuser[index].caseID) {
+                this.ShowProductByuser[index] = response;
+                break;
+              }
+            }
+          }
+        }
+      },
+      async getModelList() {
+        this.modelList = await this.getAllAvailableModels(this.modelSearchName)
+      },
+      async getColorList() {
+        this.colorList = await this.getAllAvailableColors();
+      },
       async createNewProductImage(event) {
-      this.imageholderEnable = false;
-      const file = event.target;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.productImage = event.target.result;
-        this.imageholderEnable = true;
-      };
-      reader.readAsDataURL(file.files[0]);
-    },
+        this.imageholderEnable = false;
+        const file = event.target;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.productImage = event.target.result;
+          this.imageholderEnable = true;
+        };
+        reader.readAsDataURL(file.files[0]);
+      },
       async getProfile() {
         await axios.get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
           .then((response) => {
@@ -457,6 +590,9 @@
     async created() {
       await this.getProfile();
       await this.getProductUser();
+      await this.getModelList();
+      await this.getColorList();
+
       this.createPagingBar(1);
     },
   };
