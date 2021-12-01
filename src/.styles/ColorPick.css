@@ -1,5 +1,13 @@
 .colorpick-default{
+<<<<<<< HEAD
     @apply w-full h-10 rounded-xl flex justify-center items-center
+=======
+    @apply w-auto;
+    min-width: 75px;
+    max-width: fit-content;
+    height:50px;
+    border:1px solid;
+>>>>>>> 6251e7ffbf215e5711e2fdfaa5b9aa93e8ed8d9d
 }
 .colorpick-black{
     background-color: #fcfcfc ; @apply colorpick-default
