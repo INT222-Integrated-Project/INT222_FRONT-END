@@ -27,7 +27,6 @@
               <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="text-center" />
             </div>
           </div>
-
           <div class="w-4/6">
             <i class="text-sm text-red-500" v-if="this.invalid.caseName">
               Invalid validate Image!
@@ -37,6 +36,7 @@
             </i>
             <div class="flex">
               <div class="flex-1">
+
               <label for="CaseName" class="text-lg font-medium">Case Name</label>
               <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName" class="defaultinput-light-input" placeholder="Your new product name." />
               </div>
@@ -177,7 +177,8 @@ export default {
   methods: {
     //----------createNewProductImage---------
     async getModels(){
-      this.models = this.getAllAvailableModels(this.modelSearchName);
+      let response = await this.getAllAvailableModels(this.modelSearchName);
+      this.modelList = response
     },
     async createNewProductImage(event) {
       this.imageholderEnable = false;

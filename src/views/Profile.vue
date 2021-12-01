@@ -74,7 +74,7 @@
                 <div class="flex flex-row m-2  ">
                   <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)"
                     class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-                    <h3 class="">Cancle</h3>
+                    <h3 class="">cancel</h3>
                   </a>
                   <input type="submit"
                     class="w-16 h-16 mx-6 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none ">
@@ -119,50 +119,13 @@
 
         <div v-else class="flex flex-wrap  sm:mx-2  mx-4 justify-center bg-blue-500 ">
           <div>Edit your product : {{editProduct.caseName}}</div>
-            <div class="bg-blue-300" v-show="editproductActive">
-              <form>
-                <div class="bodystyle-addproduct-form">
-                  <h2>Step 1 : Edit General information</h2>
-                  <div class="flex flex-col justify-center w-1/12">
-                    <div>
-                      <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
-                      <button type="button">uploadPhoto</button>
-                      <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
-                    </div>
-                  </div>
-                  <div class="flex flex-wrap items-center">
-                    <div class="defaultinput-box-edit-text-input flex flex-col">
-                      <h3> New Case Name </h3><br>
-                      <input class="defaultinput-light-input" id="caseName" type="text" placeholder="Product New Name"
-                        v-model="editProduct.caseName">
-                    </div>
-                    <div class="defaultinput-box-edit-text-input flex flex-col">
-                      <label for="caseDescription"> New Case Descrpition </label> 
-                      <textarea class="defaultinput-light-input"
-                        id="caseDescription" placeholder="Product Description" v-model="editProduct.caseDescription"></textarea>
-
-                    </div>
-                    <div class="defaultinput-box-edit-text-input flex flex-col">
-                      <label for="casePrice"> New Case Price </label>
-                      <input class="defaultinput-light-input" id="casePrice"
-                        type="number" placeholder="New Price" v-model="editProduct.casePrice">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="bodystyle-addproduct-form">
-                  <h2>Step 2 : Pick models.</h2>
-                  
-                </div>
-                <div class="bodystyle-addproduct-form">
-                  <h2>Step 3 : Pick colors.</h2>
-                </div>
-                <br>
-              </form>
-            </div>
-            <a href="#" @click="  (editproductActive = !editproductActive),  (emptyFieldsproduct = false)" class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none "> Cancle</a>
-            <input type="submit" class="w-16 h-16 mx-6 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none ">
-          </div>
+          <a href="#" @click="  (editproductActive = !editproductActive),  (emptyFieldsproduct = false)"
+            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+            <h3 class="">cancel</h3>
+          </a>
+          <img v-show="!imageholderEnable" :src="`${process.env.VUE_APP_ROOT_API}public/productImage/${editProduct.productImage}`" class="input-image-get"/>
+          <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />  
+        </div>
         <!-- Paging -->
         <div v-show="!editproductActive" class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
           <div class="flex flex-row">
@@ -196,12 +159,75 @@
           </div>
         </div>
       </div>
-
-
-
       <!--  -->
     </div>
-    
+    <div class="bg-blue-300" v-show="editproductActive">
+      <div>Edit your product : {{editProduct.caseName}}</div>
+      <div>
+        <p>{{editProduct}}</p>
+      </div>
+
+      <form>
+        <div class="bodystyle-addproduct-form">
+
+          <h2>Step 1 : Edit General information</h2>
+
+          <div class="flex flex-col justify-center w-1/12">
+            <div>
+              <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
+              <button type="button">uploadPhoto</button>
+              <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center">
+            <div class="defaultinput-box-edit-text-input flex flex-col">
+              <h3> New Case Name </h3><br>
+              <input class="defaultinput-light-input" id="caseName" type="text" placeholder="Product New Name"
+                v-model="editProduct.caseName">
+
+            </div>
+
+            <div class="defaultinput-box-edit-text-input flex flex-col">
+              <label for="caseDescription"> New Case Descrpition </label>
+              <textarea class="defaultinput-light-input" id="caseDescription" placeholder="Product Description"
+                v-model="editProduct.caseDescription"></textarea>
+
+            </div>
+            <div class="defaultinput-box-edit-text-input flex flex-col">
+              <label for="casePrice"> New Case Price </label>
+              <input class="defaultinput-light-input" id="casePrice" type="number" placeholder="New Price"
+                v-model="editProduct.casePrice">
+            </div>
+          </div>
+        </div>
+
+        <div class="bodystyle-addproduct-form">
+          <h2>Step 2 : Pick models.</h2>
+
+        </div>
+
+        <div class="bodystyle-addproduct-form">
+          <h2>Step 3 : Pick colors.</h2>
+
+        </div>
+
+
+        <div class="bodystyle-addproduct-form">
+          <h2>Step 4 : Revive And Save.</h2>
+          <a href="#" @click="  (editproductActive = !editproductActive), editProduct = {}, (emptyFieldsproduct = false)"
+            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+            <h3 class="">cancel</h3>
+          </a>
+
+          <a href="#" @click="  (editproductActive = !editproductActive)"
+            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+            <h3 class="">Save</h3>
+          </a>
+        </div>
+        <br>
+
+      </form>
+    </div>
     <div v-show="false">
 
       <StaffOrderList></StaffOrderList>
@@ -221,12 +247,11 @@
     components: {
       StaffProductList,
       StaffOrderList
-    },props: [
-     "item",
-  ],
+    },
     data() {
       return {
         // profile information
+        productImage: null,
         editProduct: {
           caseName: "",
           caseDescription: "",
@@ -237,6 +262,7 @@
         showProfile: {
           role: {}
         },
+        imageholderEnable:false,
         editActive: false,
         emptyFields: false,
         editproductActive: false,
@@ -278,6 +304,16 @@
       };
     },
     methods: {
+      async createNewProductImage(event) {
+      this.imageholderEnable = false;
+      const file = event.target;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.productImage = event.target.result;
+        this.imageholderEnable = true;
+      };
+      reader.readAsDataURL(file.files[0]);
+    },
       async getProfile() {
         await axios.get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
           .then((response) => {
@@ -373,26 +409,7 @@
           this.exception.message = "[ Not found ] "
           this.gui.errorWindow = true;
         }
-      },async getBrands() {
-      await axios
-        .get(`${process.env.VUE_APP_ROOT_API}public/brands`)
-        .then((response) => {
-          this.brandList = response.data;
-        })
-        .catch((error) => {
-          this.error.pageError = error.response.data.message;
-        });
-    },
-    async getColors() {
-      await axios
-        .get(`${process.env.VUE_APP_ROOT_API}public/colors`)
-        .then((response) => {
-          this.colorList = response.data;
-        })
-        .catch((error) => {
-          this.error.pageError = error.response.data.message;
-        });
-    },
+      },
       async deleteCase(id) {
         await axios.delete(`${process.env.VUE_APP_ROOT_API}api/products/${id}`)
         for (let i = 0; i < this.ShowProductByuser.length; i++) {
@@ -440,9 +457,6 @@
     async created() {
       await this.getProfile();
       await this.getProductUser();
-      await this.getColors();
-      await this.getModels();
-      await this.getBrands();
       this.createPagingBar(1);
     },
   };
