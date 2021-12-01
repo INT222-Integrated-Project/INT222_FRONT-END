@@ -117,16 +117,144 @@
           </div>
         </div>
 
-        <div v-else class="flex flex-wrap  sm:mx-2  mx-4 justify-center bg-blue-500 ">
-          <div>Edit your product : {{editProduct.caseName}}</div>
-          <a href="#"
-            @click="  (editproductActive = !editproductActive), imageholderEnable=false, (emptyFieldsproduct = false)"
-            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-            <h3 class="">cancel</h3>
-          </a>
-          <img v-show="!imageholderEnable" :src="`public/productImage/${editProduct.productImage}`"
+        <div v-else class="flex justify-center item-center bg-purple-300 p-5 rounded-xl">
+       
+        <form @submit.prevent="formValidate">
+        <div class="flex flex-col border-2 rounded-xl m-2 p-5 ">
+          <div class="flex flex-row" v-if="!modelActive ">
+            <div class="w-2/6 flex justify-center items-center">
+              <div class="w-3/5 flex flex-col relative overflow-hidden   ">
+               <img v-show="!imageholderEnable" :src="`public/productImage/${editProduct.productImage}`"
             class="input-image-get" />
-          <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
+          <!-- <img v-show="imageholderEnable" :src="productImage" class="input-image-get" /> -->
+                <img v-show="imageholderEnable" :src="productImage" class="" />
+                <button type="button" class="text-lg font-medium">uploadPhoto</button>
+                <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
+              </div>
+            </div>
+            <div class="w-4/6">
+              <div class="flex">
+                <div class="flex-1">
+                  <h3 class="text-lg font-medium"> New Case Name </h3>
+                  <input class="defaultinput-light-input" id="caseName" type="text" placeholder="Product New Name"
+                    v-model="editProduct.caseName">
+                </div>
+                <div class="flex-1">
+                  <label for="caseDescription" class="text-lg font-medium"> New Case Descrpition </label>
+                  <textarea class="defaultinput-light-input" id="caseDescription" placeholder="Product Description"
+                    v-model="editProduct.caseDescription"></textarea>
+                </div>
+              </div>
+              <div class="">
+                <label for="casePrice" class="text-lg font-medium"> New Case Price </label>
+                <input class="defaultinput-light-input" id="casePrice" type="number" placeholder="New Price"
+                  v-model="editProduct.casePrice">
+              </div>
+              <button @click="(modelActive = true),  (emptyFields = false)" class="cancle-button" >Choose Models and Colors</button>
+              <div class="flex flex-row mt-5 justify-end" >
+                <div>
+                  <button v-show="!invalid.validationPassed" type="submit" class="defaultinput-page-default-button">
+                    Save
+                  </button>
+                </div>
+                <div>
+                  <button href="#"  @click="  (editproductActive = !editproductActive), imageholderEnable=false, (emptyFieldsproduct = false)" class="defaultinput-page-default-button-two">
+                  Cancel
+                  </button>
+                </div>
+                <div v-show="invalid.validationPassed"
+                  :class="error.showWindow=='Saving...'?'default-inprogress-notification-window':'Product is sucessfully updated'?'default-success-notification-window':'default-error-notification-window'">
+                  {{error.showWindow}}
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div v-else>
+            <!-- model -->
+            <div  class="bodystyle-addproduct-form  ">
+              <h2> Pick models.</h2>
+              <div class="flex flex-row">
+              <input type="text" placeholder="" v-model="modelSearchName">
+              <button type="button" @click="getModelList" class="defaultinput-page-default-button">
+                Search
+              </button>
+              </div>
+              <div class="overflow-scroll h-44">
+              <div v-for="(item, index) in modelList" :key="index" >
+                <div class="flex align-middle justify-start items-center">
+                  <input type="checkbox" class="defaultinput-pick-model-button" :value="item"
+                    v-model="editProduct.models" />
+                  <div>{{ item.brand.caseBrand }} : {{ item.modelName }}</div>
+                </div>
+              </div>
+              </div>
+
+              <div>
+                <h2 class="bg-red-400">
+                  Your product will be available for the following models.
+                </h2>
+              </div>
+              <div v-for="(item, index) in editProduct.models" :key="index">
+                {{ item.brand.caseBrand }} : {{ item.modelName }}
+              </div>
+              <div class="default-error-notification-window" v-if="editProduct.models.length == 0">
+                Select at least one compatible model.
+              </div>
+            </div>
+            <!-- Colors -->
+            <div  class="bodystyle-addproduct-form">
+              <h2>Pick colors.</h2>
+              <div class="flex justify-between">
+
+                <div v-for="color in colorList" :key="color.codeColor">
+                  <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"
+                    v-model="editProduct.productColor" />
+                  <label @click="color.selected = !color.selected" :for="color.caseColor" :class="
+                      color.caseColor
+                        ? 'colorpick-' + color.caseColor.toLowerCase()
+                        : ''
+                    ">
+                  </label>
+                  <div class="flex align-middle justify-start items-center">
+                    <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
+                  </div>
+
+                  <div class="default-error-notification-window" v-if="editProduct.productColor.length == 0">
+                    Select at least one color.
+                  </div>
+                </div>
+              </div>
+              <div v-for="(color, index) in editProduct.productColor" :key="index">
+                <div :class="
+                    'colorpick-bg-' +
+                    color.color.caseColor.toLowerCase() +
+                    ' flex justify-start items-center'
+                  ">
+                  <button type="button" class="defaultinput-pick-model-button"
+                    @click="color.quantity = this.decreaseStock(color.quantity)">
+                    -
+                  </button>
+                  <input class="defaultinput-light-input-number" type="number" placeholder="Quantity"
+                    v-model="editProduct.productColor[index].quantity" />
+                  <button type="button" class="defaultinput-pick-model-button"
+                    @click="color.quantity = this.increaseStock(color.quantity)">
+                    +
+                  </button>
+                  <div>Quantity : {{ color.quantity }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center items-center">
+                <button   @click="  (modelActive = !modelActive)" class="summit-button  ">choose</button>
+            </div>
+          </div>
+
+        
+        </div>
+      </form>
+      
+         
         </div>
         <!-- Paging -->
         <div v-show="!editproductActive" class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
@@ -163,134 +291,14 @@
       </div>
       <!--  -->
     </div>
-    <div class="bg-blue-300" v-show="editproductActive">
+    <!-- <div class="bg-blue-300" v-show="editproductActive">
       <div>Edit your product : {{editProduct.caseName}}</div>
       <div>
         <p>{{editProduct}}</p>
       </div>
 
-      <form @submit.prevent="formValidate">
-        <div class="bodystyle-addproduct-form">
-
-          <h2>Step 1 : Edit General information</h2>
-
-          <div class="flex flex-col justify-center w-1/12">
-            <div>
-              <button type="button">uploadPhoto</button>
-              <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
-            </div>
-          </div>
-          <div class="flex flex-wrap items-center">
-            <div class="defaultinput-box-edit-text-input flex flex-col">
-              <h3> New Case Name </h3><br>
-              <input class="defaultinput-light-input" id="caseName" type="text" placeholder="Product New Name"
-                v-model="editProduct.caseName">
-
-            </div>
-
-            <div class="defaultinput-box-edit-text-input flex flex-col">
-              <label for="caseDescription"> New Case Descrpition </label>
-              <textarea class="defaultinput-light-input" id="caseDescription" placeholder="Product Description"
-                v-model="editProduct.caseDescription"></textarea>
-
-            </div>
-            <div class="defaultinput-box-edit-text-input flex flex-col">
-              <label for="casePrice"> New Case Price </label>
-              <input class="defaultinput-light-input" id="casePrice" type="number" placeholder="New Price"
-                v-model="editProduct.casePrice">
-            </div>
-          </div>
-        </div>
-
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 2 : Pick models.</h2>
-          <input type="text" placeholder="" v-model="modelSearchName">
-          <button type="button" @click="getModelList" class="defaultinput-page-default-button">
-            Search
-          </button>
-
-          <div v-for="(item, index) in modelList" :key="index">
-            <div class="flex align-middle justify-start items-center">
-              <input type="checkbox" class="defaultinput-pick-model-button" :value="item"
-                v-model="editProduct.models" />
-              <div>{{ item.brand.caseBrand }} : {{ item.modelName }}</div>
-            </div>
-          </div>
-
-          <div>
-            <!--PLEASE COMPLETE THE CSS-->
-            <h2 class="bg-red-400">
-              Your product will be available for the following models.
-            </h2>
-          </div>
-          <div v-for="(item, index) in editProduct.models" :key="index">
-            {{ item.brand.caseBrand }} : {{ item.modelName }}
-          </div>
-          <div class="default-error-notification-window" v-if="editProduct.models.length == 0">
-            Select at least one compatible model.
-          </div>
-
-
-        </div>
-
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 3 : Pick colors.</h2>
-          <div class="flex justify-between">
-
-            <div v-for="color in colorList" :key="color.codeColor">
-              <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"
-                v-model="editProduct.productColor" />
-              <label @click="color.selected = !color.selected" :for="color.caseColor" :class="
-                  color.caseColor
-                    ? 'colorpick-' + color.caseColor.toLowerCase()
-                    : ''
-                ">
-              </label>
-              <div class="flex align-middle justify-start items-center">
-                <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
-              </div>
-
-              <div class="default-error-notification-window" v-if="editProduct.productColor.length == 0">
-                Select at least one color.
-              </div>
-            </div>
-          </div>
-          <div v-for="(color, index) in editProduct.productColor" :key="index">
-            <div :class="
-                'colorpick-bg-' +
-                color.color.caseColor.toLowerCase() +
-                ' flex justify-start items-center'
-              ">
-              <button type="button" class="defaultinput-pick-model-button"
-                @click="color.quantity = this.decreaseStock(color.quantity)">
-                -
-              </button>
-              <input class="defaultinput-light-input-number" type="number" placeholder="Quantity"
-                v-model="editProduct.productColor[index].quantity" />
-              <button type="button" class="defaultinput-pick-model-button"
-                @click="color.quantity = this.increaseStock(color.quantity)">
-                +
-              </button>
-              <div>Quantity : {{ color.quantity }}</div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="bodystyle-addproduct-form">
-          <h2>Step 4 : Revive And Save.</h2>
-          <button v-show="!invalid.validationPassed" type="submit" class="defaultinput-page-default-button">
-            GO
-          </button>
-          <div v-show="invalid.validationPassed"
-            :class="error.showWindow=='Saving...'?'default-inprogress-notification-window':'Product is sucessfully updated'?'default-success-notification-window':'default-error-notification-window'">
-            {{error.showWindow}}
-          </div>
-        </div>
-        <br>
-
-      </form>
-    </div>
+      
+    </div> -->
     <div v-show="false">
 
       <StaffOrderList></StaffOrderList>
@@ -333,7 +341,9 @@
           role: {}
         },
         imageholderEnable: false,
+        modelActive:false,
         editActive: false,
+        colorActive:  false,
         emptyFields: false,
         editproductActive: false,
         emptyFieldsproduct: false,
