@@ -23,15 +23,8 @@ export const prodcutControllerServices = {
             })
             let formData = new FormData();
             formData.append('newProducts', newProductBlob)
-
-            formData.append('imageFile', newImage)
-
             if (newImage != null) {
-                /*const newImageBlob = new Blob([newImage],{
-                    type: 'image/png'
-                })*/
-
-                //formData.append('File', newImage)
+                formData.append('imageFile', newImage)
             }
             let actionResponse;
             await axios.post(`${process.env.VUE_APP_ROOT_API}staff/products`, formData).then(response => {
@@ -41,7 +34,17 @@ export const prodcutControllerServices = {
             })
             return actionResponse;
         },
-        async editProduct(formData) {
+        async editProduct(newProductEdit, newImage) {
+            const newProductEditBlob = new Blob([JSON.stringify(newProductEdit)], {
+                type: 'application/json'
+            })
+
+            let formData = new FormData;
+            formData.append(newProducts, newProductEditBlob)
+            if (newImage != null) {
+                formData.append('imageFile', newImage)
+            }
+
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/product`, formData).then(response => {
                 actionResponse = response.data;
@@ -82,30 +85,38 @@ export const prodcutControllerServices = {
 
         },
         async getAllAvailableColors() {
+            let result;
             await axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then(response => {
-                return response.data
+                result = response.data.content;
             }).catch(error => {
-                return error.response
-            })
+                result = error.response;
+            });
+            return result;
         },
         async getAllAvailableBrand() {
+            let result;
             await axios.get(`${process.env.VUE_APP_ROOT_API}public/brands`).then(response => {
-                return response.data
+                result = response.data.content;
             }).catch(error => {
-                return error.response
-            })
+                result = error.response;
+            });
+            return result;
         },
         async getAllAvailableModels(searchcontent) {
+            let result;
             await axios
-                .get(`${process.env.VUE_APP_ROOT_API}public/models`,{params:{
-                    searchname:searchcontent
-                }})
+                .get(`${process.env.VUE_APP_ROOT_API}public/models`, {
+                    params: {
+                        searchname: searchcontent
+                    }
+                })
                 .then((response) => {
-                    this.modelList = response.data.content;
+                    result = response.data.content;
                 })
                 .catch((error) => {
-                    this.error.pageError = error.response.data.message;
+                    result = error.response;
                 });
+            return result;
         }
     }
 }

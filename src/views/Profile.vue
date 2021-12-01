@@ -123,6 +123,8 @@
             class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
             <h3 class="">cancel</h3>
           </a>
+          <img v-show="!imageholderEnable" :src="`${process.env.VUE_APP_ROOT_API}public/productImage/${editProduct.productImage}`" class="input-image-get"/>
+          <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />  
         </div>
         <!-- Paging -->
         <div v-show="!editproductActive" class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
@@ -157,9 +159,6 @@
           </div>
         </div>
       </div>
-
-
-
       <!--  -->
     </div>
     <div class="bg-blue-300" v-show="editproductActive">
@@ -167,10 +166,7 @@
       <div>
         <p>{{editProduct}}</p>
       </div>
-      <a href="#" @click="  (editproductActive = !editproductActive),  (emptyFieldsproduct = false)"
-        class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-        <h3 class="">cancel</h3>
-      </a>
+
       <form>
         <div class="bodystyle-addproduct-form">
 
@@ -192,33 +188,45 @@
             </div>
 
             <div class="defaultinput-box-edit-text-input flex flex-col">
-              <label for="caseDescription"> New Case Descrpition </label> 
-              <textarea class="defaultinput-light-input"
-                id="caseDescription" placeholder="Product Description" v-model="editProduct.caseDescription"></textarea>
+              <label for="caseDescription"> New Case Descrpition </label>
+              <textarea class="defaultinput-light-input" id="caseDescription" placeholder="Product Description"
+                v-model="editProduct.caseDescription"></textarea>
 
             </div>
             <div class="defaultinput-box-edit-text-input flex flex-col">
               <label for="casePrice"> New Case Price </label>
-              <input class="defaultinput-light-input" id="casePrice"
-                type="number" placeholder="New Price" v-model="editProduct.casePrice">
+              <input class="defaultinput-light-input" id="casePrice" type="number" placeholder="New Price"
+                v-model="editProduct.casePrice">
             </div>
           </div>
         </div>
 
         <div class="bodystyle-addproduct-form">
           <h2>Step 2 : Pick models.</h2>
-      
+
         </div>
 
         <div class="bodystyle-addproduct-form">
           <h2>Step 3 : Pick colors.</h2>
 
         </div>
+
+
+        <div class="bodystyle-addproduct-form">
+          <h2>Step 4 : Revive And Save.</h2>
+          <a href="#" @click="  (editproductActive = !editproductActive), editProduct = {}, (emptyFieldsproduct = false)"
+            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+            <h3 class="">cancel</h3>
+          </a>
+
+          <a href="#" @click="  (editproductActive = !editproductActive)"
+            class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+            <h3 class="">Save</h3>
+          </a>
+        </div>
         <br>
 
       </form>
-
-
     </div>
     <div v-show="false">
 
@@ -243,6 +251,7 @@
     data() {
       return {
         // profile information
+        productImage: null,
         editProduct: {
           caseName: "",
           caseDescription: "",
@@ -253,6 +262,7 @@
         showProfile: {
           role: {}
         },
+        imageholderEnable:false,
         editActive: false,
         emptyFields: false,
         editproductActive: false,
@@ -294,6 +304,16 @@
       };
     },
     methods: {
+      async createNewProductImage(event) {
+      this.imageholderEnable = false;
+      const file = event.target;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.productImage = event.target.result;
+        this.imageholderEnable = true;
+      };
+      reader.readAsDataURL(file.files[0]);
+    },
       async getProfile() {
         await axios.get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
           .then((response) => {
