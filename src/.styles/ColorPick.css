@@ -1,5 +1,9 @@
 .colorpick-default{
-    width:100px;height:50px;border:1px solid;
+    @apply w-auto;
+    min-width: 75px;
+    max-width: fit-content;
+    height:50px;
+    border:1px solid;
 }
 
 .colorpick-black{
