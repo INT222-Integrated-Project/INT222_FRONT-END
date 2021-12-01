@@ -3,10 +3,7 @@
     <div>
       <div>Add product</div>
     </div>
-    <div
-      v-show="!invalid.validationPassed"
-      class="default-error-notification-window"
-    >
+    <div v-show="!invalid.validationPassed" class="default-error-notification-window">
       <p v-show="invalid.caseName">♦ Please fill in the product name.</p>
       <p v-show="invalid.casePrice">
         ♦ No negative number on caseprice or you don't have case price.
@@ -27,22 +24,10 @@
 
           <div class="flex flex-col justify-center w-1/12">
             <div>
-              <img
-                v-show="imageholderEnable"
-                :src="productImage"
-                class="input-image-get"
-              />
+              <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
               <button type="button">uploadPhoto</button>
-              <input
-                id="imageHolderDiv"
-                type="file"
-                @change="createNewProductImage"
-                class=""
-              />
+              <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
             </div>
-            <i class="text-sm text-red-500" v-if="this.invalid.incaseimage">
-              Invalid validate Image!
-            </i>
           </div>
 
           <div>
@@ -53,32 +38,16 @@
               Invalid validate Image!
             </i>
             <div>
-              <label for="CaseName" class="text-lg font-medium"
-                >Case Name</label
-              >
-              <input
-                type="text"
-                id="CaseName"
-                v-model="newProduct.caseName"
-                name="CaseName"
-                class="defaultinput-light-input"
-                placeholder="Your new product name."
-              />
+              <label for="CaseName" class="text-lg font-medium">Case Name</label>
+              <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName"
+                class="defaultinput-light-input" placeholder="Your new product name." />
             </div>
             <div>
-              <label for="caseDescription" class="text-lg font-medium"
-                >caseDescription</label
-              >
-              <textarea
-                rows="50"
-                type="text"
-                id="caseDescription"
-                v-model="newProduct.caseDescription"
-                name="caseDescription"
-                class="defaultinput-light-input"
-                placeholder="A description in brief for this product."
-              />
-            </div>
+              <label for="caseDescription" class="text-lg font-medium">caseDescription</label>
+              <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"
+                name="caseDescription" class="defaultinput-light-input"
+                placeholder="A description in brief for this product." />
+              </div>
             <div>
               <label for="casePrice" class="text-lg font-medium"
                 >casePrice</label
@@ -103,31 +72,21 @@
         <div class="bodystyle-addproduct-form">
           <h2>Step 2 : Pick models.</h2>
           <div>Pick at least 1 models that fit to this product.</div>
-          <div
-            class="default-error-notification-window"
-            v-if="newProduct.models.length == 0"
-          >
-            Select at least one compatible model.
-          </div>
 
-          <PaginationComponent
-            pagination="modelsPagination"
-          ></PaginationComponent>
+          <input type="text" placeholder="" v-model="modelSearchName">
+          <button type="button" @click="getModels" class="defaultinput-page-default-button">
+            Search
+          </button>
 
           <div v-for="(item, index) in modelList" :key="index">
             <div class="flex align-middle justify-start items-center">
-              <input
-                type="checkbox"
-                class="defaultinput-pick-model-button"
-                :value="item"
-                v-model="newProduct.models"
-              />
-
+              <input type="checkbox" class="defaultinput-pick-model-button" :value="item" v-model="newProduct.models"/>
               <div>{{ item.brand.caseBrand }} : {{ item.modelName }}</div>
             </div>
           </div>
 
           <div>
+              <!--PLEASE COMPLETE THE CSS-->
             <h2 class="bg-red-400">
               Your product will be available for the following models.
             </h2>
@@ -135,17 +94,18 @@
           <div v-for="(item, index) in newProduct.models" :key="index">
             {{ item.brand.caseBrand }} : {{ item.modelName }}
           </div>
+          <div
+            class="default-error-notification-window"
+            v-if="newProduct.models.length == 0"
+          >
+            Select at least one compatible model.
+          </div>
         </div>
 
         <div class="bodystyle-addproduct-form">
           <h2>Step 3 : Pick colors.</h2>
           <div>Pick at least 1 color that fit to this product.</div>
-          <div
-            class="default-error-notification-window"
-            v-if="newProduct.productColor.length == 0"
-          >
-            Select at least one color.
-          </div>
+          
           <div class="flex justify-between">
             <div v-for="color in colorList" :key="color.codeColor">
               <input
@@ -170,6 +130,13 @@
                 ></div>
               </div>
             </div>
+          </div>
+
+          <div
+            class="default-error-notification-window"
+            v-if="newProduct.productColor.length == 0"
+          >
+            Select at least one color.
           </div>
 
           <div v-for="(color, index) in newProduct.productColor" :key="index">
@@ -225,16 +192,14 @@ import axios from "axios";
 import ProductImage from "@/assets/placeholder.png";
 import { paginationServices } from "@/.services/PaginationServices.js";
 import { prodcutControllerServices } from "@/.services/ProductsControllerServices.js";
-import PaginationComponent from "@/components/.foundation/PaginationComponent.vue";
 
 export default {
   mixins: [paginationServices, prodcutControllerServices],
-  components: {
-    PaginationComponent,
-  },
   data() {
     return {
       test: 0,
+      modelSearchName: "",
+      searchModelName: "Galaxy",
       colorList: [],
       brandList: [],
       modelList: [],
@@ -262,6 +227,9 @@ export default {
   },
   methods: {
     //----------createNewProductImage---------
+    async getModels(){
+      this.models = this.getAllAvailableModels(this.modelSearchName);
+    },
     async createNewProductImage(event) {
       this.imageholderEnable = false;
       const file = event.target;
@@ -274,14 +242,10 @@ export default {
     },
     //---------------FORM VALID---------------
     formValidate() {
-      this.invalid.caseName =
-        this.newProduct.caseName === "" || this.newProduct.caseName.length > 25
-          ? true
-          : false;
+      this.invalid.caseName =this.newProduct.caseName === "" || this.newProduct.caseName.length > 25? true: false;
       //this.invalid.caseDescription = this.newProduct.caseDescription === "" ? true : false;
       this.invalid.casePrice = this.newProduct.casePrice < 0 ? true : false;
-      this.invalid.productColor =
-        this.newProduct.productColor === "" ? true : false;
+      this.invalid.productColor =this.newProduct.productColor === "" ? true : false;
       this.invalid.models = this.newProduct.models === "" ? true : false;
       if (
         this.invalid.caseName ||
@@ -302,16 +266,6 @@ export default {
         .get(`${process.env.VUE_APP_ROOT_API}public/brands`)
         .then((response) => {
           this.brandList = response.data;
-        })
-        .catch((error) => {
-          this.error.pageError = error.response.data.message;
-        });
-    },
-    async getModels() {
-      await axios
-        .get(`${process.env.VUE_APP_ROOT_API}public/models`)
-        .then((response) => {
-          this.modelList = response.data.content;
         })
         .catch((error) => {
           this.error.pageError = error.response.data.message;
