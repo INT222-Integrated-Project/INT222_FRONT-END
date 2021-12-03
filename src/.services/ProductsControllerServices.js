@@ -23,26 +23,28 @@ export const prodcutControllerServices = {
             })
             let formData = new FormData();
             formData.append('newProducts', newProductBlob)
-
-            formData.append('imageFile', newImage)
-
             if (newImage != null) {
-                /*const newImageBlob = new Blob([newImage],{
-                    type: 'image/png'
-                })*/
-
-                //formData.append('File', newImage)
+                formData.append('imageFile', newImage)
             }
             let actionResponse;
-            await axios.post(`${process.env.VUE_APP_ROOT_API}staff/products`, formData
-            ).then(response => {
+            await axios.post(`${process.env.VUE_APP_ROOT_API}staff/products`, formData).then(response => {
                 actionResponse = response.data;
             }).catch(error => {
                 actionResponse = error.response.data;
             })
             return actionResponse;
         },
-        async editProduct(formData) {
+        async editSelectedProduct(newProductEdit, newImage) {
+            const newProductEditBlob = new Blob([JSON.stringify(newProductEdit)], {
+                type: 'application/json'
+            })
+
+            let formData = new FormData;
+            formData.append('incomingproduct', newProductEditBlob)
+            if (newImage != null) {
+                formData.append('imageFile', newImage)
+            }
+
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/product`, formData).then(response => {
                 actionResponse = response.data;
@@ -53,7 +55,6 @@ export const prodcutControllerServices = {
 
         },
         async toggleThisProductOnorOutofStore(comingId) {
-            console.log(comingId)
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/product/onstore?productId=${comingId}`).then(response => {
                 actionResponse = response.data;
@@ -67,7 +68,7 @@ export const prodcutControllerServices = {
 
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/addStock`, {
-                parem: {
+                params: {
                     productColorId: productColorId,
                     quantity: quantity
                 }
@@ -81,6 +82,51 @@ export const prodcutControllerServices = {
         },
         async permanentlyRemoveProduct() {
 
-        }
+        },
+        async getAllAvailableColors() {
+            let result;
+            await axios.get(`${process.env.VUE_APP_ROOT_API}public/colors`).then(response => {
+                result = response.data;
+            }).catch(error => {
+                result = error.response;
+            });
+            return result;
+        },
+        async getAllAvailableBrand() {
+            let result;
+            await axios.get(`${process.env.VUE_APP_ROOT_API}public/brands`).then(response => {
+                result = response.data.content;
+            }).catch(error => {
+                result = error.response;
+            });
+            return result;
+        },
+        async getAllAvailableModels(searchcontent) {
+            let result;
+            await axios
+                .get(`${process.env.VUE_APP_ROOT_API}public/models`, {
+                    params: {
+                        searchname: searchcontent
+                    }
+                })
+                .then((response) => {
+                    result = response.data.content;
+                })
+                .catch((error) => {
+                    result = error.response;
+                });
+            return result;
+        },
+        async getProductInCart(){
+            let result;
+            await axios
+                .get(`${process.env.VUE_APP_ROOT_API}user/myOrders`).then(response => {
+                    result = response.data.content;
+                    console.log(response.data.content)
+                }).catch(error => {
+                    result = error.response;
+                });
+                return result;
+            },
     }
 }

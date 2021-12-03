@@ -1,118 +1,118 @@
 .colorpick-default{
-    width:100px;height:50px;border:1px solid;
-}
+    @apply w-full h-10 rounded-xl flex justify-center items-center
 
+}
 .colorpick-black{
-    background: linear-gradient(0deg, #000000 , #3F3F3F);
-    @apply colorpick-default
+    background-color: #fcfcfc ; @apply colorpick-default
 }
 .colorpick-blue{
-    background: linear-gradient(180deg, #0039ff ,  #0008CE);
-    @apply colorpick-default
+    
+    background-color: #0039ff ; @apply colorpick-default
+   
 }
 .colorpick-lavender{
-    background: linear-gradient(180deg, #713b5e ,  #400A2D);
-    @apply colorpick-default
+    background-color: #713b5e ; @apply colorpick-default
+   
 }
 .colorpick-navy-blue{
-    background: linear-gradient(180deg, #000080 ,  #00004F);
-    @apply colorpick-default
+    background-color: #000080; @apply colorpick-default
+   
 }
 .colorpick-coral{
-    background: linear-gradient(180deg, #ff6666 ,  #CE3535);
-    @apply colorpick-default
+    background-color: #ff6666; @apply colorpick-default
+   
 }
 .colorpick-green{  
-    background: linear-gradient(180deg, #5aa897 ,  #478577);
-    @apply colorpick-default
+   background-color: #5aa897; @apply colorpick-default
+   
 }
 .colorpick-pink{
-    background: linear-gradient(180deg, #ec5578 ,  #BB3547);
-    @apply colorpick-default
+    background-color: #ec5578; @apply colorpick-default
+   
 }
 .colorpick-purple{
-    background: linear-gradient(180deg, #c67ace ,  #400A2D);
-    @apply colorpick-default
+    background-color: #999999; @apply colorpick-default
+   
 }
 .colorpick-red{
-    background: linear-gradient(180deg, #91091e ,  #600000);
-    @apply colorpick-default
+    background-color: #91091e; @apply colorpick-default
+   
 }
 .colorpick-yellow{
-    background: linear-gradient(180deg, #fdfd96 ,  #CCCC65);
-    @apply colorpick-default
+    background-color: #fdfd96; @apply colorpick-default
+   
 }
 .colorpick-gray{
-    background: linear-gradient(180deg, #8d847f ,  #5C534E);
-    @apply colorpick-default
+    background-color: #8d847f; @apply colorpick-default
+   
 }
 .colorpick-charcoal{
-    background: linear-gradient(180deg, #565b5d ,  #252A2C);
-    @apply colorpick-default
+    background-color: #565b5d
+   ; @apply colorpick-default
 }.colorpick-sky-blue{
-    background: linear-gradient(180deg, #89cff0 ,  #589EBF);
-    @apply colorpick-default
+    background-color: #89cff0; @apply colorpick-default
+   
 }.colorpick-white{
-    background: linear-gradient(180deg, #ffffff ,  #C2C3C5);
-    @apply colorpick-default
+    background-color: #fcfcfc; @apply colorpick-default
+   
 }
 /*Background*/
 
-.colorpick-bg-default{
-    
-}
+
 
 .colorpick-bg-black{
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #000000; @apply colorpick-default
+   
 }
 .colorpick-bg-blue{
-    background: linear-gradient(90deg, rgba(0,57,255,1) 0%, rgba(0,57,255,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #0039ff; @apply colorpick-default
+   
 }
 .colorpick-bg-lavender{
-    background: linear-gradient(90deg, rgba(113,59,94,1) 0%, rgba(113,59,94,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #713b5e; @apply colorpick-default
+   
 }
 .colorpick-bg-navy-blue{
-    background: linear-gradient(90deg, rgba(0,0,128,1) 0%, rgba(0,0,128,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #000080; @apply colorpick-default
+   
 }
 .colorpick-bg-coral{
-    background: linear-gradient(90deg, rgba(255,102,102,1) 0%, rgba(255,102,102,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #ff6666; @apply colorpick-default
+   
 }
 .colorpick-bg-green{  
-    background: linear-gradient(90deg, rgba(90,168,151,1) 0%, rgba(90,168,151,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #5aa897; @apply colorpick-default
+   
 }
 .colorpick-bg-pink{
-    background: linear-gradient(90deg, rgba(236,85,120,1) 0%, rgba(236,85,120,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #ec5578; @apply colorpick-default
+   
 }
 .colorpick-bg-purple{
-    background: linear-gradient(90deg, rgba(198,122,206,1) 0%, rgba(198,122,206,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #91091e; @apply colorpick-default
+    
+   
 }
 .colorpick-bg-red{
-    background: linear-gradient(90deg, rgba(145,9,30,1) 0%, rgba(145,9,30,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #91091e; @apply colorpick-default
+   
 }
 .colorpick-bg-yellow{
-    background: linear-gradient(90deg, rgba(253,253,150,1) 0%, rgba(253,253,150,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #fdfd96; @apply colorpick-default
+   
 }
 .colorpick-bg-gray{
-    background: linear-gradient(90deg, rgba(141,132,127,1) 0%, rgba(141,132,127,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #8d847f; @apply colorpick-default
+   
 }
 .colorpick-bg-charcoal{
-    background: linear-gradient(90deg, rgba(86,91,93,1) 0%, rgba(86,91,93,0) 35%);
-    @apply colorpick-bg-default
-}.colorpick-bg-sky-blue{
-    background: linear-gradient(90deg, rgba(137,207,350,1) 0%, rgba(137,207,350,0) 35%);
-    @apply colorpick-bg-default
-}.colorpick-bg-white{
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 35%);
-    @apply colorpick-bg-default
+    background-color: #565b5d; @apply colorpick-default
+   
+}
+.colorpick-bg-sky-blue{
+    background-color: #0039ff; @apply colorpick-default
+   
+}
+.colorpick-bg-white{
+    background-color: #fcfcfc; @apply colorpick-default
 }

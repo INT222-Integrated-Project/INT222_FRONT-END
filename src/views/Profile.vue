@@ -1,10 +1,11 @@
-<template>  
+<template>
   <div class="bg-header size-card-main-profile  ">
     <div class=" flex flex-col sm:flex-row  ">
-    <!-- Profile information -->
+      <!-- Profile information -->
       <div class="size-card flex sm:w-2/6 sm:m-6 p-3 bg-white ">
         <div class="size-card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU"
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtzCieUrB9F073CA4Yo903Lq5TokRS-53Jhm8NFhvPSS6YV4n853Pbhl6aqWXUp9gvj4E&usqp=CAU"
             class="sm:w-full w-full mx-auto" />
           <div>
             <p class="font-bold text-lg">
@@ -71,7 +72,7 @@
                 <p class="text-gray-500 m-1 text-sm"> Last Update : {{ this.showProfile.address}}</p>
                 <input v-model="editFrom.address" name="address" placeholder="Address" required class="input-text" />
                 <div class="flex flex-row m-2  ">
-                  <a href="#" @click="  (editActive = !editActive),  (emptyFields = false)"
+                  <a href="#" @click="  (editActive = !editActive), imageholderEnable=false, (emptyFields = false)"
                     class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
                     <h3 class="">cancel</h3>
                   </a>
@@ -84,13 +85,17 @@
         </div>
       </div>
 
-<!-- My Product Management -->
-      <div  class="container  sm:m-6 p-3  sm:w-4/6    bg-blue-300 sm:items-center  " style="font-family: 'Muli', sans-serif;">
-          <p class="text-4xl text-center my-5  text-white font-semibold">My Product</p>
-          <div v-if="!editproductActive" class="flex flex-wrap  sm:mx-2  mx-4 justify-center ">
-            <div  v-for="(myProduct,index) in ShowProductByuser" :key="index" :value="myProduct" class="m-2 w-5/6 flex justify-center items-center bg-black sm:w-1/3 md:w-2/6 sm:my-4  rounded-lg   hover:shadow-xl  ">
+      <!-- My Product Management -->
+      <div class="container  sm:m-6 p-3  sm:w-4/6    bg-blue-300 sm:items-center  "
+        style="font-family: 'Muli', sans-serif;">
+        <p class="text-4xl text-center my-5  text-white font-semibold">My Product</p>
+        <div v-if="!editproductActive" class="flex flex-wrap  sm:mx-2  mx-4 justify-center ">
+          <div v-for="(myProduct,index) in ShowProductByuser" :key="index" :value="myProduct"
+            class="m-2 w-5/6 flex justify-center items-center bg-black sm:w-1/3 md:w-2/6 sm:my-4  rounded-lg   hover:shadow-xl  ">
             <div class="card-two ">
-              <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" />
+              <img
+                src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg"
+                alt="" class="block rounded-full" />
               <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-28 bg-purple-400 h-24 flex-col ">
                 <div class="">
                   <h5 class="text-white sm:text-lg  md:text-sm text-center  font-bold leading-none">
@@ -98,68 +103,247 @@
                   </h5>
                 </div>
                 <div class="flex flex-row ">
-                  <button @click="(editproductActive = true),  (emptyFieldsproduct = false)"  class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
-                  <button @click="deleteCase(myProduct.caseId)" class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-                        Delete
-                  </button>  
+
+                  <button @click="(editproductActive = true,editProduct = myProduct), (emptyFieldsproduct = false)"
+                    class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
+
+                  <button @click="deleteCase(myProduct.caseId)"
+                    class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div v-else class="flex justify-center item-center bg-purple-300 p-5 rounded-xl">
+       
+        <form @submit.prevent="formValidate">
+        <div class="flex flex-col border-2 rounded-xl m-2 p-5 ">
+          <div class="flex flex-row" v-if="!modelActive ">
+            <div class="w-2/6 flex justify-center items-center">
+              <div class="w-3/5 flex flex-col relative overflow-hidden   ">
+               <img v-show="!imageholderEnable" :src="`public/productImage/${editProduct.productImage}`"
+            class="input-image-get" />
+          <!-- <img v-show="imageholderEnable" :src="productImage" class="input-image-get" /> -->
+                <img v-show="imageholderEnable" :src="productImage" class="" />
+                <button type="button" class="text-lg font-medium">uploadPhoto</button>
+                <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="" />
+              </div>
+            </div>
+            <div class="w-4/6">
+              <div class="flex">
+                <div class="flex-1">
+                  <h3 class="text-lg font-medium"> New Case Name </h3>
+                  <input class="defaultinput-light-input" id="caseName" type="text" placeholder="Product New Name"
+                    v-model="editProduct.caseName">
+                </div>
+                <div class="flex-1">
+                  <label for="caseDescription" class="text-lg font-medium"> New Case Descrpition </label>
+                  <textarea class="defaultinput-light-input" id="caseDescription" placeholder="Product Description"
+                    v-model="editProduct.caseDescription"></textarea>
+                </div>
+              </div>
+              <div class="">
+                <label for="casePrice" class="text-lg font-medium"> New Case Price </label>
+                <input class="defaultinput-light-input" id="casePrice" type="number" placeholder="New Price"
+                  v-model="editProduct.casePrice">
+              </div>
+              <button @click="(modelActive = true),  (emptyFields = false)" class="cancle-button" >Choose Models and Colors</button>
+              <div class="flex flex-row mt-5 justify-end" >
+                <div>
+                  <button v-show="!invalid.validationPassed" type="submit" class="defaultinput-page-default-button">
+                    Save
+                  </button>
+                </div>
+                <div>
+                  <button href="#"  @click="  (editproductActive = !editproductActive), imageholderEnable=false, (emptyFieldsproduct = false)" class="defaultinput-page-default-button-two">
+                  Cancel
+                  </button>
+                </div>
+                <div v-show="invalid.validationPassed"
+                  :class="error.showWindow=='Saving...'?'default-inprogress-notification-window':'Product is sucessfully updated'?'default-success-notification-window':'default-error-notification-window'">
+                  {{error.showWindow}}
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div v-else>
+            <!-- model -->
+            <div  class="bodystyle-addproduct-form  ">
+              <h2> Pick models.</h2>
+              <div class="flex flex-row">
+              <input type="text" placeholder="" v-model="modelSearchName">
+              <button type="button" @click="getModelList" class="defaultinput-page-default-button">
+                Search
+              </button>
+              </div>
+              <div class="overflow-scroll h-44">
+              <div v-for="(item, index) in modelList" :key="index" >
+                <div class="flex align-middle justify-start items-center">
+                  <input type="checkbox" class="defaultinput-pick-model-button" :value="item"
+                    v-model="editProduct.models" />
+                  <div>{{ item.brand.caseBrand }} : {{ item.modelName }}</div>
+                </div>
+              </div>
+              </div>
+
+              <div>
+                <h2 class="bg-red-400">
+                  Your product will be available for the following models.
+                </h2>
+              </div>
+              <div v-for="(item, index) in editProduct.models" :key="index">
+                {{ item.brand.caseBrand }} : {{ item.modelName }}
+              </div>
+              <div class="default-error-notification-window" v-if="editProduct.models.length == 0">
+                Select at least one compatible model.
+              </div>
+            </div>
+            <!-- Colors -->
+            <div  class="bodystyle-addproduct-form">
+              <h2>Pick colors.</h2>
+              <div class="flex justify-between">
+
+                <div v-for="color in colorList" :key="color.codeColor">
+                  <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"
+                    v-model="editProduct.productColor" />
+                  <label @click="color.selected = !color.selected" :for="color.caseColor" :class="
+                      color.caseColor
+                        ? 'colorpick-' + color.caseColor.toLowerCase()
+                        : ''
+                    ">
+                  </label>
+                  <div class="flex align-middle justify-start items-center">
+                    <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
+                  </div>
+
+                  <div class="default-error-notification-window" v-if="editProduct.productColor.length == 0">
+                    Select at least one color.
+                  </div>
+                </div>
+              </div>
+              <div v-for="(color, index) in editProduct.productColor" :key="index">
+                <div :class="
+                    'colorpick-bg-' +
+                    color.color.caseColor.toLowerCase() +
+                    ' flex justify-start items-center'
+                  ">
+                  <button type="button" class="defaultinput-pick-model-button"
+                    @click="color.quantity = this.decreaseStock(color.quantity)">
+                    -
+                  </button>
+                  <input class="defaultinput-light-input-number" type="number" placeholder="Quantity"
+                    v-model="editProduct.productColor[index].quantity" />
+                  <button type="button" class="defaultinput-pick-model-button"
+                    @click="color.quantity = this.increaseStock(color.quantity)">
+                    +
+                  </button>
+                  <div>Quantity : {{ color.quantity }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center items-center">
+                <button   @click="  (modelActive = !modelActive)" class="summit-button  ">choose</button>
             </div>
           </div>
 
-          <div v-else class="flex flex-wrap  sm:mx-2  mx-4 justify-center bg-blue-500 " >
-            <a href="#" @click="  (editproductActive = !editproductActive),  (emptyFieldsproduct = false)"
-                    class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
-                    <h3 class="">cancel</h3>
-                  </a>
-          </div>
-          <!-- Paging -->
-            <div class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
-              <div class="flex flex-row">
-                <div class="">
-                  <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage - 1)" v-if="paging.currentPage != 1">
-                  <i class="material-icons"> keyboard_arrow_left </i>
-                  </button>
-                  <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
-                    <i class="material-icons"> keyboard_arrow_left </i>
-                  </button>
-                </div>
-                <div v-for="index in this.paging.arrayofCurrentSetofPage" :key="index" class="">
-                  <button class="flex default-page-button-show" v-on:click="changePage(index)" v-if="index != paging.currentPage">
-                    {{index}}
-                  </button>
-                  <button class="flex default-page-button-current-show" v-on:click="changePage(index)" v-else>
-                    {{index}}
-                  </button>
-                </div>
-                <div >
-                <button class="flex default-page-button-show " style="width: 30px;" v-on:click="changePage(paging.currentPage + 1)" v-if="paging.currentPage != paging.numberOfPage">
-                  <i class="material-icons"> keyboard_arrow_right </i>
-                </button>
-                <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
-                  <i class="material-icons"> keyboard_arrow_right </i>
-                </button>
-                </div>
-            </div>
-          </div> 
+        
         </div>
+      </form>
       
-<!--  -->
+         
+        </div>
+        <!-- Paging -->
+        <div v-show="!editproductActive" class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
+          <div class="flex flex-row">
+            <div class="">
+              <button class="flex default-page-button-show " style="width: 30px;"
+                v-on:click="changePage(paging.currentPage - 1)" v-if="paging.currentPage != 1">
+                <i class="material-icons"> keyboard_arrow_left </i>
+              </button>
+              <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
+                <i class="material-icons"> keyboard_arrow_left </i>
+              </button>
+            </div>
+            <div v-for="index in this.paging.arrayofCurrentSetofPage" :key="index" class="">
+              <button class="flex default-page-button-show" v-on:click="changePage(index)"
+                v-if="index != paging.currentPage">
+                {{index}}
+              </button>
+              <button class="flex default-page-button-current-show" v-on:click="changePage(index)" v-else>
+                {{index}}
+              </button>
+            </div>
+            <div>
+              <button class="flex default-page-button-show " style="width: 30px;"
+                v-on:click="changePage(paging.currentPage + 1)" v-if="paging.currentPage != paging.numberOfPage">
+                <i class="material-icons"> keyboard_arrow_right </i>
+              </button>
+              <button class="flex default-page-button-current-show " style="width: 30px;" v-else>
+                <i class="material-icons"> keyboard_arrow_right </i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+    <!-- <div class="bg-blue-300" v-show="editproductActive">
+      <div>Edit your product : {{editProduct.caseName}}</div>
+      <div>
+        <p>{{editProduct}}</p>
+      </div>
+
+      
+    </div> -->
+    <div v-show="false">
+
+      <StaffOrderList></StaffOrderList>
+      <StaffProductList></StaffProductList>
+
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
-export default {
-  components: {},
+  import axios from "axios";
+  import {
+    mapGetters
+  } from 'vuex';
+  import StaffProductList from '@/components/staffs/StaffProductList.vue'
+  import StaffOrderList from '@/components/staffs/StaffOrderList.vue'
+  import {
+    prodcutControllerServices
+  } from "@/.services/ProductsControllerServices.js";
+  export default {
+    mixins: [prodcutControllerServices],
+    components: {
+      StaffProductList,
+      StaffOrderList
+    },
     data() {
       return {
         // profile information
+        modelSearchName: "",
+        productImage: null,
+        editProduct: {
+          caseName: "",
+          caseDescription: "",
+          casePrice: "",
+          productColor: [],
+          models: [],
+        },
+        modelList: [],
+        colorList: [],
         showProfile: {
           role: {}
         },
+        imageholderEnable: false,
+        modelActive:false,
         editActive: false,
+        colorActive:  false,
         emptyFields: false,
         editproductActive: false,
         emptyFieldsproduct: false,
@@ -171,18 +355,24 @@ export default {
           email: "",
         },
         invalid: {
+          validationPassed: false,
           invalidfirstName: false,
           invalidlastName: false,
           invalidphone: false,
           invalidaddress: false,
           invalidemail: false,
+          models: false,
+          productColor: false,
+          casePrice: false,
+          caseName: false,
+          enableProductSubmitButton: true
         },
         error: {
           message: "",
           showWindow: ""
         },
         // Flow list Product and page
-        ShowProductByuser:{},
+        ShowProductByuser: [],
         paging: {
           currentPage: 1,
           numberOfPage: 0,
@@ -191,8 +381,8 @@ export default {
         },
         totalElements: 0,
         gui: {
-        edittingWindow: false,
-        errorWindow: false,
+          edittingWindow: false,
+          errorWindow: false,
         },
         exception: {
           message: ""
@@ -200,6 +390,73 @@ export default {
       };
     },
     methods: {
+      async formValidate() {
+        this.invalid.caseName = this.editProduct.caseName === "" || this.editProduct.caseName.length > 25 ? true :
+          false;
+        //this.invalid.caseDescription = this.newProduct.caseDescription === "" ? true : false;
+        this.invalid.casePrice = this.editProduct.casePrice < 0 ? true : false;
+        this.invalid.productColor = this.editProduct.productColor === "" ? true : false;
+        this.invalid.models = this.editProduct.models === "" ? true : false;
+        if (
+          this.invalid.caseName ||
+          this.invalid.casePrice ||
+          this.invalid.productColor ||
+          this.invalid.models
+        ) {
+          this.invalid.validationPassed = false;
+        } else {
+          this.invalid.validationPassed = true;
+          this.invalid.enableProductSubmitButton = false;
+          this.error.showWindow = "Saving..."
+          let response = await this.editSelectedProduct(this.editProduct, document.getElementById('imageHolderDiv')
+            .files[0]);
+          if (response.exceptionCode) {
+            switch (response.exceptionCode) {
+              case 2006:
+                this.error.showWindow = "This product name is already taken by someone.";
+                break;
+              default:
+                this.error.showWindow = "This is not an error from the API,"
+                break;
+            }
+            setTimeout(() => {
+              this.invalid.enableProductSubmitButton = true;
+              this.invalid.validationPassed = false;
+            }, 5000);
+          } else {
+            this.error.showWindow = "Product is sucessfully updated"
+            console.log(response);
+            setTimeout(() => {
+              this.editproductActive = false;
+              this.invalid.enableProductSubmitButton = true;
+              this.invalid.validationPassed = false;
+            }, 2000);
+            console.log(this.ShowProductByuser);
+            for (let index = 0; index < this.ShowProductByuser.length; index++) {
+              if (response.caseID == this.ShowProductByuser[index].caseID) {
+                this.ShowProductByuser[index] = response;
+                break;
+              }
+            }
+          }
+        }
+      },
+      async getModelList() {
+        this.modelList = await this.getAllAvailableModels(this.modelSearchName)
+      },
+      async getColorList() {
+        this.colorList = await this.getAllAvailableColors();
+      },
+      async createNewProductImage(event) {
+        this.imageholderEnable = false;
+        const file = event.target;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          this.productImage = event.target.result;
+          this.imageholderEnable = true;
+        };
+        reader.readAsDataURL(file.files[0]);
+      },
       async getProfile() {
         await axios.get(`${process.env.VUE_APP_ROOT_API}user/myprofile`)
           .then((response) => {
@@ -278,9 +535,9 @@ export default {
       async getProductUser() {
         let errorcode = 0;
         let response = await axios.get(`${process.env.VUE_APP_ROOT_API}staff/myshop`, {
-          params: { 
+          params: {
             page: this.paging.currentPage - 1,
-            size: 3, 
+            size: 3,
           }
         }).catch(error => {
           errorcode = error.response.data.exceptionCode;
@@ -294,16 +551,16 @@ export default {
         } else {
           this.exception.message = "[ Not found ] "
           this.gui.errorWindow = true;
-        }   
-      },
-      async deleteCase(id){
-      await axios.delete(`${process.env.VUE_APP_ROOT_API}api/products/${id}`)
-      for(let i = 0; i< this.ShowProductByuser.length;i++ ){
-        if(this.ShowProductByuser[i].caseId == id){
-          this.ShowProductByuser.splice(i,1)
         }
-      }
-    },
+      },
+      async deleteCase(id) {
+        await axios.delete(`${process.env.VUE_APP_ROOT_API}api/products/${id}`)
+        for (let i = 0; i < this.ShowProductByuser.length; i++) {
+          if (this.ShowProductByuser[i].caseId == id) {
+            this.ShowProductByuser.splice(i, 1)
+          }
+        }
+      },
       async changePage(pageNumber) {
         this.paging.currentPage = pageNumber;
         this.createPagingBar(pageNumber);
@@ -317,25 +574,35 @@ export default {
               this.paging.arrayofCurrentSetofPage[index] = this.paging.highestMove - 5 + index;
             }
           } else if (this.paging.lowestMove <= pageNumber) {
-              for (let index = 0; index < 11; index++) {
-                this.paging.arrayofCurrentSetofPage[index] = pageNumber - 5 + index;
-              }
-            } else {
-              for (let index = 0; index < 11; index++) {
-                this.paging.arrayofCurrentSetofPage[index] = index + 1;
-              }
+            for (let index = 0; index < 11; index++) {
+              this.paging.arrayofCurrentSetofPage[index] = pageNumber - 5 + index;
             }
-        }else {
-            this.paging.arrayofCurrentSetofPage = [];
-              for (let index = 1; index <= this.paging.numberOfPage; index++) {
-                this.paging.arrayofCurrentSetofPage.push(index);
-              }
+          } else {
+            for (let index = 0; index < 11; index++) {
+              this.paging.arrayofCurrentSetofPage[index] = index + 1;
+            }
+          }
+        } else {
+          this.paging.arrayofCurrentSetofPage = [];
+          for (let index = 1; index <= this.paging.numberOfPage; index++) {
+            this.paging.arrayofCurrentSetofPage.push(index);
+          }
         }
-      },      
+      },
+    },
+    computed: {
+      ...mapGetters({
+        authenticated: 'authentication/authenticated',
+        user: 'authentication/user',
+        roleName: 'authentication/roleName'
+      })
     },
     async created() {
       await this.getProfile();
       await this.getProductUser();
+      await this.getModelList();
+      await this.getColorList();
+
       this.createPagingBar(1);
     },
   };
