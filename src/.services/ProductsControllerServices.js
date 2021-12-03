@@ -116,6 +116,17 @@ export const prodcutControllerServices = {
                     result = error.response;
                 });
             return result;
-        }
+        },
+        async getProductInCart(){
+            let result;
+            await axios
+                .get(`${process.env.VUE_APP_ROOT_API}user/myOrders`).then(response => {
+                    result = response.data.content;
+                    console.log(response.data.content)
+                }).catch(error => {
+                    result = error.response;
+                });
+                return result;
+            },
     }
 }
