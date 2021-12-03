@@ -15,14 +15,13 @@
         <div v-if="productCart.length> 0">
           <div class="overflow-scroll h-72" >
             <div class="flex justify-center w-full  border-gray-100  " v-for="product in productCart" :key="product">
-              {{product}}
-              <div class=" font-semibold text-gray-600  uppercase w-2/5  ">
-                <div class="flex justify-start items-center flex-row">
-                  <img :src="product.image" :alt="product.caseName" class="h-36  " />
+              <div class=" font-semibold text-gray-600  uppercase w-2/5 " v-for="pro in product.orderDetails" :key="pro">
+                <div class="flex justify-start items-center flex-row" v-for="prod in pro.productColorToProducts" :key="prod" >
+                  <img :src=" 'https://naturegecko.com/public/productImage/' + pro.productColorToProducts.productImage"/>
                   <div class="flex flex-col">
-                    <h2 class="font-bold ">{{ product.caseName }}</h2>
-                    <h2 class="text-red-500 ">{{ product.description }}</h2>
-                    <!-- <a @click="removeItem(index)"  href="#" class="font-semibold hover:text-red-500 text-gray-500 ">Remove</a> -->
+                    <h2 class="font-bold ">{{pro.productColorToProducts.products.caseName}}</h2>
+                    <h2 class="text-red-500 ">{{ pro.productColorToProducts.products.description }}</h2>
+                    <a @click="removeItem(index)"  href="#" class="font-semibold hover:text-red-500 text-gray-500 ">Remove</a>
                   </div>
                 </div>
               </div>

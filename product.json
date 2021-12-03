@@ -1,0 +1,70 @@
+{
+    "orderID": 42,
+    "userNameID": 43,
+    "dateTime": "2021-12-02 20:08:24",
+    "allPrice": 2000,
+    "paymentDate": null,
+    "orderDetails": [
+        {
+            "orderdetailID": 58,
+            "quantityOrder": 2,
+            "unitPrice": 1000,
+            "productcolorID": 37,
+            "productColorToProducts": {
+                "productcolorID": 37,
+                "products": {
+                    "caseID": 26,
+                    "caseName": "HOLYHOLYHOLYHOLY Aries Moross- Sticker",
+                    "caseDescription": "Impact Case",
+                    "casePrice": 1000,
+                    "usernameID": 44,
+                    "caseDate": "2021-11-27",
+                    "models": [
+                        {
+                            "modelID": 11,
+                            "modelName": "iPhone 12 Pro Max",
+                            "brand": {
+                                "codeBrand": 1,
+                                "caseBrand": "iPhone"
+                            }
+                        },
+                        {
+                            "modelID": 19,
+                            "modelName": "iPhone Xs",
+                            "brand": {
+                                "codeBrand": 1,
+                                "caseBrand": "iPhone"
+                            }
+                        }
+                    ],
+                    "productImage": "2021-11-27TGAOSGHLBM.png",
+                    "isOnStore": true
+                },
+                "color": {
+                    "codeColor": 12,
+                    "caseColor": "black"
+                },
+                "imageCase": null,
+                "quantity": 49
+            }
+        }
+    ],
+    "orderStatus": {
+        "statusID": 1,
+        "status": "To Pay"
+    },
+    "user": {
+        "userNameID": 43,
+        "userName": "user053",
+        "firstName": "Paweena",
+        "lastName": "Thongyan",
+        "email": "Pin8243@gmail.com",
+        "phoneNumber": "085362561",
+        "profileImage": null,
+        "address": "nakhon phanom thailand 48000",
+        "role": {
+            "roleID": 2,
+            "roleName": "admin"
+        }
+    }
+}

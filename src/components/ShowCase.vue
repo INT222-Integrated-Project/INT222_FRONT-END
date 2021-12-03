@@ -13,7 +13,8 @@
       <div  class="flex flex-wrap  sm:mx-4  mx-4 justify-center">
         <div v-for="(product,index) in ShowCase" :key="index" :value="product" :product="product" class="my-1 px-1 w-5/6 flex justify-center items-center sm:w-1/3 sm:my-4 sm:px-4 rounded-lg   hover:shadow-xl  ">
         <div class="card-two ">
-          <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" />
+          <img :src=" 'https://naturegecko.com/public/productImage/' + product.imageCase"/>
+          <!-- <img src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg" alt="" class="block rounded-full" /> -->
           <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-52 bg-purple-400 h-44 flex-col ">
             <div>
               <h5 class="text-white sm:text-lg text-md  font-bold leading-none">
