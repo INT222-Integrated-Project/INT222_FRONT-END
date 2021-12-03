@@ -90,15 +90,16 @@
                   to cart</button>
               </div>
             </div>
+            <div v-show="this.orderNotification.errorMessage != ''" class="mx-2 default-error-notification-window">
+              {{this.orderNotification.errorMessage}}
+            </div>
+            <div v-show="this.orderNotification.successOrder" class="mx-2 default-success-notification-window flex content-center justify-center">
+              <div class="">successfully ordered!.<br/>Check it out at your profile!</div>
+              <button class="defaultinput-button-small-green" @click="closeOrderSuccessNotification">OK</button>
+            </div>
           </form>
 
-          <div v-show="this.orderNotification.errorMessage != ''" class="default-error-notification-window">
-            {{this.orderNotification.errorMessage}}
-          </div>
-          <div v-show="this.orderNotification.successOrder" class="default-success-notification-window flex">
-            <div class="w-4/5">successfully ordered! You can check your order in your profile.</div>
-            <button class="defaultinput-button-small-green" @click="closeOrderSuccessNotification">OK</button>
-          </div>
+
 
         </div>
 
@@ -143,9 +144,9 @@
         let formData = new FormData()
         formData.append('productColorId', this.productCart.productColorId);
         formData.append('quantity', this.productCart.quantity);
-        await axios.post(`${process.env.VUE_APP_ROOT_API}user/purchase`, formData).then(function () {
+        await axios.post(`${process.env.VUE_APP_ROOT_API}user/purchase`, formData).then((respones) => {
             errorCode = 0;
-            alert("Succesfully ordered!")
+            console.log(respones)
           })
           .catch(error => {
             errorCode = error.response.data.exceptionCode;
@@ -162,6 +163,9 @@
               break;
             case 6002:
               this.orderNotification.errorMessage = "Not enough good for sell.";
+              break;
+            case 6005:
+              this.orderNotification.errorMessage = "You cannot buy your own product.";
               break;
             default:
               this.orderNotification.errorMessage = "An error occured at the API.";
