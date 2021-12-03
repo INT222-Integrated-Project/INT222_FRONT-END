@@ -130,7 +130,8 @@ export default {
           size: 6, 
           searchname: this.searchName
         }
-      }).catch(error => {
+      })
+      .catch(error => {
         errorcode = error.response.data.exceptionCode;
       })
       if (errorcode == 0) {

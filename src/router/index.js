@@ -5,7 +5,6 @@ import {
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
-import AddEdit from '../views/AddandEditProduct.vue'
 import Shipping from '../views/Shipping.vue'
 import Contact from '../views/Contact.vue'
 
@@ -76,19 +75,6 @@ const routes = [
     }
   },
   //Staff only sector
-  {
-    path: '/addEdit',
-    name: 'AddEdit',
-    component: AddEdit,
-    beforeEnter: (to, from, next) => {
-      if (!(store.getters['authentication/authenticated'] && (store.getters['authentication/roleName'] == "admin" || store.getters['authentication/roleName'] == "staff"))) {
-        return next({
-          name: 'Home'
-        })
-      }
-      next()
-    }
-  },
   {
     path: '/addproduct',
     name: 'AddProduct',

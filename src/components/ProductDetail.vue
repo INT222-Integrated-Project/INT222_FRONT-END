@@ -5,14 +5,17 @@
         <i class="material-icons w-16  text-center">keyboard_backspace</i>
       </button>
     </div>
-    <div class=" sm:m-  flex justify-center item-center sm:w-11/12 " style="font-family: 'Muli', sans-serif;">
-      <div class="flex sm:mx-a16  mx-4 ">
+
+    <div class="  flex justify-center item-center sm:w-full " style="font-family: 'Muli', sans-serif;">
+      <div  class="w-10/12 ">
+
         <div class="card-two ">
 
           <form @submit.prevent="addtocard">
             <div class="flex justify-end items-end absolute ">
               <h2 class="text-lg text-gray-400 font-light  mx-3   "> {{ product.caseDate }}</h2>
             </div>
+
 
             <img
               src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg"
@@ -30,23 +33,22 @@
               </div>
 
               <div class="flex flex-row">
-                <div class="flex-1 flex-col">
-                  <p class="text-lg text-gray font-light ">Description </p>
-                  <div class="text-lg text-black border-2 border-gray-800 w-full">
-                    <p class="text-lg text-gray font-light flex-1">{{ product.caseDescription }}</p>
-                  </div>
-                </div>
-                <div class="flex-1  ">
-                  <p class="text-lg text-black font-light  ">Color</p>
-                  <div class="flex flex-row items-center justify-center space-x-3   ">
-                    <select :value="c" id="productColor" name="productColor" v-model="productCart.productColorId">
-                      <option disabled value="Colors">Colors</option>
-                      <option v-for="c in product.productColor" :key="c" selected> {{c.productcolorID}}</option>
-                      <!-- class="flex rounded-full bg-black h-8 w-8 shadow-inner " :class=" c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> -->
-                      <!-- @click="c.checked = !c.checked" :for="c.color.caseColor"
-                            <span v-show="c.checked" class="flex mx-auto items-center material-icons text-black">done</span> -->
+                <p class="text-lg text-gray font-light ">Description </p> 
+                 <div>
+                  <p class="text-lg text-gray font-light ml-3">{{ product.caseDescription }}</p>
+              </div>
 
-                    </select>
+              </div>
+
+            <div class="flex flex-row">
+                <div class="flex-1  ">
+                  <p  class="text-lg text-black font-light  ">Color</p>
+                <div class="flex flex-row items-center justify-center    ">
+                  <select  :value="c" id="productColor" name="productColor" v-model="productCart.productColorId" class="bg-gray-100 rounded py-2 mb-4 w-full h-10 flex mx-2 items-center text-center ">
+                    <option disabled value="Colors" >Colors</option>
+                    <option v-for="c in product.productColor"  :key="c" selected 
+                        :class=" c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' ? 'text-caseCol-'+ c.color.caseColor.toLowerCase(): ''  "   > {{c.productcolorID}}</option>
+                  </select>
                   </div>
 
                 </div>
@@ -64,6 +66,7 @@
                   <input type="number" placeholder="Quantity" min="1" step="1" max="" v-model="productCart.quantity"
                     class="bg-gray-100 rounded py-2 mb-4 w-full h-10 flex  items-center text-center " />
                 </div>
+
               </div>
 
 
@@ -100,21 +103,20 @@
 
         </div>
 
+          {{productCart}}
 
       </div>
     </div>
-  </div>
+    
+  </div>  
 
 </template>
 <script>
   import axios from "axios"
   export default {
     emits: ["close"],
-    props: [
-      "product",
-    ],
+    props: [ "product",],
     components: {
-
     },
     data() {
       return {
@@ -129,6 +131,7 @@
         }
       };
     },
+
     methods: {
       closeCurrentModal() {
         this.$emit("close", true);
