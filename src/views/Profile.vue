@@ -107,7 +107,7 @@
                   <button @click="(editproductActive = true,editProduct = myProduct), (emptyFieldsproduct = false)"
                     class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
 
-                  <button @click="deleteCase(myProduct.caseId)"
+                  <button @click="deleteCase(myProduct.caseID)"
                     class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none ">
                     Delete
                   </button>
@@ -116,6 +116,8 @@
             </div>
           </div>
         </div>
+
+
 
         <div v-else class="flex flex-wrap  sm:mx-2  mx-4 justify-center bg-blue-500 ">
           <div>Edit your product : {{editProduct.caseName}}</div>
@@ -128,6 +130,12 @@
             class="input-image-get" />
           <img v-show="imageholderEnable" :src="productImage" class="input-image-get" />
         </div>
+
+        <div v-show="deleteError.issuccess" class="default-success-notification-window">
+          {{deleteError.message}}</div>
+        <div v-show="deleteError.hasException"
+          :class="!deleteError.issuccess?'default-error-notification-window':'default-success-notification-window'">
+          {{deleteError.message}}</div>
         <!-- Paging -->
         <div v-show="!editproductActive" class="flex align-middle justify-center items-center sm:flex-row flex-col  ">
           <div class="flex flex-row">
@@ -165,9 +173,6 @@
     </div>
     <div class="bg-blue-300" v-show="editproductActive">
       <div>Edit your product : {{editProduct.caseName}}</div>
-      <div>
-        <p>{{editProduct}}</p>
-      </div>
 
       <form @submit.prevent="formValidate">
         <div class="bodystyle-addproduct-form">
@@ -241,10 +246,7 @@
               <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"
                 v-model="editProduct.productColor" />
               <label @click="color.selected = !color.selected" :for="color.caseColor" :class="
-                  color.caseColor
-                    ? 'colorpick-' + color.caseColor.toLowerCase()
-                    : ''
-                ">
+                  color.caseColor ? 'colorpick-' + color.caseColor.toLowerCase() : ''">
               </label>
               <div class="flex align-middle justify-start items-center">
                 <div :class="'colorpick-' + color.caseColor.toLowerCase()"></div>
@@ -256,11 +258,7 @@
             </div>
           </div>
           <div v-for="(color, index) in editProduct.productColor" :key="index">
-            <div :class="
-                'colorpick-bg-' +
-                color.color.caseColor.toLowerCase() +
-                ' flex justify-start items-center'
-              ">
+            <div :class="'colorpick-bg-' + color.color.caseColor.toLowerCase() +' flex justify-start items-center'">
               <button type="button" class="defaultinput-pick-model-button"
                 @click="color.quantity = this.decreaseStock(color.quantity)">
                 -
@@ -291,6 +289,7 @@
 
       </form>
     </div>
+    <MyCaseOrder></MyCaseOrder>
     <div v-show="false">
 
       <StaffOrderList></StaffOrderList>
@@ -306,17 +305,23 @@
   } from 'vuex';
   import StaffProductList from '@/components/staffs/StaffProductList.vue'
   import StaffOrderList from '@/components/staffs/StaffOrderList.vue'
-  import {
-    prodcutControllerServices
-  } from "@/.services/ProductsControllerServices.js";
+  import MyCaseOrder from '@/components/users/MyCaseOrder.vue'
+  import { prodcutControllerServices } from "@/.services/ProductsControllerServices.js";
   export default {
     mixins: [prodcutControllerServices],
     components: {
       StaffProductList,
-      StaffOrderList
+      StaffOrderList,
+      MyCaseOrder
     },
     data() {
       return {
+        deleteError: {
+          issuccess: false,
+          hasException: false,
+          message: ""
+        },
+        limitation: [],
         // profile information
         modelSearchName: "",
         productImage: null,
@@ -400,7 +405,7 @@
           this.error.showWindow = "Saving..."
           let response = await this.editSelectedProduct(this.editProduct, document.getElementById('imageHolderDiv')
             .files[0]);
-          if (response.exceptionCode) {
+          if (response.exceptionCode != 0) {
             switch (response.exceptionCode) {
               case 2006:
                 this.error.showWindow = "This product name is already taken by someone.";
@@ -420,7 +425,7 @@
               this.editproductActive = false;
               this.invalid.enableProductSubmitButton = true;
               this.invalid.validationPassed = false;
-            }, 2000);
+            }, 5000);
             console.log(this.ShowProductByuser);
             for (let index = 0; index < this.ShowProductByuser.length; index++) {
               if (response.caseID == this.ShowProductByuser[index].caseID) {
@@ -527,7 +532,7 @@
         let response = await axios.get(`${process.env.VUE_APP_ROOT_API}staff/myshop`, {
           params: {
             page: this.paging.currentPage - 1,
-            size: 3,
+            size: 4,
           }
         }).catch(error => {
           errorcode = error.response.data.exceptionCode;
@@ -544,11 +549,30 @@
         }
       },
       async deleteCase(id) {
-        await axios.delete(`${process.env.VUE_APP_ROOT_API}api/products/${id}`)
-        for (let i = 0; i < this.ShowProductByuser.length; i++) {
-          if (this.ShowProductByuser[i].caseId == id) {
-            this.ShowProductByuser.splice(i, 1)
+        let response = await this.permanentlyRemoveProduct(id);
+        this.getProductUser();
+
+        console.log(response)
+
+        if (!response.success) {
+          this.deleteError.hasException = true;
+          switch (response.exceptionCode) {
+            case 2008:
+              this.deleteError.message = "This product has at least one orders coming."
+              break;
+            default:
+              this.deleteError.message = "Some error occures"
+              break;
           }
+          setTimeout(() => {
+            this.deleteError.hasException = false;
+          }, 5000);
+        } else {
+          this.deleteError.issuccess == true;
+          this.deleteError.message = "Product is deleted.";
+          setTimeout(() => {
+            this.deleteError.issuccess = false;
+          }, 5000);
         }
       },
       async changePage(pageNumber) {

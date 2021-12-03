@@ -1,11 +1,6 @@
 import axios from "axios"
 export const prodcutControllerServices = {
 
-    Data() {
-        return {
-
-        }
-    },
     methods: {
         increaseStock(current) {
             if (current > 9998) {
@@ -80,8 +75,16 @@ export const prodcutControllerServices = {
 
             return actionResponse;
         },
-        async permanentlyRemoveProduct() {
-
+        async permanentlyRemoveProduct(productId) {
+            let actionResponse;
+            await axios.delete(`${process.env.VUE_APP_ROOT_API}staff/products`,{params:{
+                productId:productId
+            }}).then(response => {
+                actionResponse = response.data;
+            }).catch(error => {
+                actionResponse = error.response.data;
+            })
+            return actionResponse;
         },
         async getAllAvailableColors() {
             let result;
