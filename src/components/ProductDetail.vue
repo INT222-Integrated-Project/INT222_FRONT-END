@@ -103,8 +103,6 @@
 
         </div>
 
-          {{productCart}}
-
       </div>
     </div>
     

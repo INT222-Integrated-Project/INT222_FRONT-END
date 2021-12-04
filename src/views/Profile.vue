@@ -86,7 +86,7 @@
       </div>
 
       <!-- My Product Management -->
-      <div class="container  sm:m-6 p-3  sm:w-4/6    bg-blue-300 sm:items-center  "
+      <div v-show="roleName != 'customer'" class="container  sm:m-6 p-3  sm:w-4/6    bg-blue-300 sm:items-center  "
         style="font-family: 'Muli', sans-serif;">
         <p class="text-4xl text-center my-5  text-white font-semibold">My Product</p>
         <div v-if="!editproductActive" class="flex flex-wrap  sm:mx-2  mx-4 justify-center ">

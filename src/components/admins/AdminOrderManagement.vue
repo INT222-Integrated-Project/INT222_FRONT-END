@@ -1,16 +1,32 @@
 <template>
     <div class="ordermanage-admin-main-href">Order Managements</div>
-    <div class="ordermanage-default-list flex justify-center">
-        <input class="defaultinput-light-input" type="text" placeholder="Search orders by username"
-            v-model="searchContent.searchUserName">
-        <button class="defaultinput-page-default-button" type="button" @click="listAllOrderByUserName">Search</button>
+    <div class="ordermanage-default-list flex justify-center items-center">
+        <div class="w-1/2 flex flex-row">
+            <input class="defaultinput-light-input" type="text" placeholder="Search orders by username"
+                v-model="searchContent.searchUserName">
+            <button class="defaultinput-page-default-button" type="button"
+                @click="listAllOrderByUserName">Search</button>
+        </div>
+        <div class="flex flex-row items-center">
+            <button type="button" @click="listAllOrderByStatus(null)" class="ordermanage-status-topay">ALL</button>
+            <button type="button" @click="listAllOrderByStatus('To Pay')"
+                class="ordermanage-status-topay">Ordered</button>
+            <button type="button" @click="listAllOrderByStatus('To Ship')"
+                class="ordermanage-status-toship">Paid</button>
+            <button type="button" @click="listAllOrderByStatus('To Receive')"
+                class="ordermanage-status-recieve">Shiped</button>
+            <button type="button" @click="listAllOrderByStatus('Completed')"
+                class="ordermanage-status-completed">Done</button>
+            <button type="button" @click="listAllOrderByStatus('Cancelled')"
+                class="ordermanage-status-cancelled">Aborted</button>
+        </div>
     </div>
     <div>
         <div v-show="!notification.sucessfullyLoaded" class="mx-4 text-2xl default-inprogress-notification-window">
             Loading...
         </div>
         <div v-show="notification.searchnotfound" class="default-error-notification-window mx-4">
-            Nothing here : This username might not exist or doesn't have any order.
+            Nothing here : What ever you are looking at might not exist.
         </div>
         <div v-for="order in orderList" :key="order">
             <div @click="order.showProductDetail = !order.showProductDetail"
@@ -56,11 +72,21 @@
 
                 </div>
                 <div class="flex flex-row">
-                    <div class="ordermanage-status-topay">Ordered</div>
-                    <div class="ordermanage-status-toship">Paid</div>
-                    <div class="ordermanage-status-recieve">Shiped</div>
-                    <div class="ordermanage-status-completed">Done</div>
-                    <div class="ordermanage-status-cancelled">Aborted</div>
+                    <div
+                        :class="order.orderStatus.statusID <= 4 ?'ordermanage-status-topay':'ordermanage-status-disable'">
+                        Ordered</div>
+                    <div
+                        :class="order.orderStatus.statusID <= 4 && order.orderStatus.statusID >= 2 ?'ordermanage-status-toship':'ordermanage-status-disable'">
+                        Paid</div>
+                    <div
+                        :class="order.orderStatus.statusID <= 4 && order.orderStatus.statusID >= 3 ?'ordermanage-status-recieve':'ordermanage-status-disable'">
+                        Shiped</div>
+                    <div
+                        :class="order.orderStatus.statusID == 4 ?'ordermanage-status-completed':'ordermanage-status-disable'">
+                        Done</div>
+                    <div
+                        :class="order.orderStatus.statusID == 5 ?'ordermanage-status-cancelled':'ordermanage-status-disable'">
+                        Aborted</div>
                 </div>
             </div>
             <div v-show="order.showProductDetail" class="ordermanage-default-small flex justify-between">
@@ -85,11 +111,18 @@
                         <p class="ordermanage-default-text"> {{order.orderStatus.status}}</p>
                     </div>
                 </div>
-                <div class="flex flex-row">
-                    <button class="">Paid</button>
-                    <button class="">Shiped</button>
-                    <button class="">Done</button>
-                    <button class="">Cancle</button>
+                <div class="ordermanage-assign-body flex flex-col">
+                    <button @click="stepUpByOneStep(order.orderID,order.orderStatus.statusID)"
+                        :disabled="order.orderStatus.statusID >= 4"
+                        :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable' : 'ordermanage-status-completed'">Success
+                        by one step.</button>
+                    <button @click="stepDownByOneStep(order.orderID,order.orderStatus.statusID)"
+                        :disabled="order.orderStatus.statusID >= 4 || order.orderStatus.statusID < 2"
+                        :class="order.orderStatus.statusID >= 4 || order.orderStatus.statusID < 2 ? 'ordermanage-status-disable' : 'ordermanage-status-toship'">Step
+                        back by one step.</button>
+                    <button @click="cancelOrderStatus(order.orderID)" :disabled="order.orderStatus.statusID >= 4"
+                        :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable':'ordermanage-status-cancelled'">Cancel
+                        this order.</button>
                 </div>
             </div>
         </div>
@@ -109,18 +142,81 @@
                 orderList: [],
                 notification: {
                     searchnotfound: false,
-                    sucessfullyLoaded: false
+                    sucessfullyLoaded: false,
+                    assignOrderStatusValid: true
                 },
                 searchContent: {
-                    searchUserName: ""
+                    searchUserName: "",
+                    searchStatus: ""
                 }
             }
         },
         methods: {
+            async cancelOrderStatus(orderId) {
+                let result;
+                result = await this.changeOrderStatus(orderId, 5)
+                for (let index = 0; index < this.orderList.length; index++) {
+                    if (result.orderID == this.orderList[index].orderID) {
+                        this.orderList[index] = result;
+                        break;
+                    }
+                }
+            },
+            async stepUpByOneStep(orderId, orderStatusId) {
+                let result;
+                let toOrder;
+                switch (orderStatusId) {
+                    case 1:
+                        toOrder = 2;
+                        break;
+                    case 2:
+                        toOrder = 3;
+                        break;
+                    case 3:
+                        toOrder = 4;
+                        break;
+                    default:
+                        break;
+                }
+                if (toOrder >= 2 && toOrder <= 4) {
+                    result = await this.changeOrderStatus(orderId, toOrder);
+                    result.showProductDetail = true;
+                    for (let index = 0; index < this.orderList.length; index++) {
+                        if (result.orderID == this.orderList[index].orderID) {
+                            this.orderList[index] = result;
+                            break;
+                        }
+                    }
+                } 
+            },
+            async stepDownByOneStep(orderId, orderStatusId) {
+                let result;
+                let toOrder;
+                switch (orderStatusId) {
+                    case 2:
+                        toOrder = 1;
+                        break;
+                    case 3:
+                        toOrder = 2;
+                        break;
+                    default:
+                        break;
+                }
+                if (toOrder == 1 || toOrder == 2) {
+                    result = await this.changeOrderStatus(orderId, toOrder);
+                    result.showProductDetail = true;
+                    for (let index = 0; index < this.orderList.length; index++) {
+                        if (result.orderID == this.orderList[index].orderID) {
+                            this.orderList[index] = result;
+                            break;
+                        }
+                    }
+                }
+            },
             async listAllOrderByUserName() {
                 this.notification.sucessfullyLoaded = false;
                 this.orderList = [];
-                let result = await this.getOrdersList(0, 200, this.searchContent.searchUserName)
+                let result = await this.getOrdersList(0, 200, this.searchContent.searchUserName, null)
                 if (result.exceptionCode) {
                     this.notification.searchnotfound = true;
                 } else {
@@ -128,12 +224,22 @@
                     this.notification.searchnotfound = false;
                 }
                 this.notification.sucessfullyLoaded = true;
-            }
+            },
+            async listAllOrderByStatus(searchStatus) {
+                this.notification.sucessfullyLoaded = false;
+                this.orderList = [];
+                let result = await this.getOrdersList(0, 200, this.searchContent.searchUserName, searchStatus)
+                if (result.exceptionCode) {
+                    this.notification.searchnotfound = true;
+                } else {
+                    this.orderList = result;
+                    this.notification.searchnotfound = false;
+                }
+                this.notification.sucessfullyLoaded = true;
+            },
         },
         async created() {
-            this.notification.sucessfullyLoaded = false;
             await this.listAllOrderByUserName();
-            this.notification.sucessfullyLoaded = true;
         }
     }
 </script>

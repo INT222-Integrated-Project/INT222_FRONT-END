@@ -24,7 +24,6 @@
 .ordermanage-status-box{
     @apply border-2 bg-opacity-50 p-1 font-bold;
     min-width: 70px;
-    max-width: 100px;
 }
 .ordermanage-status-topay{
     @apply ordermanage-status-box bg-purple-100 text-purple-800 border-purple-800 hover:bg-purple-200 duration-150
@@ -46,5 +45,7 @@
 }
 
 /*Assign order button*/
-
+.ordermanage-assign-body{
+    min-width: 400px;
+}
 
