@@ -1,26 +1,26 @@
 <template>
   <div class="fixed  inset-0 bg-blue-200 sm:w-4/12 ">
+  <div class="  ">
     <div class="flex justify-end items-end mx-6 my-3">
-      <button @click="closeCurrentModal" class="flex justify-center items-center sm:h-10  bg-white rounded-lg ">
+      <button @click="closeCurrentModal" class="flex justify-center items-center h-10  bg-white rounded-lg ">
         <i class="material-icons w-16  text-center">keyboard_backspace</i>
       </button>
     </div>
 
-    <div class="  flex justify-center item-center sm:w-full " style="font-family: 'Muli', sans-serif;">
-      <div  class="w-10/12 ">
+    <div class="  flex justify-center sm:w-full   " style="font-family: 'Muli', sans-serif;">
+      <div  class="w-10/12 flex justify-center items-center   ">
 
-        <div class="card-two ">
+        <div class=" card-two ">
 
           <form @submit.prevent="addtocard">
             <div class="flex justify-end items-end absolute ">
               <h2 class="text-lg text-gray-400 font-light  mx-3   "> {{ product.caseDate }}</h2>
             </div>
 
-
+            
             <img
               src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg"
-              class=" sm:h-72 h-56 flex justify-center item-center mx-auto " />
-
+              class="  h-72 w-full flex justify-center item-center mx-auto " />
             <div
               class="flex justify-center items-center  p-2 sm:p-4 rounded-lg sm:h-80 md:h-80 border-2 m-2 border-gray-700 h-72 flex-col ">
               <div class="flex">
@@ -103,11 +103,11 @@
 
         </div>
 
-          {{productCart}}
+         
 
       </div>
     </div>
-    
+    </div>
   </div>  
 
 </template>

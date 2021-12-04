@@ -130,6 +130,18 @@ export const prodcutControllerServices = {
                     result = error.response;
                 });
                 return result;
-            },
+        },
+        async RemoveProductInCart(productId) {
+            let actionResponse;
+            await axios.delete(`${process.env.VUE_APP_ROOT_API}staff/products`,{params:{
+                productId:productId
+            }}).then(response => {
+                actionResponse = response.data;
+            }).catch(error => {
+                actionResponse = error.response.data;
+            })
+            return actionResponse;
+        },
+    
     }
 }

@@ -80,7 +80,8 @@ const routes = [
     name: 'AddProduct',
     component: AddProduct,
     beforeEnter: (to, from, next) => {
-      if (!(store.getters['authentication/authenticated'] && (store.getters['authentication/roleName'] == "admin" || store.getters['authentication/roleName'] == "staff"))) {
+      if (!(store.getters['authentication/authenticated'] && (store.getters['authentication/roleName'] == "admin" || 
+      store.getters['authentication/roleName'] == "staff"))) {
         return next({
           name: 'Home'
         })

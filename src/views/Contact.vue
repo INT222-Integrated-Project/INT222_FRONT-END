@@ -40,19 +40,19 @@ data() {
         {
             image: "1.png",
             name : "Thanaphat Dararat",
-            role : "Back-End Devops Database",
+            role : "Back-End Database",
             studentId : "62130500032",
         },
         {
-            image: "1.png",
+            image: "2.jpg",
             name : "Paweena Thongyan",
             role : "FrontEnd Devops Network",
             studentId : "62130500053",
         }, 
         {
-            image: "1.png",
+            image: "3.png",
             name : "Anuttree Tipmom",
-            role : "FrontEnd Devops Database ",
+            role : "Database ",
             studentId : "62130500101",
         }
         ]

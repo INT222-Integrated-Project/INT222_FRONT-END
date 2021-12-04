@@ -1,5 +1,6 @@
 <template>
-  <div class=" mt-3 text-center md:w-5/6 items-center md:mx-auto  bg-white lg:md-20 ">
+<div class="bg-header">
+  <div class=" mt-3 text-center md:w-5/6 items-center md:mx-auto   lg:md-20 ">
     <div class="sm:p-5 p-5">
       <div class="bg-blue-200 rounded-full border-1  hover:bg-blue-300  border-blue-600">
         <div class="text-4xl font-semibold m-5 p-3  ">Add Product</div>
@@ -12,14 +13,14 @@
         <p v-show="invalid.modals">♦ At least 1 model is required.</p>
         <p v-show="invalid.productColor">♦ At least 1 color is required.</p>
       </div>
-      <div class=" flex justify-center item-center bg-purple-300 p-5 rounded-xl">
+      <div class=" flex justify-center item-center bg-purple-300 p-5 border-purple-600 rounded-xl">
       <!----
         Style file in a ton of files.
         The first place of the style name tells where the style is kept.
         -->
 
       <form @submit.prevent="formValidate">
-        <div class="flex border-2 rounded-xl m-2 p-5 "  >
+        <div class="flex border-2 border-purple-600 rounded-xl m-2 p-5 "  >
           <div class="w-2/6 flex justify-center items-center">
             <div class="w-3/5 flex flex-col relative overflow-hidden   ">
               <img v-show="imageholderEnable" :src="productImage" class="" />
@@ -35,21 +36,21 @@
               Invalid validate Image!
             </i>
             <div class="flex ">
-              <div class="flex-1 border-2 rounded-xl m-2">
+              <div class="flex-1 border-2 border-purple-600 rounded-xl m-2">
 
               <label for="CaseName" class="text-lg font-semibold">Case Name</label>
               <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName" class="defaultinput-light-input" placeholder="Your new product name." />
               </div>
-              <div class="flex-1 border-2 rounded-xl m-2">
+              <div class="flex-1 border-2 border-purple-600  rounded-xl m-2">
               <label for="caseDescription" class="text-lg font-semibold">caseDescription</label>
               <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"  name="caseDescription" class="defaultinput-light-input" placeholder="A description in brief for this product." />
               </div>
             </div>
-            <div class="border-2 rounded-xl m-2">
+            <div class="border-2 border-purple-600 rounded-xl m-2">
               <label for="casePrice" class="text-lg font-semibold">casePrice</label>
               <input type="number" id="casePrice"  min="1" step="100" v-model="newProduct.casePrice" name="casePrice" class="defaultinput-light-input" placeholder="How mush is this?"/>
             </div>
-            <div class="border-2 rounded-xl m-2">
+            <div class="border-2 border-purple-600 rounded-xl m-2">
               <label for="Brand and Model" class="text-lg font-semibold ">Brand and Model</label>
                 <div class="overflow-y-scroll h-44">
                   <div v-for="(item, index) in modelList" :key="index">
@@ -74,7 +75,7 @@
             </div> -->
 
 
-            <div class="border-2 rounded-xl m-2">
+            <div class="border-2 border-purple-600 rounded-xl m-2">
               <label for="Colors" class="text-lg font-semibold">Colors</label>
               <div class=" overflow-y-scroll h-44 grid grid-cols-4">
                 <div v-for="color in colorList" :key="color.codeColor" class="p-2">
@@ -91,7 +92,7 @@
               >
                 Select at least one color.
               </div> -->
-              <div class=" border-2 rounded-xl m-2">
+              <div class=" border-2  border-purple-600 rounded-xl m-2">
               <label for="Quantity" class="text-lg font-semibold">Quantity</label>
                 <div v-for="(color, index) in newProduct.productColor" :key="index">
                   <div class="flex items-center mx-1 mb-5">
@@ -130,7 +131,7 @@
         </div>
       </form>
     </div>
-    
+    </div>
   </div>
 </div>
 </template>
