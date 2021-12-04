@@ -292,7 +292,6 @@
     <MyCaseOrder></MyCaseOrder>
     <div v-show="false">
 
-      <StaffOrderList></StaffOrderList>
       <StaffProductList></StaffProductList>
 
     </div>
@@ -304,14 +303,12 @@
     mapGetters
   } from 'vuex';
   import StaffProductList from '@/components/staffs/StaffProductList.vue'
-  import StaffOrderList from '@/components/staffs/StaffOrderList.vue'
   import MyCaseOrder from '@/components/users/MyCaseOrder.vue'
   import { prodcutControllerServices } from "@/.services/ProductsControllerServices.js";
   export default {
     mixins: [prodcutControllerServices],
     components: {
       StaffProductList,
-      StaffOrderList,
       MyCaseOrder
     },
     data() {
