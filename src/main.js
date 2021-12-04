@@ -10,6 +10,7 @@ import './.styles/DefaultNotification.css'
 import './.styles/DefaultInput.css'
 import './.styles/BodyStyle.css'
 import './.styles/ColorPick.css'
+import './.styles/OrderManagement.css'
 
 require('@/store/subscriber')
 

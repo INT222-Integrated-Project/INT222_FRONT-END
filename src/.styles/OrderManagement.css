@@ -1,0 +1,51 @@
+.ordermanage-admin-main-href{
+    @apply text-center text-2xl text-pink-900 font-semibold bg-pink-50 border-pink-600 border-2 mx-4 p-3
+}
+.ordermanage-admin-main-href{
+    @apply text-center text-2xl text-pink-900 font-semibold bg-pink-50 border-pink-600 border-2 mx-4 p-3
+}
+.ordermanage-default-list{
+    @apply text-center text-pink-900 bg-white border-pink-600 border-2 mx-4 p-3
+}
+.ordermanage-default-small{
+    @apply text-center text-pink-900 bg-pink-50 border-pink-600 border-2 mx-4 p-1 bg-opacity-20 bg-gradient-to-b from-transparent to-pink-100;
+}
+.ordermanage-default-text{
+    @apply text-pink-900
+}
+.ordermanage-header-text{
+    @apply ordermanage-default-text font-semibold px-2;
+    min-width: 120px;
+}
+.ordermanage-price-tag{
+    @apply bg-green-100 border-green-700 border-2 text-green-700 p-2 rounded-2xl mx-10 font-semibold
+}
+/*Order status boxes*/
+.ordermanage-status-box{
+    @apply border-2 bg-opacity-50 p-1 font-bold;
+    min-width: 70px;
+}
+.ordermanage-status-topay{
+    @apply ordermanage-status-box bg-purple-100 text-purple-800 border-purple-800 hover:bg-purple-200 duration-150
+}
+.ordermanage-status-toship{
+    @apply ordermanage-status-box bg-yellow-100 text-yellow-800 border-yellow-800 hover:bg-yellow-200 duration-150
+}
+.ordermanage-status-recieve{
+    @apply ordermanage-status-box bg-blue-100 text-blue-800 border-blue-800 hover:bg-blue-200 duration-150
+}
+.ordermanage-status-completed{
+    @apply ordermanage-status-box bg-green-100 text-green-800 border-green-800 hover:bg-green-200 duration-150
+}
+.ordermanage-status-cancelled{
+    @apply ordermanage-status-box bg-red-100 text-red-800 border-red-800 hover:bg-red-200 duration-150
+}
+.ordermanage-status-disable{
+    @apply ordermanage-status-box bg-gray-100 text-gray-800 border-gray-800 hover:bg-gray-200 duration-150
+}
+
+/*Assign order button*/
+.ordermanage-assign-body{
+    min-width: 400px;
+}
+

@@ -17,7 +17,7 @@
 }
 .defaultinput-page-default-button{
     @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm mx-1 text-center font-bold justify-center flex items-center hover:bg-pink-300 duration-100 placeholder-gray-800 ;
-    min-width: 150px;
+    min-width: 100px;
 }
 .defaultinput-page-default-button-two{
     @apply p-3 bg-blue-200 border-2 border-blue-500 rounded-sm mx-1 text-center font-bold justify-center flex items-center hover:bg-blue-300 duration-100 placeholder-gray-800 ;

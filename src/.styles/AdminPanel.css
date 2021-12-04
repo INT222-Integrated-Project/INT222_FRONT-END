@@ -36,10 +36,10 @@
     @apply m-1 sm:w-32 text-yellow-900 bg-yellow-100 border-2 p-1 sm:text-lg md:text-base text-sm text-center xl:text-xl border-yellow-900 rounded-xl hover:bg-yellow-200 duration-100
 }
 
-:disabled{
+#assign-role-btn :disabled{
     @apply m-1 sm:w-32 text-gray-900 bg-gray-100 border-2 p-1 sm:text-lg text-sm md:text-base xl:text-xl text-center  border-gray-900 rounded-xl hover:bg-gray-200 duration-100
 }
 
-.default-assignrole-disabled{
+.default-assignrole-disabled {
     @apply m-1 sm:w-32 text-gray-900 bg-gray-100 border-2 p-1 sm:text-lg text-sm md:text-base text-center xl:text-xl border-gray-900 rounded-xl hover:bg-gray-200 duration-100
 }

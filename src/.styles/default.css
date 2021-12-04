@@ -2,7 +2,7 @@
     @apply bg-pink-200 py-5 text-center sm:text-4xl text-2xl font-bold
 }
 .default-medium-header-box{
-    @apply bg-gray-100  sm:text-xl text-base border-green-600 border-2 mx-4  hover:bg-gray-200 duration-200 my-5 flex sm:flex-row justify-center  flex-wrap items-center
+    @apply bg-gray-100  sm:text-xl text-base border-pink-600 border-2 mx-4  hover:bg-gray-200 duration-200 my-5 flex sm:flex-row justify-center  flex-wrap items-center
 }
 .default-medium-body-box{
     @apply bg-gray-100  sm:text-xl text-base border-gray-400 border-2 mx-4  hover:bg-gray-200 duration-200 my-5 flex sm:flex-row justify-start  flex-wrap items-center
