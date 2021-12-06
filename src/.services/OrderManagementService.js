@@ -34,6 +34,15 @@ export const orderManagementSetvice = {
                 result = error.response.data;
             });
             return result;
+        },
+        async cancelUserOrderByUser(orderId){
+            let result;
+            await axios.put(`${process.env.VUE_APP_ROOT_API}user/cancleorder?orderId=${orderId}`).then((response) => {
+                result = response.data;
+            }).catch((error) => {
+                result = error.response.data;
+            });
+            return result;
         }
         
     }

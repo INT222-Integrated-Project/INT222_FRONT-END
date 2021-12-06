@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-white">
-        <div class="ordermanage-admin-main-href">My Orders</div>
+    <div class="bg-purple-300">
+        <div class="ordermanage-admin-main-href my-3">My Orders</div>
         <div v-show="!notification.sucessfullyLoaded" class="mx-4 text-2xl default-inprogress-notification-window">
             Loading your orders...
         </div>
@@ -9,92 +9,95 @@
         </div>
         <div v-for="order in orderList" :key="order">
             <div @click="order.showProductDetail = !order.showProductDetail"
-                class="ordermanage-default-list flex justify-between items-center">
-                <div class="flex justify-start items-start">
-                    <div class="flex justify-start items-center">
-                        <div class="text-right">
-                            <p class="ordermanage-header-text">Ordered at : </p>
-                            <p class="ordermanage-header-text">Paid at : </p>
-                            <p class="ordermanage-header-text">Ordered by : </p>
-                            <p class="ordermanage-header-text">User name : </p>
-                        </div>
-                        <div class="text-left">
-                            <p class="ordermanage-default-text"> {{order.dateTime}}</p>
-                            <p class="ordermanage-default-text"> {{order.paymentDate?order.paymentDate:"No payment."}}
-                            </p>
-                            <p class="ordermanage-default-text"> {{order.user.firstName}} {{order.user.lastName}}</p>
-                            <p class="ordermanage-default-text"> {{order.user.userName}}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-row">
-                            <div class="">
-                                <div class="ordermanage-price-tag">{{order.allPrice}} ฿</div>
+                    class="ordermanage-default-list flex flex-col md:flex-row items-center">
+                    <div class="flex sm:flex-row flex-col  items-start ">
+                        <div class="flex justify-start items-center">
+                            <div class="text-right">
+                                <p class="ordermanage-header-text">Ordered at : </p>
+                                <p class="ordermanage-header-text">Paid at : </p>
+                                <p class="ordermanage-header-text">Ordered by : </p>
+                                <p class="ordermanage-header-text">User name : </p>
                             </div>
-
-                            <div class="flex justify-start items-start">
-                                <div class="text-right">
-                                    <p class="ordermanage-header-text">Product : </p>
-                                    <p class="ordermanage-header-text">Quantity: </p>
-                                </div>
-                                <div class="text-left" v-for="item in order.orderDetails" :key="item">
-                                    <p class="ordermanage-default-text">ProCol {{item.productcolorID}}</p>
-                                    <p class="ordermanage-default-text">{{item.quantityOrder}}</p>
-                                </div>
+                            <div class="text-left">
+                                <p class="ordermanage-default-text "> {{order.dateTime}}</p>
+                                <p class="ordermanage-default-text"> {{order.paymentDate?order.paymentDate:"No payment."}}
+                                </p>
+                                <p class="ordermanage-default-text"> {{order.user.firstName}} {{order.user.lastName}}</p>
+                                <p class="ordermanage-default-text"> {{order.user.userName}}</p>
                             </div>
                         </div>
+                        <div>
+                            <div class="flex flex-row">
+                                <div class="flex justify-start items-start">
+                                    <div class="text-right">
+                                        <p class="ordermanage-header-text ml-6 sm:ml-1">Product : </p>
+                                        <p class="ordermanage-header-text">Quantity: </p>
+                                        <p class="ordermanage-header-text">Address : </p>
+                                    </div>
+                                    <div class="text-left" v-for="item in order.orderDetails" :key="item">
+                                        <p class="ordermanage-default-text">ProCol {{item.productcolorID}}</p>
+                                        <p class="ordermanage-default-text">{{item.quantityOrder}}</p>
+                                        <p class="ordermanage-default-text">{{order.user.address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    <div class="grid grid-cols-3 md:grid-cols-2 md:text-sm">
+                        <div class="">
+                            <div class="ordermanage-price-tag">{{order.allPrice}} ฿</div>
+                        </div>
+                        <div
+                            :class="order.orderStatus.statusID <= 4 ?'ordermanage-status-topay':'ordermanage-status-disable'">
+                            Ordered</div>
+                        <div
+                            :class="order.orderStatus.statusID <= 4 && order.orderStatus.statusID >= 2 ?'ordermanage-status-toship':'ordermanage-status-disable'">
+                            Paid</div>
+                        <div
+                            :class="order.orderStatus.statusID <= 4 && order.orderStatus.statusID >= 3 ?'ordermanage-status-recieve':'ordermanage-status-disable'">
+                            Shiped</div>
+                        <div
+                            :class="order.orderStatus.statusID == 4 ?'ordermanage-status-completed':'ordermanage-status-disable'">
+                            Done</div>
+                        <div
+                            :class="order.orderStatus.statusID == 5 ?'ordermanage-status-cancelled':'ordermanage-status-disable'">
+                            Aborted</div>
+                    </div>
+                </div>
+                <div v-show="order.showProductDetail" class="ordermanage-default-small flex sm:flex-row flex-col">
+                    <div class="flex flex-row w-3/4 sm:mt-6">
+                        <div class="text-right ">
+                            <p class="ordermanage-header-text">Product : </p>
+                            <p class="ordermanage-header-text">Variant : </p>
+                            <p class="ordermanage-header-text">Brand : </p>
+                            <p class="ordermanage-header-text">Status : </p>
+                        </div>
                         <div class="text-left">
-                            <span class="ordermanage-header-text">Address : </span>
-                            <span class="ordermanage-default-text">{{order.user.address}}</span>
+                            <p class="ordermanage-default-text">
+                                {{order.orderDetails[0].productColorToProducts.products.caseName}}</p>
+                            <p class="ordermanage-default-text">
+                                {{order.orderDetails[0].productColorToProducts.color.caseColor}}</p>
+                            <p class="ordermanage-default-text">
+                                {{order.orderDetails[0].productColorToProducts.products.models[0].brand.caseBrand}}</p>
+                            <p class="ordermanage-default-text"> {{order.orderStatus.status}}</p>
                         </div>
                     </div>
-
+                    <div class="ordermanage-assign-body flex flex-col w-1/4">
+                        <button @click="stepUpByOneStep(order.orderID,order.orderStatus.statusID)"
+                            :disabled="order.orderStatus.statusID >= 4"
+                            :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable' : 'ordermanage-status-completed'">Success
+                            by one step.</button>
+                        <button @click="stepDownByOneStep(order.orderID,order.orderStatus.statusID)"
+                            :disabled="order.orderStatus.statusID >= 4 || order.orderStatus.statusID < 2"
+                            :class="order.orderStatus.statusID >= 4 || order.orderStatus.statusID < 2 ? 'ordermanage-status-disable' : 'ordermanage-status-toship'">Step
+                            back by one step.</button>
+                        <button @click="cancelOrderStatus(order.orderID)" :disabled="order.orderStatus.statusID >= 4"
+                            :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable':'ordermanage-status-cancelled'">Cancel
+                            this order.</button>
+                    </div>
                 </div>
-                <div class="flex flex-row">
-                    <div
-                        :class="order.orderStatus.statusID <= 4 ?'ordermanage-status-topay':'ordermanage-status-disable'">
-                        Ordered</div>
-                    <div
-                        :class="order.orderStatus.statusID <= 4 && order.orderStatus.statusID >= 2 ?'ordermanage-status-toship':'ordermanage-status-disable'">
-                        Paid</div>
-                    <div
-                        :class="order.orderStatus.statusID <= 4 && order.orderStatus.statusID >= 3 ?'ordermanage-status-recieve':'ordermanage-status-disable'">
-                        Shiped</div>
-                    <div
-                        :class="order.orderStatus.statusID == 4 ?'ordermanage-status-completed':'ordermanage-status-disable'">
-                        Done</div>
-                    <div
-                        :class="order.orderStatus.statusID == 5 ?'ordermanage-status-cancelled':'ordermanage-status-disable'">
-                        Aborted</div>
-                </div>
-            </div>
-            <div v-show="order.showProductDetail" class="ordermanage-default-small flex justify-between">
-                <div class="flex flex-row">
-                    <div class="text-right">
-                        <p class="ordermanage-header-text">Product : </p>
-                        <p class="ordermanage-header-text">Variant : </p>
-                        <p class="ordermanage-header-text">Brand : </p>
-                    </div>
-                    <div class="text-left">
-                        <p class="ordermanage-default-text">
-                            {{order.orderDetails[0].productColorToProducts.products.caseName}}</p>
-                        <p class="ordermanage-default-text">
-                            {{order.orderDetails[0].productColorToProducts.color.caseColor}}</p>
-                        <p class="ordermanage-default-text">
-                            {{order.orderDetails[0].productColorToProducts.products.models[0].brand.caseBrand}}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="ordermanage-header-text">Status : </p>
-                    </div>
-                    <div class="text-left">
-                        <p class="ordermanage-default-text"> {{order.orderStatus.status}}</p>
-                    </div>
-
-                </div>
-                <button @click="cancelMyorder(order.orderID)" :disabled="order.orderStatus.statusID > 1"
-                    :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable':'ordermanage-status-cancelled'">Cancel
-                    this order.</button>
-            </div>
         </div>
     </div>
 </template>
@@ -133,7 +136,7 @@
             },
             async cancelMyorder(orderid) {
                 let result;
-                result = await this.changeOrderStatus(orderid, 5);
+                result = await this.cancelUserOrderByUser(orderid);
                 for (let index = 0; index < this.orderList.length; index++) {
                     if (result.orderID == this.orderList[index].orderID) {
                         this.orderList[index] = result;

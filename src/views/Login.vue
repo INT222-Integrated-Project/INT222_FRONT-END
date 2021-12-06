@@ -17,7 +17,7 @@
             <div class="default-error-box" v-show="invalid.suspended">
               <p>This accout is suspended.</p>
             </div>
-            <div class="mx-auto max-w-xs">
+            <div class=" flex justify-center flex-col">
               <input v-model="logform.userName" type="text" name="userName" placeholder="userName" required
                 class="input-text" />
               <i class="text-center text-sm text-red-500" v-if="this.invalid.invaliduserName"> please username must be

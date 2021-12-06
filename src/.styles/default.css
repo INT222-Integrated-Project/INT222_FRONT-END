@@ -1,11 +1,11 @@
 .default-large-header-box{
-    @apply bg-pink-200 py-5 text-center sm:text-4xl text-2xl font-bold
+    @apply  mt-5 py-10  text-center sm:text-5xl text-2xl font-bold
 }
 .default-medium-header-box{
-    @apply bg-gray-100  sm:text-xl text-base border-pink-600 border-2 mx-4  hover:bg-gray-200 duration-200 my-5 flex sm:flex-row justify-center  flex-wrap items-center
+    @apply bg-purple-100 rounded-xl transform  sm:text-xl text-base  mx-4  hover:bg-purple-200 duration-200 my-5 flex sm:flex-row justify-center  flex-wrap items-center
 }
 .default-medium-body-box{
-    @apply bg-gray-100  sm:text-xl text-base border-gray-400 border-2 mx-4  hover:bg-gray-200 duration-200 my-5 flex sm:flex-row justify-start  flex-wrap items-center
+    @apply bg-purple-100  sm:text-xl text-base border-gray-400 border-2 mx-4  hover:bg-purple-200 duration-200 my-5 flex sm:flex-row justify-start  flex-wrap items-center
 }
 .default-edit-button{
     @apply p-2 border-2 rounded-md w-full
@@ -21,20 +21,20 @@
     height: 35px;
 }
 .default-page-search-button{
-    @apply p-3  bg-pink-200 border-2 border-pink-500 rounded-sm  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-pink-300 duration-100 placeholder-gray-800 ;
+    @apply p-3  bg-pink-200 border-2 border-pink-500 rounded-xl  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-pink-300 duration-100 placeholder-gray-800 ;
    
 }
 .light-page-search-button{
-    @apply p-3  bg-white border-2 border-pink-200 rounded-sm  font-bold  m-1 w-3/4 sm:w-4/6  py-2 hover:bg-pink-300 duration-100 placeholder-gray-800 ;
+    @apply p-3  bg-white border-2 border-pink-200 rounded-xl  font-bold  m-1 w-3/4 sm:w-4/6  py-2 hover:bg-pink-300 duration-100 placeholder-gray-800 ;
     
 }
 .default-search-input{
-    @apply  bg-white border-2 border-gray-500 hover:bg-purple-100 duration-100 m-1 w-3/4 sm:w-5/6 px-8 py-2 rounded-sm font-medium ;
+    @apply  bg-white border-2  border-gray-500 hover:bg-purple-100 duration-100 m-1 w-3/4 sm:w-5/6 px-8 py-2 rounded-xl font-medium ;
    
     
 }
 .default-page-navigation-buttons{
-    @apply p-3 bg-pink-200 border-2 border-pink-500 rounded-sm m-1 w-3/4 sm:w-3/12  text-center font-bold justify-center flex items-center hover:bg-pink-300 duration-100 placeholder-gray-800 ;
+    @apply p-3 bg-pink-200 border-2 border-pink-300 rounded-xl m-1 w-3/4 sm:w-3/12  text-center font-bold justify-center flex items-center hover:bg-pink-300 duration-100 placeholder-gray-800 ;
     
 }
 

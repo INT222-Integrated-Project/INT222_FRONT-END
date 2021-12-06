@@ -12,6 +12,37 @@ export const prodcutControllerServices = {
                 return 0
             } else return current -= 1;
         },
+        async toggleProductShowStatus(prodId) {
+            let result;
+            await axios.put(`${process.env.VUE_APP_ROOT_API}staff/product/onstore?productId=${prodId}`).then(response => {
+                result = response.data
+            }).catch(error => {
+                result = error.response.data
+            })
+            return result;
+        },
+        async getListOfProduct() {
+            let result
+            await axios.get(`${process.env.VUE_APP_ROOT_API}public/products`).then(response => {
+                result = response.data.content;
+            }).catch(error => {
+                result = error.response.data;
+            })
+            return result;
+        },
+        async getListOfProductAdmin(page, size, searchContent) {
+            let result;
+            await axios.get(`${process.env.VUE_APP_ROOT_API}admin/listProduct`,{params:{
+                page:page,
+                size:size,
+                searchContent:searchContent
+            }}).then(response => {
+                result = response.data.content;
+            }).catch(error => {
+                result = error.response.data;
+            })
+            return result
+        },
         async addProduct(newProduct, newImage) {
             const newProductBlob = new Blob([JSON.stringify(newProduct)], {
                 type: 'application/json'
@@ -60,7 +91,6 @@ export const prodcutControllerServices = {
             return actionResponse;
         },
         async addQuaitity(quantity, productColorId) {
-
             let actionResponse;
             await axios.put(`${process.env.VUE_APP_ROOT_API}staff/addStock`, {
                 params: {
@@ -77,9 +107,11 @@ export const prodcutControllerServices = {
         },
         async permanentlyRemoveProduct(productId) {
             let actionResponse;
-            await axios.delete(`${process.env.VUE_APP_ROOT_API}staff/products`,{params:{
-                productId:productId
-            }}).then(response => {
+            await axios.delete(`${process.env.VUE_APP_ROOT_API}staff/products`, {
+                params: {
+                    productId: productId
+                }
+            }).then(response => {
                 actionResponse = response.data;
             }).catch(error => {
                 actionResponse = error.response.data;
@@ -120,7 +152,7 @@ export const prodcutControllerServices = {
                 });
             return result;
         },
-        async getProductInCart(){
+        async getProductInCart() {
             let result;
             await axios
                 .get(`${process.env.VUE_APP_ROOT_API}user/myOrders`).then(response => {
@@ -129,7 +161,7 @@ export const prodcutControllerServices = {
                 }).catch(error => {
                     result = error.response;
                 });
-                return result;
-            },
+            return result;
+        },
     }
 }

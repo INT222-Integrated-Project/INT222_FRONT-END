@@ -11,11 +11,11 @@ import './.styles/DefaultInput.css'
 import './.styles/BodyStyle.css'
 import './.styles/ColorPick.css'
 import './.styles/OrderManagement.css'
+import './.styles/ProductManagementStyle.css'
 
 require('@/store/subscriber')
 
 store.dispatch('authentication/attempt',localStorage.getItem('accesstoken')).then(() =>{
     createApp(App).use(store).use(router).mount('#app')
 })
-
 

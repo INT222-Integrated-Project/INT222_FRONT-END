@@ -1,5 +1,5 @@
 .button-nav-show-staff-dropdown{
-    @apply text-white   w-full  sm:mt-0  hover:text-black hover:border-white hover:bg-white
+    @apply text-white   w-full  sm:mt-0  hover:text-white hover:border-white hover:bg-black
 }
 .button-nav-show-staff{
     @apply text-white  sm:mt-0 p-1 hover:text-pink-700 outline-none hover:border-pink-200 border-transparent border-2 hover:border-current md:text-xl text-base
@@ -30,5 +30,5 @@
     @apply w-full justify-end sm:flex flex-row sm:items-center sm:w-auto 
 }
 .berger{
-   @apply flex items-center px-3 py-2 border rounded  text-white hover:text-white hover:border-white
+   @apply flex items-center px-3 py-2 border rounded  text-white hover:text-white hover:border-black
 }
