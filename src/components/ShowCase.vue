@@ -2,7 +2,9 @@
   <div class="sm:p-5 p-5 ">
     <div class="size-search ">
       <input type="text" class="insearch-box  " placeholder="Search Case name " v-model="searchName">
+
       <button class="search-box text-white text-xl p-3" v-on:click.prevent="showProduct()">Search</button>
+
     </div>
     <div class="default-error-box" v-show="gui.errorWindow">
       {{exception.message}}

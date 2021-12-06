@@ -1,4 +1,5 @@
 <template>
+
 <div class="my-5 ">
     <div class="default-medium-header-box my-5 flex sm:flex-row justify-center  flex-wrap items-center ">
         <!-- <div class="prodmanage-admin-main-href">Product Management</div> -->
@@ -7,6 +8,7 @@
                 v-model="searchContent.searchProductName">
             <button class="default-page-search-button" type="button" @click="getProductList">Search</button>
         </div>
+
     </div>
     <div v-show="!notification.sucessfullyLoaded" class="mx-4 text-2xl default-inprogress-notification-window">
         Loading...
@@ -14,6 +16,7 @@
     <div v-show="notification.searchnotfound" class="mx-4 text-2xl default-inprogress-notification-window">
         Seems like you don't have any order, need something?
     </div>
+
     <div v-show="notification.sucessfullyLoaded" class="flex justify-center items-center bg-blue-200 rounded-2xl m-4 flex-col ">
         <div v-for="(item,index) in productList" :key="index" class="my-3 bg-white rounded-xl w-3/6 ">
             <div @click="item.showMoreDetails = !item.showMoreDetails" class="flex justify-center items-center mx-4  p-2 sm:flex-row flex-col"
@@ -55,6 +58,7 @@
                                 <div class="flex mx-1">
                                     <!-- <p>{{item.caseName}}</p> -->
                                     <p class="font-semibold">Product descrpition :</p>
+
                                     <p>{{item.caseDescription}}</p>
                                 </div>
                             </div>
@@ -64,21 +68,25 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="mx-5 w-1/4 ">
                         <h2>Available colors</h2>
                         <div v-for="vari in item.productColor" :key="vari" class="flex flex-col border-2 border-black rounded-2xl m-1">
+
                             <div :class="'colorpick-bg-'+vari.color.caseColor.toLowerCase()">
                                 {{vari.color.caseColor}}
                             </div>
                         </div>
+
                     </div>
+
 
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div> 
 </div>
+
 </template>
 
 <script>

@@ -275,12 +275,6 @@
       <!--  -->
       <MyCaseOrder></MyCaseOrder>
     </div>
-    
-    <div v-show="false">
-
-     
-
-    </div>
   </div>
 </template>
 <script>
@@ -289,7 +283,6 @@
     mapGetters
   } from 'vuex';
   import caseNotFoundImage from '@/assets/imageNotFound.png'
-
   import MyCaseOrder from '@/components/users/MyCaseOrder.vue'
   import {
     prodcutControllerServices

@@ -19,9 +19,11 @@
         -->
 
         <form @submit.prevent="formValidate">
+
           <div class="flex  rounded-xl sm:m-2 p-5 sm:flex-row flex-col justify-center items-center ">
             <div class="w-2/6 flex justify-center items-center">
               <div class="sm:w-3/5 w-full flex flex-col relative overflow-hidden   ">
+
                 <img v-show="imageholderEnable" :src="productImage" class="" />
                 <button type="button">uploadPhoto</button>
                 <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="text-center" />
@@ -34,7 +36,9 @@
               <i class="text-sm text-red-500" v-if="this.invalid.casePrice">
                 Invalid validate Image!
               </i>
+
               <div class="flex  sm:flex-row flex-col ">
+
                 <div class="flex-1 border-2 rounded-xl m-2">
 
                   <label for="CaseName" class="text-lg font-semibold">Case Name</label>
@@ -48,6 +52,7 @@
                     placeholder="A description in brief for this product." />
                 </div>
               </div>
+
             <div class="border-2 rounded-xl m-2">
               <label for="casePrice" class="text-lg font-semibold">casePrice</label>
               <input type="number" id="casePrice" v-model="newProduct.casePrice" name="casePrice" class="defaultinput-light-input" placeholder="How mush is this?"/>
@@ -223,12 +228,11 @@ export default {
       ) {
         this.invalid.validationPassed = false;
         this.addSuccess = true;
-        
-
       } else {
         let result;
         result = await this.addProduct(this.newProduct, document.getElementById('imageHolderDiv').files[0]);
         console.log(result)
+
          this.$router.replace({
             name: 'Home'
           })

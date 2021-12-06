@@ -24,11 +24,13 @@
 
 /*Button*/
 .prodmanage-page-hide-button{
+
     @apply p-3  bg-purple-200 border-2 border-purple-500 rounded-sm  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-purple-300 duration-100 placeholder-gray-800 ;
     width: 150px;
 }
 .prodmanage-page-delete-button{
     @apply p-3  bg-blue-200 border-2 border-blue-500 rounded-sm  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-blue-300 duration-100 placeholder-gray-800 ;
+
     min-width: 150px;
     width: 150px;
 }
