@@ -1,0 +1,39 @@
+.prodmanage-admin-main-href{
+    @apply text-center text-2xl text-pink-900 font-semibold bg-pink-50 border-pink-600 border-2 mx-4 p-3
+}
+.prodmanage-admin-head-list{
+    @apply border-2 border-pink-500 bg-pink-50
+}
+.prodmanage-admin-head-list-notonsale{
+    @apply border-2 border-gray-600 bg-gray-50
+}
+.prodmanage-admin-status-onsale{
+    @apply border-2 border-pink-500 bg-pink-50
+}
+.prodmanage-admin-head-status-notonsale{
+    @apply border-2 border-gray-600 bg-gray-50
+}
+/*Text*/
+.prodmanage-text-semi-header{
+    @apply font-semibold
+}
+/*Color box */
+.prodmanage-color-box{
+    @apply p-2
+}
+
+/*Button*/
+.prodmanage-page-hide-button{
+    @apply p-3  bg-gray-200 border-2 border-gray-500 rounded-sm  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-gray-300 duration-100 placeholder-gray-800 ;
+    width: 150px;
+}
+.prodmanage-page-delete-button{
+    @apply p-3  bg-red-200 border-2 border-red-500 rounded-sm  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-red-300 duration-100 placeholder-gray-800 ;
+    min-width: 150px;
+    width: 150px;
+}
+.prodmanage-page-unhide-button{
+    @apply p-3  bg-pink-200 border-2 border-pink-500 rounded-sm  m-1 w-3/4 sm:w-1/6  py-2 hover:bg-pink-300 duration-100 placeholder-pink-800 ;
+    min-width: 150px;
+    width: 150px;
+}

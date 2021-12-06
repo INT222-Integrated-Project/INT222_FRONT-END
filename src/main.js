@@ -11,6 +11,7 @@ import './.styles/DefaultInput.css'
 import './.styles/BodyStyle.css'
 import './.styles/ColorPick.css'
 import './.styles/OrderManagement.css'
+import './.styles/ProductManagementStyle.css'
 
 require('@/store/subscriber')
 

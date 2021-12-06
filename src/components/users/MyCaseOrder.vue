@@ -133,7 +133,7 @@
             },
             async cancelMyorder(orderid) {
                 let result;
-                result = await this.changeOrderStatus(orderid, 5);
+                result = await this.cancelUserOrderByUser(orderid);
                 for (let index = 0; index < this.orderList.length; index++) {
                     if (result.orderID == this.orderList[index].orderID) {
                         this.orderList[index] = result;
