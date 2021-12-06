@@ -58,7 +58,7 @@
 
                     </div>
                     <div class="flex flex-col">
-                        <button class="prodmanage-page-delete-button">Delete</button>
+                        <button class="prodmanage-page-delete-button" @click="deletProd(item.caseID)">Delete</button>
                         <button v-show="item.isOnStore" @click="toggleProduct(item.caseID)"
                             class="prodmanage-page-hide-button">Hide</button>
                         <button v-show="!item.isOnStore" @click="toggleProduct(item.caseID)"
@@ -105,8 +105,8 @@
                     alert("You can't delete a product with at least 1 order.")
                 } else {
                     this.productList = await this.getListOfProductAdmin();
+                    alert("This product is deleted.")
                 }
-
             },
             async toggleProduct(prodId) {
                 let response;

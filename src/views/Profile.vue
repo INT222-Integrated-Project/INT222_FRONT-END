@@ -93,9 +93,8 @@
           <div v-for="(myProduct,index) in ShowProductByuser" :key="index" :value="myProduct"
             class="m-2 w-5/6 flex justify-center items-center bg-black sm:w-1/3 md:w-2/6 sm:my-4  rounded-lg   hover:shadow-xl  ">
             <div class="card-two ">
-              <img
-                src="https://cdn-image02.casetify.com/usr/17130/1187130/~v87/4974841x2_iphone11_16002941.png.1000x1000-w.m80.jpg"
-                alt="" class="block rounded-full" />
+              <img :src="'https://naturegecko.com/backend/public/productImage/'+myProduct.productImage"
+                @error="replaceErrorImage" class="h-56 rounded-full" />
               <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-28 bg-purple-400 h-24 flex-col ">
                 <div class="">
                   <h5 class="text-white sm:text-lg  md:text-sm text-center  font-bold leading-none">
@@ -104,7 +103,7 @@
                 </div>
                 <div class="flex flex-row ">
 
-                  <button @click="(editproductActive = true,editProduct = myProduct), (emptyFieldsproduct = false)"
+                  <button @click="(editproductActive = true,editProduct = myProduct), (emptyFieldsproduct = false),checkRepeatedCol()"
                     class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">Edit</button>
 
                   <button @click="deleteCase(myProduct.caseID)"
@@ -242,7 +241,7 @@
           <h2>Step 3 : Pick colors.</h2>
           <div class="flex justify-between">
 
-            <div v-for="color in colorList" :key="color.codeColor">
+            <div v-for="color in availableProdCol" :key="color.codeColor">
               <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"
                 v-model="editProduct.productColor" />
               <label @click="color.selected = !color.selected" :for="color.caseColor" :class="
@@ -302,9 +301,12 @@
   import {
     mapGetters
   } from 'vuex';
+  import caseNotFoundImage from '@/assets/imageNotFound.png'
   import StaffProductList from '@/components/staffs/StaffProductList.vue'
   import MyCaseOrder from '@/components/users/MyCaseOrder.vue'
-  import { prodcutControllerServices } from "@/.services/ProductsControllerServices.js";
+  import {
+    prodcutControllerServices
+  } from "@/.services/ProductsControllerServices.js";
   export default {
     mixins: [prodcutControllerServices],
     components: {
@@ -313,6 +315,7 @@
     },
     data() {
       return {
+        caseNotFoundImage: caseNotFoundImage,
         deleteError: {
           issuccess: false,
           hasException: false,
@@ -378,10 +381,30 @@
         },
         exception: {
           message: ""
-        }
+        },
+        availableProdCol: []
       };
     },
     methods: {
+      replaceErrorImage(e) {
+        e.target.src = caseNotFoundImage
+      },
+      async checkRepeatedCol() {
+        this.availableProdCol = [];
+        let colList = await this.getAllAvailableColors();      
+        for (let i = 0; i < colList.length; i++) {
+         let currentAvailable = true;
+         for (let j = 0; j < this.editProduct.productColor.length; j++) {
+           if(this.editProduct.productColor[j].color.codeColor == colList[i].codeColor ){
+             currentAvailable = false;
+             break;
+           }           
+         }
+         if(currentAvailable){
+           this.availableProdCol.push(colList[i]);
+         }
+        }
+      },
       async formValidate() {
         this.invalid.caseName = this.editProduct.caseName === "" || this.editProduct.caseName.length > 25 ? true :
           false;
@@ -393,7 +416,9 @@
           this.invalid.caseName ||
           this.invalid.casePrice ||
           this.invalid.productColor ||
-          this.invalid.models
+          this.invalid.models ||
+          this.editProduct.models.length == 0 ||
+          this.editProduct.productColor.length == 0
         ) {
           this.invalid.validationPassed = false;
         } else {
@@ -422,7 +447,7 @@
               this.editproductActive = false;
               this.invalid.enableProductSubmitButton = true;
               this.invalid.validationPassed = false;
-            }, 5000);
+            }, 2000);
             console.log(this.ShowProductByuser);
             for (let index = 0; index < this.ShowProductByuser.length; index++) {
               if (response.caseID == this.ShowProductByuser[index].caseID) {
