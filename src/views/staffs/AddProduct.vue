@@ -13,41 +13,47 @@
         <p v-show="invalid.productColor">♦ At least 1 color is required.</p>
       </div>
       <div class=" flex justify-center item-center bg-purple-300 p-5 rounded-xl">
-      <!----
+        <!----
         Style file in a ton of files.
         The first place of the style name tells where the style is kept.
         -->
 
-      <form @submit.prevent="formValidate">
-        <div class="flex border-2 rounded-xl m-2 p-5 "  >
-          <div class="w-2/6 flex justify-center items-center">
-            <div class="w-3/5 flex flex-col relative overflow-hidden   ">
-              <img v-show="imageholderEnable" :src="productImage" class="" />
-              <button type="button">uploadPhoto</button>
-              <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="text-center" />
+        <form @submit.prevent="formValidate">
+          <div class="flex border-2 rounded-xl m-2 p-5 ">
+            <div class="w-2/6 flex justify-center items-center">
+              <div class="w-3/5 flex flex-col relative overflow-hidden   ">
+                <img v-show="imageholderEnable" :src="productImage" class="" />
+                <button type="button">uploadPhoto</button>
+                <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="text-center" />
+              </div>
             </div>
-          </div>
-          <div class="w-4/6">
-            <i class="text-sm text-red-500" v-if="this.invalid.caseName">
-              Invalid validate Image!
-            </i>
-            <i class="text-sm text-red-500" v-if="this.invalid.casePrice">
-              Invalid validate Image!
-            </i>
-            <div class="flex ">
-              <div class="flex-1 border-2 rounded-xl m-2">
+            <div class="w-4/6">
+              <i class="text-sm text-red-500" v-if="this.invalid.caseName">
+                Invalid validate Image!
+              </i>
+              <i class="text-sm text-red-500" v-if="this.invalid.casePrice">
+                Invalid validate Image!
+              </i>
+              <div class="flex ">
+                <div class="flex-1 border-2 rounded-xl m-2">
 
-              <label for="CaseName" class="text-lg font-semibold">Case Name</label>
-              <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName" class="defaultinput-light-input" placeholder="Your new product name." />
-              </div>
-              <div class="flex-1 border-2 rounded-xl m-2">
-              <label for="caseDescription" class="text-lg font-semibold">caseDescription</label>
-              <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"  name="caseDescription" class="defaultinput-light-input" placeholder="A description in brief for this product." />
-              </div>
+                  <label for="CaseName" class="text-lg font-semibold">Case Name</label>
+                  <input type="text" id="CaseName" v-model="newProduct.caseName" name="CaseName"
+                    class="defaultinput-light-input" placeholder="Your new product name." />
+                </div>
+                <div class="flex-1 border-2 rounded-xl m-2">
+                  <label for="caseDescription" class="text-lg font-semibold">caseDescription</label>
+                  <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"
+                    name="caseDescription" class="defaultinput-light-input"
+                    placeholder="A description in brief for this product." />
+                  </div>
             </div>
             <div class="border-2 rounded-xl m-2">
               <label for="casePrice" class="text-lg font-semibold">casePrice</label>
-              <input type="number" id="casePrice"  min="1" step="100" v-model="newProduct.casePrice" name="casePrice" class="defaultinput-light-input" placeholder="How mush is this?"/>
+              <input type="number" id="casePrice" v-model="newProduct.casePrice" name="casePrice" class="defaultinput-light-input" placeholder="How mush is this?"/>
+            </div>
+            <div  class="default-error-notification-window" v-if="newProduct.caseName == '' || newProduct.casePrice == ''">
+              Give your product a name, and set a price too.
             </div>
             <div class="border-2 rounded-xl m-2">
               <label for="Brand and Model" class="text-lg font-semibold ">Brand and Model</label>
@@ -61,17 +67,13 @@
                     </div>
                   </div>
                 </div>
-              <!-- <div>
-                <h2 class="bg-red-400"> Your product will be available for the following models.</h2>
-              </div>
+                
               <div v-for="(item, index) in newProduct.models" :key="index"> {{ item.brand.caseBrand }} : {{ item.modelName }}</div>
               <div  class="default-error-notification-window" v-if="newProduct.models.length == 0">
                 Select at least one compatible model.
-              </div> -->
+              </div>
             </div>  
-            <!-- <div  class="default-error-notification-window" v-if="newProduct.caseName == '' || newProduct.casePrice == ''">
-              Give your product a name, and set a price too.
-            </div> -->
+            
 
 
             <div class="border-2 rounded-xl m-2">
@@ -80,17 +82,14 @@
                 <div v-for="color in colorList" :key="color.codeColor" class="p-2">
                   <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"  v-model="newProduct.productColor"/>
                   <label @click="color.selected = !color.selected" :for="color.caseColor" :class=" color.caseColor ? 'colorpick-' + color.caseColor.toLowerCase(): ''">{{color.caseColor}}</label>
-                    <!-- <div class="">
-                      <div :class="'colorpick-' + color.caseColor.toLowerCase() "></div>
-                    </div> -->
                 </div>
               </div>
-              <!-- <div
+              <div
                 class="default-error-notification-window"
                 v-if="newProduct.productColor.length == 0"
               >
                 Select at least one color.
-              </div> -->
+              </div>
               <div class=" border-2 rounded-xl m-2">
               <label for="Quantity" class="text-lg font-semibold">Quantity</label>
                 <div v-for="(color, index) in newProduct.productColor" :key="index">
@@ -126,7 +125,16 @@
         <!-- <a href="#" @click="  (modelActive = !modelActive),  (emptyFields = false)" class=" w-16 h-16  mx-6 tracking-wide font-semibold bg-purple-500 text-gray-100   rounded-lg hover:bg-purple-700 transition-all duration-300  flex items-center justify-center ease-in-out focus:outline-none "> <h3 class="">choose</h3></a> -->
         <!-- </div> -->
         <div class="flex justify-center items-center">
-        <button type="submit" class="defaultinput-page-default-button-two">Submit</button>
+        <button type="submit" v-show="addSuccess && !nameExists &&!responseNoError" class="defaultinput-page-default-button-two">Submit</button>
+        <div class="p-3 default-inprogress-notification-window" v-show="!addSuccess && !nameExists">
+          Saving your new amazing product!
+        </div>
+        <div class="p-3 default-error-notification-window" v-show="nameExists">
+          This product name is taken by another products.
+        </div>
+        <div class="default-success-notification-window" v-show="responseNoError">
+          Product added! Redirecting to the home page of a store.
+        </div>
         </div>
       </form>
     </div>
@@ -176,6 +184,9 @@ export default {
         productColor: false,
         models: false,
       },
+      addSuccess: true,
+      responseNoError: false,
+      nameExists: false,
     };
   },
   methods: {
@@ -196,6 +207,7 @@ export default {
     },
     //---------------FORM VALID---------------
     async formValidate() {
+      this.addSuccess = false;
       this.invalid.caseName =this.newProduct.caseName === "" || this.newProduct.caseName.length > 25? true: false;
       //this.invalid.caseDescription = this.newProduct.caseDescription === "" ? true : false;
       this.invalid.casePrice = this.newProduct.casePrice < 0 ? true : false;
@@ -205,13 +217,37 @@ export default {
         this.invalid.caseName ||
         this.invalid.casePrice ||
         this.invalid.productColor ||
-        this.invalid.models
+        this.invalid.models ||
+        this.newProduct.models.length == 0 ||
+        this.newProduct.productColor.length == 0
       ) {
         this.invalid.validationPassed = false;
+        this.addSuccess = true;
+
       } else {
-        let response = await this.addProduct(this.newProduct, document.getElementById('imageHolderDiv').files[0]);
-        this.invalid.validationPassed = true;
-        console.log(JSON.stringify(response));
+        let result;
+        result = await this.addProduct(this.newProduct, document.getElementById('imageHolderDiv').files[0]);
+        console.log(result)
+        if(result.status == 400){
+          alert("Please select an image for your product.")
+          this.addSuccess = true;
+        } else if(result.exceptionCode == 2006){
+          this.addSuccess= true;
+          this.nameExists = true;
+          setTimeout(()=>{
+          this.nameExists = false;
+        },5000)
+        } else {
+          this.invalid.validationPassed = true;
+        this.addSuccess = true;
+        this.responseNoError = true;
+        setTimeout(()=>{
+          this.$router.replace({
+                        name: 'Home'
+                    });
+          this.responseNoError = false;
+        },2000)
+        }       
       }
     },
 

@@ -402,7 +402,7 @@
           this.error.showWindow = "Saving..."
           let response = await this.editSelectedProduct(this.editProduct, document.getElementById('imageHolderDiv')
             .files[0]);
-          if (response.exceptionCode != 0) {
+          if (response.exceptionCode) {
             switch (response.exceptionCode) {
               case 2006:
                 this.error.showWindow = "This product name is already taken by someone.";
