@@ -273,7 +273,9 @@
         </div>
       </div>
       <!--  -->
-      <MyCaseOrder></MyCaseOrder>
+      <div v-show="roleName != 'admin' || roleName != 'staff'" >
+        <MyCaseOrder ></MyCaseOrder>
+      </div>
     </div>
   </div>
 </template>
