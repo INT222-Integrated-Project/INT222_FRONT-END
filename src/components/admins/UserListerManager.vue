@@ -1,25 +1,21 @@
 <template>
     <div class="my-5">
         <div class="default-medium-header-box my-5 flex sm:flex-row justify-center  flex-wrap items-center">
-            <div class="flex justify-center sm:flex-col ">
+            <!-- <div class="">
+                <p class="ordermanage-admin-main-href">User Managements</p>
+            </div> -->
+            <div class="flex justify-center sm:flex-col flex-row">
+                
                 <div class="" v-if="!gui.switchSeatchType == true">
                     <input type="text" class="default-search-input " placeholder="Search With email or username."
                         v-model="searchContent">
-                    <button class="light-page-search-button "
-                        v-on:click.prevent="gui.switchSeatchType = !gui.switchSeatchType, searchContent=''">Search by
-                        phone
-                        number.
-                    </button>
+                    <button class="light-page-search-button " v-on:click.prevent="gui.switchSeatchType = !gui.switchSeatchType, searchContent=''">Search by phone number.</button>
                     <button class="default-page-search-button" v-on:click.prevent="getUserList()">Search</button>
                 </div>
                 <div class="" v-else>
                     <input type="text" class="default-search-input" placeholder="Search With phone number."
                         v-model="searchContent">
-                    <button class="light-page-search-button"
-                        v-on:click.prevent="gui.switchSeatchType = !gui.switchSeatchType, searchContent=''">Search by
-                        username
-                        or email.
-                    </button>
+                    <button class="light-page-search-button" v-on:click.prevent="gui.switchSeatchType = !gui.switchSeatchType, searchContent=''">Search by  username   or email.</button>
                     <button class="default-page-search-button"
                         v-on:click.prevent="searchByPhoneNumber()">Search</button>
                 </div>
@@ -33,37 +29,26 @@
         <div v-for="(user, index) in this.usersList" :key="index">
             <div class="  default-medium-header-box ">
                 <div class="flex justify-center items-center flex-col  mx-3">
-                    <img class="defalut-user-profile-image " src="@/assets/UserImageNotFound.png">
+                    <img class="defalut-user-profile-image " src="@/assets/UserImageNotFound.png" >
                     <h3 class="default-user-list-username">{{user.role.roleName}}</h3>
                 </div>
                 <!-- Mobile mode  -->
                 <div class="  block  sm:hidden md:hidden lg:hidden xl:hidden    flex justify-center flex-col   ">
                     <div class="defalut-userlist-block flex flex-col justify-center pl-5 ">
-                        <div class="flex flex-row">
-                            <div>
+                        <div class="flex justify-start items-center">
+                            <div class="text-right">
                                 <p class="default-user-list-header ">Username : </p>
+                                <p class="default-user-list-header ">First name : </p>
+                                <p class="default-user-list-header ">Last name : </p>
                             </div>
-                            <div>
+                            <div class="text-left">
+                                <p class="default-user-list-user-name "> {{user.userName}}</p>
                                 <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row  ">
-                            <div>
-                                <p class="default-user-list-header">First name : </p>
-                            </div>
-                            <div>
-                                <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row ">
-                            <div>
-                                <p class="default-user-list-header">Last name : </p>
-                            </div>
-                            <div>
                                 <p class="default-user-list-user-name"> {{user.lastName}}</p>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="flex justify-center flex-row">
                         <button v-on:click="promoteUser(user)" class="default-assignrole-promote"
                             :disabled="user.role.roleName == 'admin' || user.role.roleName=='suspended'">
@@ -78,29 +63,35 @@
                 </div>
                 <!-- Ipad mode -->
                 <div class=" hidden sm:hidden md:block  lg:hidden xl:hidden   flex justify-center flex-col   ">
-                    <div class="defalut-userlist-block flex flex-col justify-center pl-5 ">
-                        <div class="flex flex-row">
-                            <div>
+                    <div class="flex flex-col justify-center pl-5 ">
+                        <div class="flex justify-start items-center">
+                            <div class="text-right">
                                 <p class="default-user-list-header ">Username : </p>
+                                <p class="default-user-list-header ">First name : </p>
+                                <p class="default-user-list-header ">Last name : </p>
                             </div>
-                            <div>
+                            <div class="text-left">
+                                <p class="default-user-list-user-name "> {{user.userName}}</p>
                                 <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row  ">
-                            <div>
-                                <p class="default-user-list-header">First name : </p>
-                            </div>
-                            <div>
-                                <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row ">
-                            <div>
-                                <p class="default-user-list-header">Last name : </p>
-                            </div>
-                            <div>
                                 <p class="default-user-list-user-name"> {{user.lastName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden  md:hidden  lg:block xl:block  flex-1  sm:flex ">
+                        <div class="defalut-userlist-block flex-1 flex-col   ">
+                            <div class="flex justify-start items-center">
+                                <div class="text-right">
+                                    <p class="default-user-list-header ">Address : </p>
+                                    <p class="default-user-list-header ">Email : </p>
+                                    <p class="default-user-list-header ">Phone : </p>
+                                </div>
+                                <div class="text-left">
+                                    <p class="default-user-list-user-name" v-if="user.address == null">no address information.</p>
+                                    <p class="default-user-list-user-name " v-else> {{user.address}}</p>
+                                    <p class="default-user-list-user-name" v-if="user.email == null">This user has no email</p>
+                                    <p class="default-user-list-user-name" > {{user.email}}</p>
+                                    <p class="default-user-list-user-name"> {{user.phoneNumber}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,27 +113,15 @@
                 <div class="hidden  md:hidden  lg:block xl:block  flex-1   sm:flex  justify-center flex-col">
                     <div class="flex  flex-row  ">
                         <div class="defalut-userlist-block flex-1 flex-col   ">
-                            <div class="flex flex-row">
-                                <div>
+                            <div class="flex justify-start items-center">
+                                <div class="text-right">
                                     <p class="default-user-list-header ">Username : </p>
+                                    <p class="default-user-list-header ">First name : </p>
+                                    <p class="default-user-list-header ">Last name : </p>
                                 </div>
-                                <div>
-                                    <p class="default-user-list-user-name"> {{user.userName}}</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-row  ">
-                                <div>
-                                    <p class="default-user-list-header">First name : </p>
-                                </div>
-                                <div>
+                                <div class="text-left">
+                                    <p class="default-user-list-user-name "> {{user.userName}}</p>
                                     <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-row ">
-                                <div>
-                                    <p class="default-user-list-header">Last name : </p>
-                                </div>
-                                <div>
                                     <p class="default-user-list-user-name"> {{user.lastName}}</p>
                                 </div>
                             </div>
@@ -151,25 +130,24 @@
                 </div>
                 <div class="hidden  md:hidden  lg:block xl:block  flex-1  sm:flex ">
                     <div class="defalut-userlist-block flex-1 flex-col   ">
-                        <div class="flex ">
-                            <p class="default-user-list-header ">Address : </p>
-                            <p class="default-user-list-user-name" v-if="user.address == null">no address information.
-                            </p>
-                            <p class="default-user-list-user-name"> {{user.address}}</p>
-                        </div>
-                        <div class="flex   ">
-                            <p class="default-user-list-header">Email : </p>
-                            <p class="default-user-list-user-name" v-if="user.email == null">This user has no email</p>
-                            <p class="default-user-list-user-name" v-else>{{user.email}}</p>
-                        </div>
-                        <div class="flex  ">
-                            <p class="default-user-list-header">Phone : </p>
-                            <p class="default-user-list-user-name">{{user.phoneNumber}}</p>
+                        <div class="flex justify-start items-center">
+                            <div class="text-right">
+                                <p class="default-user-list-header ">Address : </p>
+                                <p class="default-user-list-header ">Email : </p>
+                                <p class="default-user-list-header ">Phone : </p>
+                            </div>
+                            <div class="text-left">
+                                <p class="default-user-list-user-name" v-if="user.address == null">no address information.</p>
+                                <p class="default-user-list-user-name " v-else> {{user.address}}</p>
+                                <p class="default-user-list-user-name" v-if="user.email == null">This user has no email</p>
+                                <p class="default-user-list-user-name" > {{user.email}}</p>
+                                <p class="default-user-list-user-name"> {{user.phoneNumber}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="hidden  md:hidden  lg:block xl:block   sm:flex ">
-                    <div class=" flex flex-col text-right ">
+                <div class="hidden  md:hidden  lg:block xl:block   sm:flex mr-10">
+                    <div class=" flex flex-col ">
                         <button v-on:click="promoteUser(user)" class="default-assignrole-promote"
                             :disabled="user.role.roleName == 'admin' || user.role.roleName=='suspended'">
                             Promote</button>
@@ -183,135 +161,6 @@
                 </div>
             </div>
         </div>
-
-        <!--   <div class="flex flex-col mx-5 w-36 bg-pink-100">
-                    <img class="defalut-user-profile-image " src="@/assets/UserImageNotFound.png">
-                    <h3 class="default-user-list-username">{{user.role.roleName}}</h3>
-                </div>
-                
-                <div class=" block sm:hidden flex justify-center flex-col  ">
-                    <div class="defalut-userlist-block flex flex-col justify-center pl-5 ">
-                        <div class="flex flex-row">
-                            <div>
-                                <p class="default-user-list-header ">Username : </p>
-                            </div>
-                            <div>
-                                <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-row  ">
-                            <div>
-                                <p class="default-user-list-header">First name : </p>
-                            </div>
-                            <div>
-                                <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                            </div>
-                        </div>
-                        <div  class="flex flex-row ">
-                            <div>
-                                <p class="default-user-list-header">Last name : </p>
-                            </div>
-                            <div>
-                                <p class="default-user-list-user-name"> {{user.lastName}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex justify-center flex-row">
-                        <button v-on:click="promoteUser(user)" class="default-assignrole-promote"
-                                :disabled="user.role.roleName == 'admin' || user.role.roleName=='suspended'"> Promote</button>
-                        <button v-on:click="demoteUser(user)" class="default-assignrole-demote"
-                                :disabled="user.role.roleName == 'customer' || user.role.roleName=='suspended'">Demote</button>
-                        <button v-if="user.role.roleName=='suspended'" v-on:click="banOrUnbanUser(user)"
-                                class="default-assignrole-promote">Un-suspend</button>
-                        <button v-else v-on:click="banOrUnbanUser(user)" class="default-assignrole-ban"
-                                :disabled="user.role.roleName == 'admin'">Suspend</button>
-                    </div>
-                </div>
-                <div class="hidden sm:flex  justify-center flex-col  ">
-                    <div class="flex  flex-row ">
-                        <div class="defalut-userlist-block flex-1 flex-col   ">
-                            <div class="flex flex-row">
-                                <div>
-                                    <p class="default-user-list-header ">Username : </p>
-                                </div>
-                                <div>
-                                    <p class="default-user-list-user-name"> {{user.userName}}</p>
-                                </div>
-                            </div>
-                            <div class="flex flex-row  ">
-                                <div>
-                                    <p class="default-user-list-header">First name : </p>
-                                </div>
-                                <div>
-                                    <p class="default-user-list-user-name"> {{user.firstName}}</p>
-                                </div>
-                            </div>
-                            <div  class="flex flex-row ">
-                                <div>
-                                    <p class="default-user-list-header">Last name : </p>
-                                </div>
-                                <div>
-                                    <p class="default-user-list-user-name"> {{user.lastName}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="defalut-userlist-block flex-1 flex-col   ">
-                            <div class="flex ">
-                                
-                                <p class="default-user-list-header ">Address : </p>
-                                <p class="default-user-list-user-name" v-if="user.address == null">no address information.</p>
-                                <p class="default-user-list-user-name"> {{user.address}}</p>
-                                
-                            </div>
-                            <div class="flex   ">
-                                
-                                    <p class="default-user-list-header">Email : </p>
-                                    <p class="default-user-list-user-name" v-if="user.email == null">This user has no email</p>
-                                    <p class="default-user-list-user-name" v-else >{{user.email}}</p>
-                                
-                            </div>
-                            <div  class="flex  ">
-                                <p class="default-user-list-header">Phone : </p>
-                                <p class="default-user-list-user-name">{{user.phoneNumber}}</p>
-                            </div>
-                        </div>
-                        <div class="defalut-userlist-block flex flex-col text-right ">
-                            <button v-on:click="promoteUser(user)" class="default-assignrole-promote"
-                                    :disabled="user.role.roleName == 'admin' || user.role.roleName=='suspended'"> Promote</button>
-                            <button v-on:click="demoteUser(user)" class="default-assignrole-demote"
-                                    :disabled="user.role.roleName == 'customer' || user.role.roleName=='suspended'">Demote</button>
-                            <button v-if="user.role.roleName=='suspended'" v-on:click="banOrUnbanUser(user)"
-                                    class="default-assignrole-promote">Un-suspend</button>
-                            <button v-else v-on:click="banOrUnbanUser(user)" class="default-assignrole-ban"
-                                    :disabled="user.role.roleName == 'admin'">Suspend</button>
-                        </div>
-                    </div> 
-                </div> -->
-        <!-- <div class="defalut-userlist-block">
-                    <p>
-                        <p class="default-user-list-header">Email : </p>
-                        <p class="default-user-list-user-name" v-if="user.email == null">This user has no
-                            email</p>
-                        <p class="default-user-list-user-name" v-else>{{user.email}}</p>
-                    </p>
-                    <p>
-                        <p class="default-user-list-header">Phone : </p>
-                        <p class="default-user-list-user-name">{{user.phoneNumber}}</p>
-                    </p>
-                    <p>
-                        <p class="default-user-list-header">Role : </p>
-                        <p class="default-user-list-user-name">{{user.role.roleName}}</p>
-                    </p>
-                </div>
-                <div class="defalut-userlist-block">
-                    <p>
-                        <p class="default-user-list-header">Address : </p>
-                        <p class="default-user-list-user-name" v-if="user.address == null">This user has no address
-                            information.</p>
-                        <p class="default-user-list-user-name" v-else>{{user.address}}</p>
-                    </p>
-                </div>-->
-
         <div class="flex align-middle justify-center items-center sm:flex-row flex-col mr-2 ">
             <div class="hidden sm:flex flex-row sm:items-center sm:w-auto ">
                 <button class="flex default-page-button " style="width: 150px;" v-on:click="changePage(1)"

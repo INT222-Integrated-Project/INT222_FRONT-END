@@ -19,9 +19,11 @@
         -->
 
         <form @submit.prevent="formValidate">
-          <div class="flex border-2 rounded-xl m-2 p-5 ">
+
+          <div class="flex  rounded-xl sm:m-2 p-5 sm:flex-row flex-col justify-center items-center ">
             <div class="w-2/6 flex justify-center items-center">
-              <div class="w-3/5 flex flex-col relative overflow-hidden   ">
+              <div class="sm:w-3/5 w-full flex flex-col relative overflow-hidden   ">
+
                 <img v-show="imageholderEnable" :src="productImage" class="" />
                 <button type="button">uploadPhoto</button>
                 <input id="imageHolderDiv" type="file" @change="createNewProductImage" class="text-center" />
@@ -34,7 +36,9 @@
               <i class="text-sm text-red-500" v-if="this.invalid.casePrice">
                 Invalid validate Image!
               </i>
-              <div class="flex ">
+
+              <div class="flex  sm:flex-row flex-col ">
+
                 <div class="flex-1 border-2 rounded-xl m-2">
 
                   <label for="CaseName" class="text-lg font-semibold">Case Name</label>
@@ -46,8 +50,9 @@
                   <textarea rows="50" type="text" id="caseDescription" v-model="newProduct.caseDescription"
                     name="caseDescription" class="defaultinput-light-input"
                     placeholder="A description in brief for this product." />
-                  </div>
-            </div>
+                </div>
+              </div>
+
             <div class="border-2 rounded-xl m-2">
               <label for="casePrice" class="text-lg font-semibold">casePrice</label>
               <input type="number" id="casePrice" v-model="newProduct.casePrice" name="casePrice" class="defaultinput-light-input" placeholder="How mush is this?"/>
@@ -78,10 +83,10 @@
 
             <div class="border-2 rounded-xl m-2">
               <label for="Colors" class="text-lg font-semibold">Colors</label>
-              <div class=" overflow-y-scroll h-44 grid grid-cols-4">
+              <div class=" overflow-y-scroll h-44 grid grid-cols-4 sm:grid-cols-6">
                 <div v-for="color in colorList" :key="color.codeColor" class="p-2">
                   <input type="checkbox" :id="color.caseColor" :value="{ color: color, imageCase: null, quantity: 0 }"  v-model="newProduct.productColor"/>
-                  <label @click="color.selected = !color.selected" :for="color.caseColor" :class=" color.caseColor ? 'colorpick-' + color.caseColor.toLowerCase(): ''">{{color.caseColor}}</label>
+                  <label @click="color.selected = !color.selected"  :class=" color.caseColor ? 'colorpick-' + color.caseColor.toLowerCase(): ''"></label>
                 </div>
               </div>
               <div
@@ -94,12 +99,13 @@
               <label for="Quantity" class="text-lg font-semibold">Quantity</label>
                 <div v-for="(color, index) in newProduct.productColor" :key="index">
                   <div class="flex items-center mx-1 mb-5">
+                  
                   <div :class=" 'colorpick-bg-' + color.color.caseColor.toLowerCase() + ' flex justify-start items-center '">
                     <button  type="button" class="defaultinput-pick-model-button " @click="color.quantity = this.decreaseStock(color.quantity)">
                       -
                     </button>
                     <input  class="defaultinput-light-input-number" type="number" placeholder="Quantity" v-model="newProduct.productColor[index].quantity"/>
-                    <button type="button" class="defaultinput-pick-model-button " @click="color.quantity = this.increaseStock(color.quantity)">
+                    <button type="button" class="defaultinput-pick-model-button "  @click="color.quantity = this.increaseStock(color.quantity)">
                       +
                     </button>
                     <div class="text-gray-600">Quantity : {{ color.quantity }}</div>
@@ -107,7 +113,6 @@
                   </div>
                 </div>
               </div>
-            
           </div>
           </div>
           
@@ -223,11 +228,15 @@ export default {
       ) {
         this.invalid.validationPassed = false;
         this.addSuccess = true;
-
       } else {
         let result;
         result = await this.addProduct(this.newProduct, document.getElementById('imageHolderDiv').files[0]);
         console.log(result)
+
+         this.$router.replace({
+            name: 'Home'
+          })
+
         if(result.status == 400){
           alert("Please select an image for your product.")
           this.addSuccess = true;

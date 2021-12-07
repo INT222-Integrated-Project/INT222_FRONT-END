@@ -3,7 +3,7 @@
 
 }
 .colorpick-black{
-    background-color: #fcfcfc ; @apply colorpick-default
+    background-color: #000000 ; @apply colorpick-default
 }
 .colorpick-blue{
     
@@ -110,7 +110,7 @@
    
 }
 .colorpick-bg-sky-blue{
-    background-color: #0039ff; @apply colorpick-default
+    background-color: #89cff0; @apply colorpick-default
    
 }
 .colorpick-bg-white{

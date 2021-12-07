@@ -19,4 +19,3 @@ store.dispatch('authentication/attempt',localStorage.getItem('accesstoken')).the
     createApp(App).use(store).use(router).mount('#app')
 })
 
-

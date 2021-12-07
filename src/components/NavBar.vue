@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-black " >
+  <div class="bg-purple-300 " >
     <div class="flex items-center  flex-wrap p-3 w-screen ">
         <div class="hidden mx-auto sm:flex  items-center ">
           <div class="hidden sm:flex justify-start items-center  sm:text-lg  "> 
@@ -48,7 +48,7 @@
               </router-link>
               </div>
               <div class="sm:w-16  mx-2 flex items-center">
-                <a hraf="#" @click.prevent="signOut" class="button-sing-out text-white mx-5 "><i class="material-icons mr-4  text-3xl">logout</i></a>
+                <a hraf="#" @click.prevent="signOut" class="button-sing-out text-black mx-5 "><i class="material-icons mr-4  text-3xl">logout</i></a>
               </div>
             </div>
           </div>
@@ -60,7 +60,7 @@
                 </router-link>
               </div>
               <div v-if="roleName=='admin'||roleName=='staff'">
-                <router-link to="/AddEdit" class=" ">
+                <router-link to="/addproduct" class=" ">
                   <button class="flex items-center button-nav-show-staff-dropdown"><i class="material-icons mx-5 text-3xl  ">add_circle</i>Add New Case</button>
                 </router-link>
               </div>
@@ -91,11 +91,11 @@
             </div>
           </div>
            <div class=" block md:hidden flex ">
-            <div class="mx-2  ">
+            <!-- <div class="mx-2  ">
               <router-link to="/contact" class="button-nav-show-staff">
                 <button class="flex items-center"><i class="material-icons mr-5 text-3xl">forum</i></button>
               </router-link>
-            </div>
+            </div> -->
             <div class="mx-2 md:w-40  flex items-center">
               <router-link to="/login" class="button-nav-show-staff">
                 <button class="flex items-center"><i class="material-icons mr-5 text-3xl">account_circle</i></button>
