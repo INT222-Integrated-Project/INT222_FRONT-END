@@ -1,5 +1,5 @@
 <template>
-<div class="fixed    inset-0 bg-blue-200 sm:w-4/12">
+<div class="fixed inset-0 bg-blue-200 md:w-4/12 ">
   <div class="my-10">
     <div class="flex justify-end items-end mr-8 my-3 ">
       <button @click="closeCurrentModal" class="flex justify-center items-center sm:h-10  bg-white rounded-lg ">
@@ -17,7 +17,7 @@
             <div class=" flex justify-center items-center ">
             <img :src="'https://naturegecko.com/backend/public/productImage/'+product.productImage" alt="" class=" sm:h-96 h-52 " />
             </div>
-            <div class="flex justify-center items-center  p-2 sm:p-4 rounded-lg sm:h-96 md:h-80 h-80 border-2 m-2 border-gray-700 flex-col ">
+            <div class="flex justify-center items-center  p-2 sm:p-4 rounded-lg sm:h-96 md:h-80 h-80  m-2  flex-col ">
               <div class="flex">
                 <h5 class="text-black sm:text-2xl text-md font-bold ">
                   {{ product.caseName }}
@@ -93,7 +93,7 @@
               <button class="defaultinput-button-small-green" @click="closeOrderSuccessNotification">OK</button>
             </div>
           </form>
-
+          
 
 
         </div>
@@ -161,7 +161,11 @@
               this.orderNotification.errorMessage = "You cannot buy your own product.";
               break;
             default:
-              this.orderNotification.errorMessage = "An error occured at the API.";
+              // this.orderNotification.errorMessage = "An error occured at the API.";
+              alert("Please login to add product.")
+              this.$router.replace({
+                name: 'Login'
+              })
               break;
 
           }

@@ -1,5 +1,5 @@
 <template>
-  <div class="sm:p-5 p-5 ">
+  <div class="md:p-5 p-1 ">
     <div class="size-search ">
       <input type="text" class="insearch-box  " placeholder="Search Case name " v-model="searchName">
 
@@ -10,14 +10,19 @@
       {{exception.message}}
     </div>
 
-    <div class="container sm:my-6  sm:items-center " style="font-family: 'Muli', sans-serif;">
-      <div class="flex flex-wrap  sm:mx-4  mx-4 justify-center">
+    <div class="container sm:my-2  sm:items-center  " style="font-family: 'Muli', sans-serif;">
+      <div class="flex flex-wrap justify-center ">
         <div v-for="(product,index) in ShowCase" :key="index" :value="product" :product="product"
-          class="my-1 px-1 w-5/6 flex justify-center items-center sm:w-1/3 sm:my-4 sm:px-4 rounded-lg   hover:shadow-xl  ">
-          <div class="card-two ">
+          class="flex justify-center items-center md:w-1/4 md:m-3 m-1 rounded-lg hover:shadow-xl  ">
+          <div class="card-two m-2">
             <img :src="'https://naturegecko.com/backend/public/productImage/'+product.productImage" alt=""
-              class="block rounded-full" />
-            <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-52 bg-purple-400 h-44 flex-col ">
+              class="block rounded-lg md:h-80 md:w-80 " />
+            <div class="flex items-center p-2 sm:p-4 rounded-lg sm:h-36 md:h-52 bg-pink-300 h-44 flex-col ">
+              <div class="flex flex-row  space-x-1  ">
+                <label v-for=" (c,index) in product.productColor" :product="product" :key="index"
+                  class=" bg-black h-5 w-5 rounded-full"
+                  :class="c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> </label>
+              </div>
               <div>
                 <h5 class="text-white sm:text-lg text-md  font-bold leading-none">
                   {{ product.caseName }}
@@ -30,14 +35,8 @@
                 </div>
 
               </div>
-              <div class="flex flex-row  space-x-0.5  ">
-                <label v-for=" (c,index) in product.productColor" :product="product" :key="index"
-                  class=" bg-black h-2 w-5 shadow-inner"
-                  :class="c.color.caseColor ? 'bg-caseCol-' + c.color.caseColor.toLowerCase(): '' "> </label>
-              </div>
               <button @click="detailClick(product)"
-                class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-500 text-gray-100  rounded-lg hover:bg-pink-700 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">VIEW</button>
-
+                class="sm:w-16 w-16 sm:h-10 h-10 m-2 tracking-wide font-semibold bg-pink-400 text-gray-100  rounded-lg hover:bg-pink-600 transition-all duration-300  flex items-center justify-center ease-in-out  focus:outline-none">VIEW</button>
             </div>
           </div>
         </div>

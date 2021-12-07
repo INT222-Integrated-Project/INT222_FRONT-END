@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-purple-300">
+    <div class="bg-purple-300 sm:m-6 p-2 rounded-xl">
         <div class="ordermanage-admin-main-href my-3">My Orders</div>
         <div v-show="!notification.sucessfullyLoaded" class="mx-4 text-2xl default-inprogress-notification-window">
             Loading your orders...
@@ -35,7 +35,7 @@
                                         <p class="ordermanage-header-text">Address : </p>
                                     </div>
                                     <div class="text-left" v-for="item in order.orderDetails" :key="item">
-                                        <p class="ordermanage-default-text">ProCol {{item.productcolorID}}</p>
+                                        <p class="ordermanage-default-text">ProCol {{item.productColorToProducts.products.caseName}}</p>
                                         <p class="ordermanage-default-text">{{item.quantityOrder}}</p>
                                         <p class="ordermanage-default-text">{{order.user.address}}</p>
                                     </div>

@@ -1,0 +1,51 @@
+{
+    "ORDERDETAILID": 13,
+    "QUANTITYORDER": 1,
+    "UNITPRICE": 1501,
+    "PRODUCTCOLORID": 30,
+    "PRODUCTCOLORTOPRODUCTS": {
+        "PRODUCTCOLORID": 30,
+        "PRODUCTS": {
+            "CASEID": 12,
+            "CASENAME": "CHRISTMAS JAPAN KOKESHI",
+            "CASEDESCRIPTION": "IMPACK CASE",
+            "CASEPRICE": 1501,
+            "USERNAMEID": 5,
+            "CASEDATE": "2021-12-04",
+            "MODELS": [
+                {
+                    "MODELID": 12,
+                    "MODELNAME": "IPHONE 12 PRO",
+                    "BRAND": {
+                        "CODEBRAND": 1,
+                        "CASEBRAND": "IPHONE"
+                    }
+                },
+                {
+                    "MODELID": 11,
+                    "MODELNAME": "IPHONE 12 PRO MAX",
+                    "BRAND": {
+                        "CODEBRAND": 1,
+                        "CASEBRAND": "IPHONE"
+                    }
+                },
+                {
+                    "MODELID": 1,
+                    "MODELNAME": "SAMSUNG GALAXY Z FLIP3 5G",
+                    "BRAND": {
+                        "CODEBRAND": 2,
+                        "CASEBRAND": "SAMSUNG"
+                    }
+                }
+            ],
+            "PRODUCTIMAGE": "2021-12-04XFGSRFHAQU.JPG",
+            "ISONSTORE": TRUE
+        },
+        "COLOR": {
+            "CODECOLOR": 8,
+            "CASECOLOR": "RED"
+        },
+        "IMAGECASE": NULL,
+        "QUANTITY": 24
+    }
+}
