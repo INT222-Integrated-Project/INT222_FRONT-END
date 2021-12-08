@@ -25,4 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### web Address
-http://13.90.192.192:8080/
+https://naturegecko.com
