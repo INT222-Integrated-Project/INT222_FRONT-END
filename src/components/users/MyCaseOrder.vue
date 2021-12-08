@@ -85,15 +85,7 @@
                         </div>
                     </div>
                     <div class="ordermanage-assign-body flex flex-col w-1/4">
-                        <button @click="stepUpByOneStep(order.orderID,order.orderStatus.statusID)"
-                            :disabled="order.orderStatus.statusID >= 4"
-                            :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable' : 'ordermanage-status-completed'">Success
-                            by one step.</button>
-                        <button @click="stepDownByOneStep(order.orderID,order.orderStatus.statusID)"
-                            :disabled="order.orderStatus.statusID >= 4 || order.orderStatus.statusID < 2"
-                            :class="order.orderStatus.statusID >= 4 || order.orderStatus.statusID < 2 ? 'ordermanage-status-disable' : 'ordermanage-status-toship'">Step
-                            back by one step.</button>
-                        <button @click="cancelOrderStatus(order.orderID)" :disabled="order.orderStatus.statusID >= 4"
+                        <button @click="cancelMyorder(order.orderID)" :disabled="order.orderStatus.statusID >= 4"
                             :class="order.orderStatus.statusID >= 4 ? 'ordermanage-status-disable':'ordermanage-status-cancelled'">Cancel
                             this order.</button>
                     </div>
