@@ -39,7 +39,7 @@
               </div>
               <div v-show="roleName=='customer'" class="sm:w-28 flex items-center mx-2 ">
               <router-link to="/shipping" >
-                <button  class="set-center button-nav-show-staff "><i class="material-icons mr-5 text-3xl">shopping_cart</i>Card</button>
+                <button  class="set-center button-nav-show-staff "><i class="material-icons mr-5 text-3xl">shopping_cart</i>Cart</button>
               </router-link>
               </div>
               <div class="md:w-28  flex items-center mx-2">

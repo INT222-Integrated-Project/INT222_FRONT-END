@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-header size-card-main-profile  ">
+  <div class="bg-header sm:h-screen size-card-main-profile  ">
     <div class=" flex flex-col sm:flex-row  ">
       <!-- Profile information -->
       <div class="size-card flex sm:w-2/6 sm:m-6 p-2 bg-white ">
