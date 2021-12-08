@@ -155,6 +155,10 @@
         if (errorCode == 0) {
           this.orderNotification.successOrder = true;
           this.orderNotification.errorMessage = "";
+          // alert("Please login to add product.")
+              // this.$router.replace({
+              //   name: 'Login'
+              // })
         } else {
           console.log(errorCode)
           switch (errorCode) {
@@ -168,11 +172,8 @@
               this.orderNotification.errorMessage = "You cannot buy your own product.";
               break;
             default:
-              // this.orderNotification.errorMessage = "An error occured at the API.";
-              alert("Please login to add product.")
-              this.$router.replace({
-                name: 'Login'
-              })
+              this.orderNotification.errorMessage = "An error occured at the API.";
+              
               break;
 
           }

@@ -273,7 +273,7 @@
         </div>
       </div>
       <!--  -->
-      <div v-show="roleName != 'admin' " >
+      <div v-show="roleName != 'admin' && roleName != 'staff'" >
         <MyCaseOrder ></MyCaseOrder>
       </div>
     </div>
