@@ -82,12 +82,18 @@
                   </div>
                 </div>
 
-                <div class="flex ">
+                <div class="flex " v-show="authenticated" >
                   <button type="submit" v-show="!orderNotification.successOrder"
                     class="font-semibold bg-blue-400 text-white  p-4 rounded-lg hover:bg-purple-500 transition-all duration-300 ease-in-out focus:outline-none">Add
                     to cart</button>
                 </div>
+                <div class="flex " v-show="!authenticated" >
+                  <p class="flex justify-center items-center text-xl  font-semibold text-red-500">
+                  Please Login
+                  </p>
+                </div>
               </div>
+              
               <div v-show="this.orderNotification.errorMessage != ''" class="mx-2 default-error-notification-window">
                 {{this.orderNotification.errorMessage}}
               </div>
@@ -155,10 +161,7 @@
         if (errorCode == 0) {
           this.orderNotification.successOrder = true;
           this.orderNotification.errorMessage = "";
-          // alert("Please login to add product.")
-              // this.$router.replace({
-              //   name: 'Login'
-              // })
+          
         } else {
           console.log(errorCode)
           switch (errorCode) {
@@ -172,7 +175,7 @@
               this.orderNotification.errorMessage = "You cannot buy your own product.";
               break;
             default:
-              this.orderNotification.errorMessage = "An error occured at the API.";
+              this.orderNotification.errorMessage = "Please fill the form";
               
               break;
 
