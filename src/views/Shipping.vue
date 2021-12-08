@@ -89,8 +89,12 @@
   import {
     prodcutControllerServices
   } from "@/.services/ProductsControllerServices.js";
+  import {
+        orderManagementSetvice
+    } from '@/.services/OrderManagementService.js'
+
   export default {
-    mixins: [prodcutControllerServices],
+    mixins: [prodcutControllerServices,orderManagementSetvice],
     data() {
       return {
         productCart: {},
@@ -105,11 +109,11 @@
         alert("Success Order")
       },
       async getCartList() {
-        this.productCart = await this.getProductInCart();
+        this.productCart = await this.ListOrderedOrderByUserID();
 
       },
       async deleteCase(id) {
-        let response = await this.permanentlyRemoveProduct(id);
+        let response = await this.cancelUserOrderByUser(id);
         this.getProductUser();
         console.log(response)
 

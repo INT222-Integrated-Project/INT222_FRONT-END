@@ -43,7 +43,16 @@ export const orderManagementSetvice = {
                 result = error.response.data;
             });
             return result;
-        }
+        },
+        async ListOrderedOrderByUserID(){
+            let result;
+            await axios.get(`${process.env.VUE_APP_ROOT_API}user/mycart`).then((response) => {
+                result = response.data.content;
+            }).catch((error) => {
+                result = error.response.data;
+            });
+            return result;
+        },
         
     }
 }
